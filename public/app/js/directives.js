@@ -52,12 +52,24 @@ angular.module('application.directives',[])
         },
         templateUrl: 'app/directive_tmpl/form_controls/dropdownwithlabel.tmpl.html',
         link: function(scope) {
-            scope.selected;
             scope.updateLocal = function(item) {
-                console.log(item);
                 scope.selected = item;
             }
         }
+    }
+})
+.directive('switchWithLabel', function() {
+    return {
+        restrict: 'E',
+        replace: true,
+        scope: {
+            label:'@',
+            id:'@',
+            on:'@',
+            off:'@',
+            setmodel:'&'
+        },
+        templateUrl: 'app/directive_tmpl/form_controls/switchwithlabel.tmpl.html'
     }
 })
 

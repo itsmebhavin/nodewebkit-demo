@@ -15,4 +15,10 @@ vinmodule.controller('vinCtrl', ['$scope', function($scope) {
     $scope.setVehicleModel = function(item) {
         $scope.vinForm.vehicleModel = item;
     }
+    $scope.setTitleCourt = function(item) {
+        $scope.vinForm.titleCourt = item;
+    }
+    $scope.setFeeCollected = function(item) {
+        $scope.vinForm.feeCollected = item;
+    }
 }]);
