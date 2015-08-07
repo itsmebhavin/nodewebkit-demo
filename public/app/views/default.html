@@ -1,2 +1,33 @@
+<style>
+.tabDropdown {
+    background-color:inherit;
+    color:inherit;
+    outline: 0;
+    background: none;
+    border: 0;
+}
+</style>
+
 <div ui-view="toolbar"></div>
-<div ui-view="forms"></div>
+<tabset>
+    <tab sortable-tab ng-repeat="tab in tabs" active="tab.active" disable="tab.disabled">
+        <tab-heading>
+            {{tab.title}}
+        </tab-heading>
+        <div style="padding-left:10px; padding-right:10px;">
+            <div ui-view="forms"></div>
+            <button class="btn btn-danger pull-right" ng-click="removeTab($index)">Remove</button>
+        </div>
+    </tab>
+    <tab disable="false">
+        <tab-heading>
+            <i class="glyphicon glyphicon-plus"></i>
+        </tab-heading>
+        <div class="well well-lg mdc-bg-blue-400" ng-click="addTab()">
+            VIN
+        </div>
+        <div class="well well-lg">
+            ASR
+        </div>
+    </tab>
+</tabset>

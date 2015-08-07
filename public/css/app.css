@@ -183,3 +183,23 @@ a {
 .navbar-xs .navbar-brand{ padding: 2px 8px;font-size: 14px;line-height: 14px; }
 .navbar-xs .navbar-nav > li > a { border-right:1px solid #ddd; padding-top: 2px; padding-bottom: 2px; line-height: 16px }
 /* small navbar ends*/
+
+/* Sortable Tabs CSS */
+.container {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.tab-pane {
+    padding-top: 20px;
+}
+.nav-tabs > li:hover > a {
+    background: transparent;
+    border-color: transparent;
+}
+.nav-tabs > li.hover > a {
+    background: #555;
+}
+.nav-tabs > li.dragging {
+    opacity: 0.5;
+}
+/* END Sortable Tabs CSS */

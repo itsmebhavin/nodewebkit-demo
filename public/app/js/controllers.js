@@ -1,21 +1,39 @@
 var server = require('../server/server');
+var uuid = require('node-uuid');
 app.controller('indexCtrl',['$scope','windowFactory',function($scope,windowFactory){
-  $scope.welcome = "eForms-nw.js";
+    $scope.welcome = "eForms-nw.js";
 }]);
 app.controller('mainCtrl',['$scope','$state',function($scope,$state){
-  var uuid = require('node-uuid');
-  // console.log('inside main controller');
-  $scope.today = new Date();
-  server.usersdb.getAll();
-  $scope.createNewVIN = function(){
-    //var docid = uuid.v4();
-    console.log('navigating to default page now.');
-    $state.go('default',{type:'VIN',docid:uuid.v4()});
-    // $state.go('home',{type:'VIN',docid:uuid.v4()});
-  };
+    // console.log('inside main controller');
+    $scope.today = new Date();
+    server.usersdb.getAll();
+    $scope.createNewVIN = function(){
+        //var docid = uuid.v4();
+        console.log('navigating to default page now.');
+        $state.go('default',{type:'VIN',docid:uuid.v4()});
+        // $state.go('home',{type:'VIN',docid:uuid.v4()});
+    };
 }]);
-app.controller('defaultCtrl',['$scope','$stateParams',function($scope,$stateParams){
-  $scope.hello = "Hello Default..!!";
-  $scope.doctype = $stateParams.type;
-  $scope.docid = $stateParams.docid;
+app.controller('defaultCtrl',['$scope','$stateParams', '$state' ,function($scope,$stateParams,$state){
+    $scope.hello = "Hello Default..!!";
+    $scope.doctype = $stateParams.type;
+    $scope.docid = $stateParams.docid;
+
+
+    $scope.tabs = [];
+
+    $scope.addTab = function() {
+        var d = new Date();
+        var title = d.getMonth() + '/' + d.getDate() + '/' + d.getFullYear() + ' - ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
+        $scope.tabs.push({title: title, active:true});
+        // $state.go('default',{type:'VIN',docid:uuid.v4()});
+    }
+    $scope.removeTab = function(index) {
+        console.log($scope.tabs);
+        console.log(index);
+        if(index !== 0) {
+            $scope.tabs[0].active = true;
+        }
+        $scope.tabs.splice(index, 1);
+    }
 }]);
