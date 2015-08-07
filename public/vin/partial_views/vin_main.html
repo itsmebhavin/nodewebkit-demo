@@ -1,11 +1,11 @@
 <form>
-    <div class="row center">
-        <div class="column col-md-6">
+    <div class="row">
+        <div class="column col-xs-6">
             <textbox-with-label id="inputVIN" label="VIN" ng-model="vinForm.vin"></textbox-with-label>
             <dropdown-with-label id="inputStateOfTitle" label="State Of Current Title" items="stateList" setmodel="setStateTitle(item)"></dropdown-with-label>
             <switch-with-label id="switchTitleCourt" label="Title/Court Order Num" ng-model="vinForm.titleCourt" on="Ticket" off="Court"></switch-with-label>
             <div class="form-group row">
-                <div class="col-md-12">
+                <div class="col-xs-12">
                     <input type="text" class="form-control input-sm mdc-bg-grey-800 mdc-text-grey-100" ng-model="vinForm.titleCourtOrderNum">
                 </div>
             </div>
@@ -13,7 +13,7 @@
             <textbox-with-label id="inputVerifyingAgency" label="Verifying Agency" ng-model="vinForm.verifyingAgency"></textbox-with-label>
             <textbox-with-label id="inputWorkPhone" label="Work Phone" ng-model="vinForm.workPhone"></textbox-with-label>
         </div>
-        <div class="column col-md-6">
+        <div class="column col-xs-6">
             <textbox-with-label id="inputVehicleYear" label="Vehicle Year" ng-model="vinForm.vehicleYear"></textbox-with-label>
             <dropdown-with-label id="inputVehicleMake" label="Vehicle Make" items='vehicleMakes' setmodel="setVehicleMake(item)"></dropdown-with-label>
             <dropdown-with-label id="inputVehicleModel" label="Vehicle Model" items='vehicleModels' setmodel="setVehicleModel(item)"></dropdown-with-label>
@@ -24,4 +24,3 @@
         </div>
     </div>
 </form>
-{{vinForm}}
