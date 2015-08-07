@@ -35,7 +35,7 @@ angular.module('application.directives',[])
         scope: {
             label:'@',
             id:'@',
-            model:'@'
+            ngModel:'='
         },
         templateUrl:'app/directive_tmpl/form_controls/textboxwithlabel.tmpl.html'
     }
@@ -67,7 +67,7 @@ angular.module('application.directives',[])
             id:'@',
             on:'@',
             off:'@',
-            setmodel:'&'
+            ngModel:'='
         },
         templateUrl: 'app/directive_tmpl/form_controls/switchwithlabel.tmpl.html'
     }

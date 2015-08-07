@@ -3,12 +3,8 @@
         <div class="column col-md-6">
             <textbox-with-label id="inputVIN" label="VIN" ng-model="vinForm.vin"></textbox-with-label>
             <dropdown-with-label id="inputStateOfTitle" label="State Of Current Title" items="stateList" setmodel="setStateTitle(item)"></dropdown-with-label>
+            <switch-with-label id="switchTitleCourt" label="Title/Court Order Num" ng-model="vinForm.titleCourt" on="Ticket" off="Court"></switch-with-label>
             <div class="form-group row">
-                <label class="col-md-4 control-label">Title/Court Order Num</label>
-                <div class="col-md-8">
-                    <switch id="switchTitleCourt" name="switchTitleCourt" ng-model="vinForm.titleCourt"
-                    class="wide" on="Ticket" off="Court"></switch>
-                </div>
                 <div class="col-md-12">
                     <input type="text" class="form-control input-sm mdc-bg-grey-800 mdc-text-grey-100" ng-model="vinForm.titleCourtOrderNum">
                 </div>
@@ -24,7 +20,7 @@
             <textbox-with-label id="inputVehicleColor" label="Vehicle Color" ng-model="vinForm.vehicleColor"></textbox-with-label>
             <textbox-with-label id="inputOfficerName" label="Officer Name" ng-model="vinForm.officerName"></textbox-with-label>
             <textbox-with-label id="inputBadgeId" label="Badge Id" ng-model="vinForm.badgeID"></textbox-with-label>
-            <switch-with-label id="switchFeeCollected" label="Is $25 Fee to be Collected" on="Yes" off="No" setmodel="setFeeCollected(item)"></switch-with-label>
+            <switch-with-label id="switchFeeCollected" label="Is $25 Fee to be Collected" on="Yes" off="No" ng-model="vinForm.feeCollected"></switch-with-label>
         </div>
     </div>
 </form>
