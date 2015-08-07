@@ -1,3 +1,33 @@
+@font-face {
+    font-family: RobotoThin;
+    src: url(../fonts/RobotoTTF/Roboto-Thin.ttf);
+}
+@font-face {
+    font-family: RobotoRegular;
+    src: url(../fonts/RobotoTTF/Roboto-Regular.ttf);
+}
+@font-face {
+    font-family: RobotoCondensedLight;
+    src: url(../fonts/RobotoTTF/RobotoCondensed-Light.ttf);
+}
+@font-face {
+    font-family: RobotoCondensedRegular;
+    src: url(../fonts/RobotoTTF/RobotoCondensed-Regular.ttf);
+}
+.robotothin{
+    font-family: RobotoThin;
+}
+.robotoregular{
+    font-family: RobotoRegular;
+}
+.robotocondensedregularlight{
+    font-family: RobotoCondensedLight;
+}
+
+.robotocondensedregular{
+    font-family: RobotoCondensedRegular;
+}
+
 html {
     margin: 0px;
     padding: 0px;
@@ -14,6 +44,7 @@ body {
     left: 0px;
     right: 0px;
     bottom: 0px;
+    font-family: robotoregular;
     -webkit-box-shadow:0px 5px 10px #1c1c1c;
     -moz-box-shadow:0px 5px 10px #1c1c1c;
     box-shadow:5px 5px 10px #1c1c1c;
