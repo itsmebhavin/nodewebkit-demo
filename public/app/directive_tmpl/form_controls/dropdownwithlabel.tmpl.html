@@ -1,0 +1,12 @@
+<div class="form-group row">
+    <label ng-attrs-for="id" class="col-md-4 control-label">{{label}}</label>
+    <div class="btn-group col-md-8" dropdown>
+        <button ng-attrs-id="id" type="button" class="btn btn-primary btn-sm" dropdown-toggle>
+            {{selected ? selected : label}} &nbsp;<span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+            <li role="menuitem" ng-click="updateLocal();setmodel()"><a href="#">&nbsp;</a></li>
+            <li role="menuitem" ng-repeat="item in items" ng-click="updateLocal(item);setmodel({item:item})"><a href="#">{{item}}</a></li>
+        </ul>
+    </div>
+</div>

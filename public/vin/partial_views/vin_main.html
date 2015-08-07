@@ -1,0 +1,36 @@
+<form>
+  <div class="row">
+    <div class="column col-md-6">
+      <textbox-with-label id="inputVIN" label="VIN"></textbox-with-label>
+      <dropdown-with-label id="inputStateOfTitle" label="State Of Current Title" items="stateList" setmodel="setStateTitle(item)"></dropdown-with-label>
+      <div class="form-group row">
+        <label class="col-md-4 control-label">Title/Court Order Num</label>
+        <div class="col-md-8">
+          <switch id="switchTitleCourt" name="switchTitleCourt" ng-model="vinForm.titleCourt"
+          class="wide" on="Ticket" off="Court"></switch>
+        </div>
+        <div class="col-md-12">
+          <input type="text" class="form-control input-sm mdc-bg-grey-800 mdc-text-grey-100">
+        </div>
+      </div>
+      <textbox-with-label id="inputInspectionDateTime" label="Inspection Date &amp; Time"></textbox-with-label>
+      <textbox-with-label id="inputVerifyingAgency" label="Verifying Agency"></textbox-with-label>
+      <textbox-with-label id="inputWorkPhone" label="Work Phone"></textbox-with-label>
+    </div>
+    <div class="column col-md-6">
+      <textbox-with-label id="inputVehicleYear" label="Vehicle Year"></textbox-with-label>
+      <dropdown-with-label id="inputVehicleMake" label="Vehicle Make" items='vehicleMakes' setmodel="setVehicleMake(item)"></dropdown-with-label>
+      <dropdown-with-label id="inputVehicleModel" label="Vehicle Model" items='vehicleModels' setmodel="setVehicleModel(item)"></dropdown-with-label>
+      <textbox-with-label id="inputVehicleColor" label="Vehicle Color"></textbox-with-label>
+      <textbox-with-label id="inputOfficerName" label="Officer Name"></textbox-with-label>
+      <textbox-with-label id="inputBadgeId" label="Badge Id"></textbox-with-label>
+      <div class="form-group row">
+        <label class="col-md-4 control-label">Is $25 Fee to be Collected?</label>
+        <div class="col-md-8">
+          <switch id="switchFeeCollected" name="switchFeeCollected" ng-model="vinForm.feeCollected"
+          class="wide" on="Yes" off="No"></switch>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
