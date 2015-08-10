@@ -1,0 +1,75 @@
+<style>
+.cd-side-navigation::before {
+  /* background color of the side navigation */
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: calc(100% - 4px);
+  background-color: #131519;
+}
+.cd-side-navigation li {
+  width: calc(100% - 4px);
+}
+.cd-side-navigation a {
+  display: block;
+  position: relative;
+}
+.cd-side-navigation a::after {
+  /* 4px line to the right of the item - visible on hover */
+  content: '';
+  position: absolute;
+  top: 0;
+  right: -4px;
+  height: 100%;
+  width: 4px;
+  background-color: #83b0b9;
+  opacity: 0;
+}
+.no-touch .cd-side-navigation a:hover::after {
+  opacity: 1;
+}
+.cd-section.visible {
+  /* this is the visible/selected section */
+  position: relative;
+  z-index: 2;
+  transform: translateX(0);
+  transition: transform 0.5s 0s;
+}
+</style>
+<nav class="cd-side-navigation">
+  <ul>
+    <li>
+      <a href="index.html" class="selected" data-menu="index">
+        <svg><!-- svg content here --></svg>
+        Intro
+      </a>
+    </li>
+
+    <li>
+      <!-- ... -->
+    </li>
+
+    <!-- other list items here -->
+  </ul>
+</nav> <!-- .cd-dashboard -->
+
+<main class="cd-main">
+  <section class="cd-section index visible">
+    <header>
+      <div class="cd-title">
+        <h2>Animated Page Transition #2</h2>
+        <span>Some text here</span>
+      </div>
+
+      <a href="#index-content" class="cd-scroll">Scroll Down</a>
+    </header>
+
+    <div class="cd-content" id="index-content">
+      <!-- content here -->
+    </div> <!-- .cd-content -->
+  </section> <!-- .cd-section -->
+</main> <!-- .cd-main -->
+
+<div id="cd-loading-bar" data-scale="1" class="index"></div> <!-- lateral loading bar -->

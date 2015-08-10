@@ -8,8 +8,8 @@ angular.module('application.routing',[])
         controller: 'mainCtrl'
     })
     .state('home',{
-        url:'/home/:type/:docid',
-        templateUrl:'.//app/views/default.html'
+        url:'/home',
+        templateUrl:'./app/views/test.html'
     })
     .state('default',{
         url:'/default/:type/:docid',
