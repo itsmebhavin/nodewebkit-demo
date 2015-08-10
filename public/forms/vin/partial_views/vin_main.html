@@ -1,26 +1,26 @@
 <form class="robotoregular">
-    <div class="row">
-        <div class="column col-xs-6">
-            <textbox-with-label id="inputVIN" label="VIN" ng-model="vinForm.vin"></textbox-with-label>
-            <dropdown-with-label id="inputStateOfTitle" label="State Of Current Title" items="stateList" setmodel="setStateTitle(item)"></dropdown-with-label>
-            <switch-with-label id="switchTitleCourt" label="Title/Court Order Num" ng-model="vinForm.titleCourt" on="Ticket" off="Court"></switch-with-label>
-            <div class="form-group row">
-                <div class="col-xs-12">
-                    <input type="text" class="form-control input-sm mdc-bg-grey-800 mdc-text-grey-100" ng-model="vinForm.titleCourtOrderNum">
-                </div>
-            </div>
-            <textbox-with-label id="inputInspectionDateTime" label="Inspection Date &amp; Time" ng-model="vinForm.inspectionDateTime"></textbox-with-label>
-            <textbox-with-label id="inputVerifyingAgency" label="Verifying Agency" ng-model="vinForm.verifyingAgency"></textbox-with-label>
-            <textbox-with-label id="inputWorkPhone" label="Work Phone" ng-model="vinForm.workPhone"></textbox-with-label>
+  <div class="row">
+    <div class="column col-xs-6">
+      <textbox-with-label id="inputVIN" label="VIN" ng-model="vinForm.vin"></textbox-with-label>
+      <dropdown-with-label id="inputStateOfTitle" label="State Of Current Title" items="stateList" setmodel="setStateTitle(item)"></dropdown-with-label>
+      <switch-with-label id="switchTitleCourt" label="Title/Court Order Num" ng-model="vinForm.titleCourt" on="Ticket" off="Court"></switch-with-label>
+      <div class="form-group row">
+        <div class="col-xs-12">
+          <input type="text" class="form-control input-sm mdc-bg-grey-800 mdc-text-grey-100" ng-model="vinForm.titleCourtOrderNum">
         </div>
-        <div class="column col-xs-6">
-            <textbox-with-label id="inputVehicleYear" label="Vehicle Year" ng-model="vinForm.vehicleYear"></textbox-with-label>
-            <dropdown-with-label id="inputVehicleMake" label="Vehicle Make" items='vehicleMakes' setmodel="setVehicleMake(item)"></dropdown-with-label>
-            <dropdown-with-label id="inputVehicleModel" label="Vehicle Model" items='vehicleModels' setmodel="setVehicleModel(item)"></dropdown-with-label>
-            <textbox-with-label id="inputVehicleColor" label="Vehicle Color" ng-model="vinForm.vehicleColor"></textbox-with-label>
-            <textbox-with-label id="inputOfficerName" label="Officer Name" ng-model="vinForm.officerName"></textbox-with-label>
-            <textbox-with-label id="inputBadgeId" label="Badge Id" ng-model="vinForm.badgeID"></textbox-with-label>
-            <switch-with-label id="switchFeeCollected" label="Is $25 Fee to be Collected" on="Yes" off="No" ng-model="vinForm.feeCollected"></switch-with-label>
-        </div>
+      </div>
+      <textbox-with-label id="inputInspectionDateTime" label="Inspection Date &amp; Time" ng-model="vinForm.inspectionDateTime"></textbox-with-label>
+      <textbox-with-label id="inputVerifyingAgency" label="Verifying Agency" ng-model="vinForm.verifyingAgency"></textbox-with-label>
+      <textbox-with-label id="inputWorkPhone" label="Work Phone" ng-model="vinForm.workPhone"></textbox-with-label>
     </div>
+    <div class="column col-xs-6">
+      <textbox-with-label id="inputVehicleYear" label="Vehicle Year" ng-model="vinForm.vehicleYear"></textbox-with-label>
+      <dropdown-with-label id="inputVehicleMake" label="Vehicle Make" items='vehicleMakes' setmodel="setVehicleMake(item)"></dropdown-with-label>
+      <dropdown-with-label id="inputVehicleModel" label="Vehicle Model" items='vehicleModels' setmodel="setVehicleModel(item)"></dropdown-with-label>
+      <textbox-with-label id="inputVehicleColor" label="Vehicle Color" ng-model="vinForm.vehicleColor"></textbox-with-label>
+      <textbox-with-label id="inputOfficerName" label="Officer Name" ng-model="vinForm.officerName"></textbox-with-label>
+      <textbox-with-label id="inputBadgeId" label="Badge Id" ng-model="vinForm.badgeID"></textbox-with-label>
+      <switch-with-label id="switchFeeCollected" label="Is $25 Fee to be Collected" on="Yes" off="No" ng-model="vinForm.feeCollected"></switch-with-label>
+    </div>
+  </div>
 </form>
