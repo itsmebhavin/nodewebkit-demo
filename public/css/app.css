@@ -207,4 +207,11 @@ a {
 .nav-tabs > li.dragging {
     opacity: 0.5;
 }
+.tabCloseBtn:visited {
+    color:inherit;
+}
+.tabCloseBtn:hover {
+    color:red;
+}
+
 /* END Sortable Tabs CSS */
