@@ -18,9 +18,12 @@ app.controller('defaultCtrl',['$scope','$stateParams', '$state' ,function($scope
     $scope.hello = "Hello Default..!!";
     $scope.doctype = $stateParams.type;
     $scope.docid = $stateParams.docid;
-
-
     $scope.tabs = [];
+
+
+    $scope.init = function() {
+        $scope.addTab($scope.doctype);
+    }
 
     $scope.addTab = function(type) {
         var d = new Date();
@@ -30,4 +33,7 @@ app.controller('defaultCtrl',['$scope','$stateParams', '$state' ,function($scope
     $scope.removeTab = function(index) {
         $scope.tabs.splice(index, 1);
     }
+
+
+    $scope.init();
 }]);
