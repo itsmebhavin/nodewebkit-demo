@@ -1,28 +1,21 @@
-<style>
-.tabDropdown {
-    background-color:inherit;
-    color:inherit;
-    outline: 0;
-    background: none;
-    border: 0;
-}
-</style>
-
 <div ui-view="toolbar"></div>
 <tabset>
     <tab sortable-tab ng-repeat="tab in tabs" active="tab.active" disable="tab.disabled">
         <tab-heading>
-            {{tab.title}}
+            {{tab.title}} &nbsp;
+            <a ng-click="removeTab($index)" href="" class="tabCloseBtn">
+                <i class="fa fa-times"></i>
+            </a>
         </tab-heading>
         <div style="padding-left:10px; padding-right:10px;">
             <div ui-view="vin" ng-if="tab.type == 'VIN'"></div>
             <div ui-view="asr" ng-if="tab.type == 'ASR'"></div>
-            <button class="btn btn-danger pull-right" ng-click="removeTab($index)">Remove</button>
         </div>
     </tab>
     <tab disable="false">
         <tab-heading>
-            <i class="glyphicon glyphicon-plus"></i>
+            <!-- <i class="zmdi zmdi-plus zmdi-hc-lg"></i> -->
+            <i class="fa fa-plus"></i>
         </tab-heading>
         <div class="well well-lg mdc-bg-blue-900" ng-click="addTab('VIN')">
             VIN
