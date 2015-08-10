@@ -24,7 +24,7 @@ app.controller('defaultCtrl',['$scope','$stateParams', '$state' ,function($scope
 
     $scope.addTab = function(type) {
         var d = new Date();
-        var title = d.getMonth() + '/' + d.getDate() + '/' + d.getFullYear() + ' - ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
+        var title = '' + type + ' - ' + d.getMonth() + '/' + d.getDate() + '/' + d.getFullYear() + ' - ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
         $scope.tabs.push({title: title, active:true, type:type});
     }
     $scope.removeTab = function(index) {

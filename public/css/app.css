@@ -1,53 +1,53 @@
 @font-face {
-    font-family: RobotoThin;
-    src: url(../fonts/RobotoTTF/Roboto-Thin.ttf);
+  font-family: RobotoThin;
+  src: url(../fonts/RobotoTTF/Roboto-Thin.ttf);
 }
 @font-face {
-    font-family: RobotoRegular;
-    src: url(../fonts/RobotoTTF/Roboto-Regular.ttf);
+  font-family: RobotoRegular;
+  src: url(../fonts/RobotoTTF/Roboto-Regular.ttf);
 }
 @font-face {
-    font-family: RobotoCondensedLight;
-    src: url(../fonts/RobotoTTF/RobotoCondensed-Light.ttf);
+  font-family: RobotoCondensedLight;
+  src: url(../fonts/RobotoTTF/RobotoCondensed-Light.ttf);
 }
 @font-face {
-    font-family: RobotoCondensedRegular;
-    src: url(../fonts/RobotoTTF/RobotoCondensed-Regular.ttf);
+  font-family: RobotoCondensedRegular;
+  src: url(../fonts/RobotoTTF/RobotoCondensed-Regular.ttf);
 }
 .robotothin{
-    font-family: RobotoThin;
+  font-family: RobotoThin;
 }
 .robotoregular{
-    font-family: RobotoRegular;
+  font-family: RobotoRegular;
 }
 .robotocondensedregularlight{
-    font-family: RobotoCondensedLight;
+  font-family: RobotoCondensedLight;
 }
 
 .robotocondensedregular{
-    font-family: RobotoCondensedRegular;
+  font-family: RobotoCondensedRegular;
 }
 
 html {
-    margin: 0px;
-    padding: 0px;
+  margin: 0px;
+  padding: 0px;
 }
 
 body {
-    padding: 0px;
-    margin: 0px;
-    /*background-color: #2D2D30;*/
-    /*border-bottom: 30px solid #424242;*/
-    /*border: 1px solid #3F51B5;*/
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    right: 0px;
-    bottom: 0px;
-    font-family: robotoregular;
-    -webkit-box-shadow:0px 5px 10px #1c1c1c;
-    -moz-box-shadow:0px 5px 10px #1c1c1c;
-    box-shadow:5px 5px 10px #1c1c1c;
+  padding: 0px;
+  margin: 0px;
+  /*background-color: #2D2D30;*/
+  /*border-bottom: 30px solid #424242;*/
+  /*border: 1px solid #3F51B5;*/
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  font-family: robotoregular;
+  -webkit-box-shadow:0px 5px 10px #1c1c1c;
+  -moz-box-shadow:0px 5px 10px #1c1c1c;
+  box-shadow:5px 5px 10px #1c1c1c;
 }
 .footer {
   position: absolute;
@@ -63,38 +63,43 @@ body {
 -------------------------------------------------- */
 /* Not required for template or sticky footer method. */
 html{
-   overflow: auto;
+  overflow: auto;
 }
 body > .container {
   padding: 60px 15px 0;
 }
 /* Let's get this party started */
 ::-webkit-scrollbar {
-    width: 12px;
+  width: 12px;
 }
-
+.rowFullWidth
+{
+  margin-left: 5px !important;
+  margin-right: 5px !important;
+  width:100%;
+}
 /* Track */
 ::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
-    background: rgba(255,0,0,0.8);
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background: rgba(255,0,0,0.8);
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
 }
 ::-webkit-scrollbar-thumb:window-inactive {
-	background: rgba(255,0,0,0.4);
+  background: rgba(255,0,0,0.4);
 }
 
 .navbar-nav > li > a, .navbar-brand {
-    padding-top:4px !important;
-    padding-bottom:0 !important;
-    height: 20px;
+  padding-top:4px !important;
+  padding-bottom:0 !important;
+  height: 20px;
 }
 .navbar {
   min-height:20px !important;
@@ -116,12 +121,12 @@ body > .container {
 
 
 #content {
-    padding: 12px;
-    color: #CCCCCC;
+  padding: 12px;
+  color: #CCCCCC;
 }
 
 a {
-    color: #68217A;
+  color: #68217A;
 }
 
 
@@ -143,10 +148,10 @@ a {
   padding-top: 5px;
 }
 .card span.card-title {
-    /*color: #fff;*/
-    font-size: 24px;
-    font-weight: 300;
-    text-transform: uppercase;
+  /*color: #fff;*/
+  font-size: 24px;
+  font-weight: 300;
+  text-transform: uppercase;
 }
 
 .card .card-content {

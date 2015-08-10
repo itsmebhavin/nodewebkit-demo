@@ -5,6 +5,7 @@ var app = angular.module('demoapp',[
     'application.routing',
     'application.directives',
     'application.vin',
+    'application.asr',
     'ui.bootstrap',
     'uiSwitch'
 ])
