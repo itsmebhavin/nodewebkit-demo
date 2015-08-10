@@ -1,5 +1,9 @@
 <form class="robotoregular">
+
   <div class="row">
+    <div class="progress" style="margin-top:-34px;">
+      <div data-percentage="0%" style="width: 100%;" class="progress-bar progress-bar-danger" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
     <div class="column col-xs-6">
       <textbox-with-label id="inputVIN" required-icon='true' label="VIN" ng-model="vinForm.vin"></textbox-with-label>
       <dropdown-with-label id="inputStateOfTitle" label="State Of Current Title" items="stateList" setmodel="setStateTitle(item)"></dropdown-with-label>
