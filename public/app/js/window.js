@@ -60,57 +60,36 @@ angular.module('components.window',[])
 
 .factory('windowFactory',[function(){
   var factory = {};
-  factory.maxWindow = function(winState){
-    // if(winState == true)
-    //   win.maximize();
-    // else
-    //   win.unmaximize();
+  factory.maxWindow = function(){
     console.log('Is KioskMode - ' + win.isKioskMode);
     console.log('Is Fullscreen - ' + win.isFullscreen);
-    console.log('Is maximize - ' + win.maximize());
-    if(win.isKioskMode)
-    win.leaveKioskMode();
-
-    win.restore();
+    if(win.isKioskMode){
+      win.leaveKioskMode();
+      win.restore();
+    }
+    else if (win.isFullscreen){
+      win.toggleFullscreen();
+      //win.restore();
+    }
+    else
     win.toggleFullscreen();
   }
   factory.minWindow = function(){
     win.minimize();
-    /* NOTE: If you want to minimize to Tray , follow this code...
-    // Load library
-    var gui = require('nw.gui');
-    // Reference to window and tray
-    var win = gui.Window.get();
-    var tray;
-    // Get the minimize event
-    win.on('minimize', function() {
-    // Hide window
-    this.hide();
-    // Show tray
-    tray = new gui.Tray({ icon: 'icon.png' });
-    // Show window and remove tray when clicked
-    tray.on('click', function() {
-    win.show();
-    this.remove();
-    tray = null;
-  });
-});
-//END tray code
-*/
-};
+  };
 
-factory.closeWindow = function(){
-  win.on('close', function() {
-    // Hide the window to give user the feeling of closing immediately
-    this.hide();
-    // If the new window is still open then close it.
-    if (win != null)
-    win.close(true);
-    // After closing the new window, close the main window.
-    this.close(true);
-  });
+  factory.closeWindow = function(){
+    win.on('close', function() {
+      // Hide the window to give user the feeling of closing immediately
+      this.hide();
+      // If the new window is still open then close it.
+      if (win != null)
+      win.close(true);
+      // After closing the new window, close the main window.
+      this.close(true);
+    });
 
-  win.close();
-}
-return factory;
+    win.close();
+  }
+  return factory;
 }])

@@ -29,14 +29,14 @@
       <li><span class="mdc-text-orange-500 fa fa-plus-circle fa-2x" data-l10n-id="hint_expand_window" style="cursor: hand;padding-left:5px;" title="restore" ng-click="maxWindow()"></span>&nbsp;</li>
       <li><span class="mdc-text-red-500 fa fa-times-circle fa-2x" data-l10n-id="hint_close_window" style="cursor: hand;padding-left:5px;" title="close" ng-click="closeWindow()"></span>&nbsp;</li>
     </ul>
-  </div><!--/.nav-collapse -->
+  </div>
 </div>
 </nav>
 <!-- Wrap all page content here -->
 <div class="container rowFullWidth" style="margin-left:10px;margin-right:10px;">
   <div id="wrap">
     <div class="center-container">
-      <div ui-view class="anim-in-out anim-fade"></div>
+      <div ui-view class="velocity-enter-transition-slideRightIn velocity-leave-transition-slideDownOut"></div>
     </div>
   </div>
 </div>
@@ -49,6 +49,9 @@
 <script type="text/javascript" src="app/js/animate.js"></script>
 <script type="text/javascript" src="lib/angular-ui-switch/switch.js"></script>
 <script type="text/javascript" src="lib/waves/waves.js"></script>
+<script src="../bower_components/velocity/velocity.min.js"></script>
+<script src="../bower_components/velocity/velocity.ui.min.js"></script>
+<script src="../bower_components/angular-velocity/angular-velocity.min.js"></script>
 <!-- application specific scripts  -->
 <script type="text/javascript" src="app/js/app.js"></script>
 <script type="text/javascript" src="app/js/directives.js"></script>

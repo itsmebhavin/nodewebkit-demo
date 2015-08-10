@@ -95,15 +95,11 @@ body > .container {
 ::-webkit-scrollbar-thumb:window-inactive {
   background: rgba(255,0,0,0.4);
 }
-
 .navbar-nav > li > a, .navbar-brand {
-  padding-top:4px !important;
-  padding-bottom:0 !important;
-  height: 20px;
+    padding-top:5px !important; padding-bottom:0 !important;
+    height: 30px;
 }
-.navbar {
-  min-height:20px !important;
-}
+.navbar {min-height:30px !important;}
 
 .container .text-muted {
   margin: 20px 0;
