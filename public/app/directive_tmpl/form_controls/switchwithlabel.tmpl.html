@@ -1,5 +1,5 @@
 <div class="form-group row">
-    <label ng-attr-for="{{id}}" class="col-md-4 control-label">{{label}}</label>
+    <label ng-attr-for="{{id}}" class="col-md-4 control-label">{{label}}&nbsp;<i ng-if="requiredIcon" class="fa fa-asterisk text-danger" style="font-size:8px;"></i></label>
     <div class="col-md-8">
         <switch ng-attr-id="{{id}}" name="{{id}}" class="wide" on="{{on}}" off={{off}} ng-model="ngModel"></switch>
     </div>
