@@ -22,18 +22,14 @@ app.controller('defaultCtrl',['$scope','$stateParams', '$state' ,function($scope
 
     $scope.tabs = [];
 
-    $scope.addTab = function() {
+    $scope.addTab = function(type) {
+        $stateParams.type = type;
+        $stateParams.docid = uuid.v4();
         var d = new Date();
         var title = d.getMonth() + '/' + d.getDate() + '/' + d.getFullYear() + ' - ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
         $scope.tabs.push({title: title, active:true});
-        // $state.go('default',{type:'VIN',docid:uuid.v4()});
     }
     $scope.removeTab = function(index) {
-        console.log($scope.tabs);
-        console.log(index);
-        if(index !== 0) {
-            $scope.tabs[0].active = true;
-        }
         $scope.tabs.splice(index, 1);
     }
 }]);
