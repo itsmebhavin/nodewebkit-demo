@@ -15,7 +15,8 @@
             {{tab.title}}
         </tab-heading>
         <div style="padding-left:10px; padding-right:10px;">
-            <div ui-view="forms"></div>
+            <div ui-view="vin" ng-if="tab.type == 'VIN'"></div>
+            <div ui-view="asr" ng-if="tab.type == 'ASR'"></div>
             <button class="btn btn-danger pull-right" ng-click="removeTab($index)">Remove</button>
         </div>
     </tab>

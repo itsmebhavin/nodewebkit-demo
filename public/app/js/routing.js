@@ -21,12 +21,13 @@ angular.module('application.routing',[])
             'toolbar@default':{
                 templateUrl: '../public/app/partial_views/toolbar.html'
             },
-            'forms@default':{
-                templateUrl: function(sp) {
-                    return './' + sp.type + '/partial_views/' + sp.type + '_main.html'
-                },
-                // templateUrl: '../public/vin/partial_views/vin_main.html',
+            'vin@default':{
+                templateUrl: './asr/partial_views/vin_main.html',
                 controller:'vinCtrl'
+            },
+            'asr@default':{
+                templateUrl: './asr/partial_views/asr_main.html',
+                controller:'asrCtrl'
             }
         }
 

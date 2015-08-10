@@ -23,11 +23,9 @@ app.controller('defaultCtrl',['$scope','$stateParams', '$state' ,function($scope
     $scope.tabs = [];
 
     $scope.addTab = function(type) {
-        $stateParams.type = type;
-        $stateParams.docid = uuid.v4();
         var d = new Date();
         var title = d.getMonth() + '/' + d.getDate() + '/' + d.getFullYear() + ' - ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
-        $scope.tabs.push({title: title, active:true});
+        $scope.tabs.push({title: title, active:true, type:type});
     }
     $scope.removeTab = function(index) {
         $scope.tabs.splice(index, 1);
