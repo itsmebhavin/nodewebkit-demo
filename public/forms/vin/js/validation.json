@@ -1,0 +1,27 @@
+{
+    "inputVIN": {
+        "name": "VIN",
+        "errors": {
+            "required": "VIN is required",
+            "minlength": "VIN must be at least 4 characters"
+        }
+    },
+    "inputVehicleMake": {
+        "name": "Vehicle Make",
+        "errors": {
+            "required": "Vehicle Make is required"
+        }
+    },
+    "inputVehicleModel": {
+        "name": "Vehicle Model",
+        "errors": {
+            "required": "Vehicle Model is required"
+        }
+    },
+    "inputVehicleColor": {
+        "name": "Vehicle Color",
+        "errors": {
+            "required": "Vehicle Color is required"
+        }
+    }
+}

@@ -1,12 +1,11 @@
 <div class="form-group row">
-    <label ng-attrs-for="id" class="col-md-4 control-label">{{label}}&nbsp;<i ng-if="requiredIcon" class="fa fa-asterisk text-danger" style="font-size:8px;"></i></label>
-    <div class="btn-group col-md-8" dropdown>
-        <button ng-attrs-id="id" type="button" class="btn btn-primary btn-sm" dropdown-toggle>
-            {{selected ? selected : label}} &nbsp;<span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" role="menu">
-            <li role="menuitem" ng-click="updateLocal();setmodel()"><a href="">&nbsp;</a></li>
-            <li role="menuitem" ng-repeat="item in items" ng-click="updateLocal(item);setmodel({item:item})"><a href="">{{item}}</a></li>
-        </ul>
+    <label ng-attrs-for="id" class="col-md-4 control-label">{{label}}&nbsp;<i ng-if="required" class="fa fa-asterisk text-danger" style="font-size:8px;"></i></label>
+    <div class="col-md-8">
+        <select class="form-control input-sm mdc-bg-grey-800 mdc-text-grey-100" ng-attr-id="{{id}}" ng-attr-name="{{id}}" ng-model="ngModel" ng-required="required">
+            <option value=""></option>
+            <option ng-repeat="item in items" value="{{item}}">
+                {{item}}
+            </option>
+        </select>
     </div>
 </div>

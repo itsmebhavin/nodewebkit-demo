@@ -1,5 +1,13 @@
-<form class="robotoregular" novalidate="novalidate" name="signupFrm">
-    <textbox-with-label label="Required" ng-model="test" required></textbox-with-label>
-    <textbox-with-label label="Not Required" ng-model="test2"></textbox-with-label>
+<form class="robotoregular" novalidate="novalidate" name="frm" ng-submit="submit()" ng-submit-force="true">
+    <textbox-with-label id="text1" label="Required" ng-model="test" required></textbox-with-label>
+    <textbox-with-label id="text2" label="Not Required" ng-model="test2"></textbox-with-label>
+    <dropdown-with-label id="dropdown" label="Required" items="stateList" ng-model="test3" required></dropdown-with-label>
     <button class="btn btn-warning btn-sm" type="reset">Reset</button>
+    <button class="btn btn-success btn-sm" type="submit">Submit</button>
 </form>
+
+<ul>
+    <li ng-repeat="f in frm" ng-if="f.$invalid">
+        {{f.$name}} - {{f.$error}}
+    </li>
+</ul>

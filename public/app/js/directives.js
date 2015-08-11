@@ -56,12 +56,7 @@ angular.module('application.directives',[])
             requiredIcon:'@',
             setmodel:'&'
         },
-        templateUrl: 'app/directive_tmpl/form_controls/dropdownwithlabel.tmpl.html',
-        link: function(scope) {
-            scope.updateLocal = function(item) {
-                scope.selected = item;
-            }
-        }
+        templateUrl: 'app/directive_tmpl/form_controls/dropdownwithlabel.tmpl.html'
     }
 })
 .directive('switchWithLabel', function() {

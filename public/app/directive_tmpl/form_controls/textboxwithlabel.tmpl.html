@@ -1,7 +1,7 @@
 <div class="form-group row">
-    <label ng-attr-for="{{id}}" class="col-md-4 control-label robotoregular">{{label}}&nbsp;<i ng-if="requiredIcon" class="fa fa-asterisk text-danger" style="font-size:8px;"></i></label>
+    <label ng-attr-for="{{id}}" class="col-md-4 control-label robotoregular">{{label}}&nbsp;<i ng-if="required" class="fa fa-asterisk text-danger" style="font-size:8px;"></i></label>
     <div class="col-md-8">
-        <input type="text" class="form-control input-sm mdc-bg-grey-800 mdc-text-grey-100" ng-attr-id="{{id}}" name="{{id}}" ng-model="ngModel"
+        <input type="text" class="form-control input-sm mdc-bg-grey-800 mdc-text-grey-100" ng-attr-id="{{id}}" ng-attr-name="{{id}}" ng-model="ngModel"
             ng-minlength="ngMinlength" ng-maxlength="ngMaxlength" ng-required="required">
     </div>
 </div>

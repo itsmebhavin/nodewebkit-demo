@@ -10,8 +10,8 @@ a:visited.validationLink {
             <div data-percentage="0%" style="width: 100%;" class="progress-bar progress-bar-danger" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
         <div class="column col-xs-6">
-            <textbox-with-label id="inputVIN" label="VIN" ng-model="vinForm.vin" ng-minlength="4" required required-icon='true'></textbox-with-label>
-            <dropdown-with-label id="inputStateOfTitle" label="State Of Current Title" items="stateList" setmodel="setStateTitle(item)"></dropdown-with-label>
+            <textbox-with-label id="inputVIN" label="VIN" ng-model="vinForm.vin" ng-minlength="4" required></textbox-with-label>
+            <dropdown-with-label id="inputStateOfTitle" label="State Of Current Title" items="stateList" ng-model="vinForm.stateTitle"></dropdown-with-label>
             <switch-with-label id="inputTitleCourt" label="Title/Court Order Num" ng-model="vinForm.titleCourt" on="Ticket" off="Court"></switch-with-label>
             <div class="form-group row">
                 <div class="col-xs-12">
@@ -24,8 +24,8 @@ a:visited.validationLink {
         </div>
         <div class="column col-xs-6">
             <textbox-with-label id="inputVehicleYear" label="Vehicle Year" ng-model="vinForm.vehicleYear"></textbox-with-label>
-            <dropdown-with-label id="inputVehicleMake" label="Vehicle Make" items='vehicleMakes' setmodel="setVehicleMake(item)" required></dropdown-with-label>
-            <dropdown-with-label id="inputVehicleModel" label="Vehicle Model" items='vehicleModels' setmodel="setVehicleModel(item)" required></dropdown-with-label>
+            <dropdown-with-label id="inputVehicleMake" label="Vehicle Make" items='vehicleMakes' ng-model="vinForm.vehicleMake" required></dropdown-with-label>
+            <dropdown-with-label id="inputVehicleModel" label="Vehicle Model" items='vehicleModels' ng-model="vinForm.vehicleModel" required></dropdown-with-label>
             <textbox-with-label id="inputVehicleColor" label="Vehicle Color" ng-model="vinForm.vehicleColor" required></textbox-with-label>
             <textbox-with-label id="inputOfficerName" label="Officer Name" ng-model="vinForm.officerName"></textbox-with-label>
             <textbox-with-label id="inputBadgeId" label="Badge Id" ng-model="vinForm.badgeID"></textbox-with-label>
@@ -40,17 +40,10 @@ a:visited.validationLink {
 <div pageslide ps-open="validationOpened" style="background-color:gray" ps-side="bottom" ps-size="200px" ps-push="true">
     <div style="padding:20px">
         <ul>
-            <li ng-if="vinFrm.inputVIN.$invalid">
-                <a href="" ng-click="focusOn('inputVIN')" class="validationLink">VIN is required</a>
-            </li>
-            <li ng-if="!vinForm.VehicleMake">
-                Vehicle Make is required
-            </li>
-            <li ng-if="!vinForm.vehicleModel">
-                Vehicle Model is required
-            </li>
-            <li ng-if="vinFrm.inputVehicleColor.$invalid">
-                <a href="" ng-click="focusOn('inputVehicleColor')" class="validationLink">Vehicle Color is required</a>
+            <li ng-repeat="(key,value) in vinFrm" ng-if="vinFrm[key].$invalid">
+                <div ng-repeat="(errKey, errValue) in vinFrm[key].$error">
+                    <a class="validationLink" href="" ng-click="focusOn(key)">{{validation[key].errors[errKey]}}</a>
+                </div>
             </li>
         </ul>
     </div>
