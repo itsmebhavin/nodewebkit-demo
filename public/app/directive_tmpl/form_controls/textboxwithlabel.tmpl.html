@@ -1,6 +1,7 @@
 <div class="form-group row">
     <label ng-attr-for="{{id}}" class="col-md-4 control-label robotoregular">{{label}}</label>
     <div class="col-md-8">
-        <input type="text" class="form-control input-sm mdc-bg-grey-800 mdc-text-grey-100" ng-attr-id="{{id}}" ng-model="ngModel">
+        <input type="text" class="form-control input-sm mdc-bg-grey-800 mdc-text-grey-100" ng-attr-id="{{id}}" name="{{id}}" ng-model="ngModel"
+            ng-minlength="ngMinlength" ng-maxlength="ngMaxlength" ng-required="required">
     </div>
 </div>

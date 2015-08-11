@@ -8,7 +8,8 @@ var app = angular.module('demoapp',[
   'application.asr',
   'ui.bootstrap',
   'uiSwitch',
-  'angular-velocity'
+  'angular-velocity',
+  'pageslide-directive'
 ])
 .run(['$window','$rootScope',function($window, $rootScope) {
   $rootScope.online = navigator.onLine;

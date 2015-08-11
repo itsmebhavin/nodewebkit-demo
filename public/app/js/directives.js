@@ -35,6 +35,9 @@ angular.module('application.directives',[])
         scope: {
             label:'@',
             id:'@',
+            ngMinlength:'=',
+            ngMaxlength:'=',
+            required:'@',
             ngModel:'='
         },
         templateUrl:'app/directive_tmpl/form_controls/textboxwithlabel.tmpl.html'
@@ -48,6 +51,7 @@ angular.module('application.directives',[])
             label:'@',
             id:'@',
             items:'=',
+            required:'@',
             setmodel:'&'
         },
         templateUrl: 'app/directive_tmpl/form_controls/dropdownwithlabel.tmpl.html',
@@ -67,6 +71,7 @@ angular.module('application.directives',[])
             id:'@',
             on:'@',
             off:'@',
+            required:'@',
             ngModel:'='
         },
         templateUrl: 'app/directive_tmpl/form_controls/switchwithlabel.tmpl.html'
