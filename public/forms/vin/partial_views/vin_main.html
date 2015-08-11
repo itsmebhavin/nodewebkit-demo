@@ -10,7 +10,7 @@ a:visited.validationLink {
             <div data-percentage="0%" style="width: 100%;" class="progress-bar progress-bar-danger" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
         <div class="column col-xs-6">
-            <textbox-with-label id="inputVIN" label="VIN" ng-model="vinForm.vin" ng-minlength="4" required></textbox-with-label>
+            <textbox-with-label id="inputVIN" label="VIN" ng-model="vinForm.vin" ng-minlength="4" required required-icon='true'></textbox-with-label>
             <dropdown-with-label id="inputStateOfTitle" label="State Of Current Title" items="stateList" setmodel="setStateTitle(item)"></dropdown-with-label>
             <switch-with-label id="inputTitleCourt" label="Title/Court Order Num" ng-model="vinForm.titleCourt" on="Ticket" off="Court"></switch-with-label>
             <div class="form-group row">

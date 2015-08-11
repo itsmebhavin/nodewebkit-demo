@@ -1,5 +1,4 @@
 var vinmodule = angular.module('application.vin',['jcs-autoValidate']);
-
 vinmodule.controller('vinCtrl', ['$scope', function($scope) {
     console.log('inside vin controller');
 
