@@ -1,7 +1,7 @@
 var server = require('../server/server');
 var uuid = require('node-uuid');
 angular.isUndefinedOrNull = function(val) {
-    return angular.isUndefined(val) || val === null
+  return angular.isUndefined(val) || val === null
 }
 app.controller('cssBundleCtrl',['$scope','$css',function($scope,$css){
   // set the default bootswatch name
@@ -28,18 +28,23 @@ app.controller('cssBundleCtrl',['$scope','$css',function($scope,$css){
     if(newval == null) newval = 'darkly'; // default is darkly
     localStorage['theme'] = newval;
 
+    //remove old css collections
     $css.remove($scope.CssCollection);
-    $css.remove(['css/bootstrap.darkly.min.css','css/bootstrap.cosmo.min.css','css/bootstrap.paper.min.css']);
+    $css.remove(['css/bootstrap.darkly.min.css',
+      'css/bootstrap.cosmo.min.css',
+      'css/bootstrap.paper.min.css'
+    ]);
 
-    var newCssCollection = [];
-    newCssCollection.push('css/bootstrap.' + newval + '.min.css');
-    angular.forEach($scope.CssCollection,function(val){
-      newCssCollection.push(val);
-    })
+  //prepare for new  css collections
+  var newCssCollection = [];
+  newCssCollection.push('css/bootstrap.' + newval + '.min.css');
+  angular.forEach($scope.CssCollection,function(val){
+    newCssCollection.push(val);
+  });
 
-    console.log(newCssCollection);
-    $css.add(newCssCollection);
-  })
+  //add new css collections
+  $css.add(newCssCollection);
+})
 
 
 
@@ -50,6 +55,7 @@ app.controller('indexCtrl',['$scope','windowFactory',function($scope,windowFacto
 }]);
 app.controller('mainCtrl',['$scope','$state',function($scope,$state){
   $scope.today = new Date();
+  $scope.format = 'M/d/yy h:mm:ss a';
   server.usersdb.getAll();
   $scope.createNewVIN = function(){
     console.log('navigating to default page now.');
