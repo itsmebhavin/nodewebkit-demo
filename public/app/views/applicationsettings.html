@@ -8,13 +8,13 @@
   </div>
   <div class="col-xs-8">
   </br>
-  <div class="well">
+  <div class="well" ng-controller="cssBundleCtrl">
     <h4>Theme Settings</h4>
-    <pre>Active theme - {{themeModel || 'null'}}</pre>
+    <pre>Active theme - {{css || 'darkly'}}</pre>
     <div class="btn-group">
-      <label class="btn btn-danger" ng-model="themeModel" btn-radio="'DARK'" uncheckable>DARK</label>
-      <label class="btn btn-danger" ng-model="themeModel" btn-radio="'LIGHT'" uncheckable>LIGHT</label>
-      <label class="btn btn-danger" ng-model="themeModel" btn-radio="'MATERIAL'" uncheckable>MATERIAL</label>
+      <label class="btn btn-danger" ng-model="css" btn-radio="'darkly'" uncheckable>darkly</label>
+      <label class="btn btn-danger" ng-model="css" btn-radio="'cosmo'" uncheckable>cosmo</label>
+      <label class="btn btn-danger" ng-model="css" btn-radio="'paper'" uncheckable>paper</label>
     </div>
   </div>
 

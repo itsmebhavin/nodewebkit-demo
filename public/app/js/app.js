@@ -9,10 +9,12 @@ var app = angular.module('demoapp',[
   'ui.bootstrap',
   'uiSwitch',
   'angular-velocity',
-  'pageslide-directive'
+  'pageslide-directive',
+  'door3.css'
 ])
 .run(['$window','$rootScope',function($window, $rootScope) {
   $rootScope.online = navigator.onLine;
+
   var path = './';
   var fs = require('fs');
 

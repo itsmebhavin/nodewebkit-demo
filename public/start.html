@@ -1,48 +1,48 @@
 <!DOCTYPE html>
-<html ng-app="demoapp">
-<head lang="en">
-  <meta charset="UTF-8">
-  <title>eForms using nw.js</title>
+<html ng-app="demoapp" >
+<head lang="en" ng-controller="cssBundleCtrl">
+    <meta charset="UTF-8">
+    <title>eForms using nw.js</title>
+    <link href="css/Bootstrap.darkly.min.css" rel="stylesheet">
+    <!-- <link href="css/Bootstrap.paper.min.css" rel="stylesheet"> -->
+    <!-- <link href="css/bootstrap.cosmo.min.css" rel="stylesheet"> -->
 
-  <link href="css/Bootstrap.darkly.min.css" rel="stylesheet">
-  <!-- <link href="css/Bootstrap.paper.min.css" rel="stylesheet"> -->
-  <!-- <link href="css/bootstrap.cosmo.min.css" rel="stylesheet"> -->
-
-  <link href="css/material-design-color-palette.min.css" rel="stylesheet">
-  <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-  <link href="lib/waves/waves.css" rel="stylesheet">
-  <link href="css/app.css" rel="stylesheet">
-  <link href="css/booleanswitch.css" rel="stylesheet">
-  <link href="lib/angular-ui-switch/switch.css" rel="stylesheet">
-  <link href="css/animate.css" rel="stylesheet">
+    <link href="css/material-design-color-palette.min.css" rel="stylesheet">
+    <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="lib/waves/waves.css" rel="stylesheet">
+    <link href="css/app.css" rel="stylesheet">
+    <link href="css/booleanswitch.css" rel="stylesheet">
+    <link href="lib/angular-ui-switch/switch.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
 </head>
 <body style="margin-left:10px;margin-right:10px;">
-  <!-- Fixed navbar -->
-  <nav class="navbar navbar-default navbar-fixed-top"
-  style="-webkit-user-select: none;-webkit-app-region: drag;"
-  ng-controller="indexCtrl">
-  <div class="container">
-    <div class="navbar-header">
-      <a class="navbar-brand" ui-sref="main">{{welcome}}</a>
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top"
+    style="-webkit-user-select: none;-webkit-app-region: drag;"
+    ng-controller="indexCtrl">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" ui-sref="main">{{welcome}}</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul style="-webkit-user-select: none;-webkit-app-region: no-drag;"
+            class="title-bar-btns nav navbar-nav navbar-right" ng-controller="windowCtrl">
+            <li><span class="mdc-text-lime-500 fa fa-wifi fa-2x" style="padding-right: 15px;" ng-if="online" title="Connected to network"></span>&nbsp;</li>
+            <li><span class="mdc-text-green-500 fa fa-minus-circle fa-2x" data-l10n-id="hint_minimize_window" title="minimize" style="cursor: hand;padding-left:5px;" ng-click="minWindow()"></span>&nbsp;</li>
+            <li><span class="mdc-text-orange-500 fa fa-plus-circle fa-2x" data-l10n-id="hint_expand_window" style="cursor: hand;padding-left:5px;" title="restore" ng-click="maxWindow()"></span>&nbsp;</li>
+            <li><span class="mdc-text-red-500 fa fa-times-circle fa-2x" data-l10n-id="hint_close_window" style="cursor: hand;padding-left:5px;" title="close" ng-click="closeWindow()"></span>&nbsp;</li>
+        </ul>
     </div>
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul style="-webkit-user-select: none;-webkit-app-region: no-drag;"
-      class="title-bar-btns nav navbar-nav navbar-right" ng-controller="windowCtrl">
-      <li><span class="mdc-text-lime-500 fa fa-wifi fa-2x" style="padding-right: 15px;" ng-if="online" title="Connected to network"></span>&nbsp;</li>
-      <li><span class="mdc-text-green-500 fa fa-minus-circle fa-2x" data-l10n-id="hint_minimize_window" title="minimize" style="cursor: hand;padding-left:5px;" ng-click="minWindow()"></span>&nbsp;</li>
-      <li><span class="mdc-text-orange-500 fa fa-plus-circle fa-2x" data-l10n-id="hint_expand_window" style="cursor: hand;padding-left:5px;" title="restore" ng-click="maxWindow()"></span>&nbsp;</li>
-      <li><span class="mdc-text-red-500 fa fa-times-circle fa-2x" data-l10n-id="hint_close_window" style="cursor: hand;padding-left:5px;" title="close" ng-click="closeWindow()"></span>&nbsp;</li>
-    </ul>
-  </div>
 </div>
 </nav>
 <!-- Wrap all page content here -->
 <div class="container rowFullWidth" style="margin-left:10px;margin-right:10px;">
-  <div id="wrap">
-    <div class="center-container">
-      <div ui-view class="velocity-enter-transition-slideRightIn velocity-leave-transition-slideDownOut"></div>
+    <div id="wrap">
+        <div class="center-container">
+            <div ui-view class="velocity-enter-transition-slideRightIn velocity-leave-transition-slideDownOut"></div>
+        </div>
     </div>
-  </div>
 </div>
 
 
@@ -59,6 +59,7 @@
 <script src="../bower_components/angular-velocity/angular-velocity.min.js"></script>
 <script src="./lib/ng-pageslide/ng-pageslide.js"></script>
 <script src="../bower_components/angular-auto-validate/dist/jcs-auto-validate.min.js"></script>
+<script src="../bower_components/angular-css/angular-css.min.js"></script>
 <!-- application specific scripts  -->
 <script type="text/javascript" src="app/js/app.js"></script>
 <script type="text/javascript" src="app/js/directives.js"></script>

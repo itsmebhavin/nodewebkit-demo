@@ -1,0 +1,21 @@
+{
+  "name": "nodewebkit-demo",
+  "version": "1.0.0",
+  "homepage": "https://github.com/bapatel1/nodewebkit-demo",
+  "authors": [
+    "bhavin_patel <bhavin.ibm@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-auto-validate": "~1.18.10",
+    "angular-css": "~1.0.7",
+    "angular-velocity": "~0.3.2"
+  }
+}
