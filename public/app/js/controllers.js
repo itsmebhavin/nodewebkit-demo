@@ -25,6 +25,7 @@ app.controller('cssBundleCtrl',['$scope','$css',function($scope,$css){
 
   $scope.$watch('css',function(newval, oldval){
     console.log('new css = ' + newval);
+    if(newval == null) newval = 'darkly'; // default is darkly
     localStorage['theme'] = newval;
 
     $css.remove($scope.CssCollection);
