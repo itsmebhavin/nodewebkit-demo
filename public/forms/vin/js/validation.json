@@ -3,7 +3,7 @@
         "name": "VIN",
         "errors": {
             "required": "VIN is required",
-            "minlength": "VIN must be at least 4 characters"
+            "minlength": "VIN must be at least 13 characters"
         }
     },
     "inputVehicleMake": {

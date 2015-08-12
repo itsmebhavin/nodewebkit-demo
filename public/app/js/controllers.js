@@ -37,3 +37,6 @@ app.controller('defaultCtrl',['$scope','$stateParams', '$state' ,function($scope
 
     $scope.init();
 }]);
+app.controller('applicationSettingsCtrl',['$scope','$rootScope',function($scope, $rootScope){
+   $rootScope.themeModel = 'DARK';
+}])

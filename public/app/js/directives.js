@@ -28,6 +28,17 @@ angular.module('application.directives',[])
         templateUrl:'app/directive_tmpl/general/smallwell.tmpl.html'
     }
 })
+.directive('uppercased', function() {
+    return {
+        require: 'ngModel',
+        link: function(scope, element, attrs, modelCtrl) {
+            modelCtrl.$parsers.push(function(input) {
+                return input ? input.toUpperCase() : "";
+            });
+            element.css("text-transform","uppercase");
+        }
+    }
+})
 .directive('textboxWithLabel', function() {
     return {
         restrict: 'E',
@@ -35,13 +46,20 @@ angular.module('application.directives',[])
         scope: {
             label:'@',
             id:'@',
+            placeholder:'@',
             ngMinlength:'=',
             ngMaxlength:'=',
             required:'@',
-            requiredIcon:'@',
             ngModel:'='
         },
-        templateUrl:'app/directive_tmpl/form_controls/textboxwithlabel.tmpl.html'
+        templateUrl:'app/directive_tmpl/form_controls/textboxwithlabel.tmpl.html',
+        link: function(scope, element, attrs) {
+            if(attrs.required == '') {
+                attrs.required = true;
+            } else {
+                attrs.required = false;
+            }
+        }
     }
 })
 .directive('dropdownWithLabel',function() {
@@ -52,9 +70,8 @@ angular.module('application.directives',[])
             label:'@',
             id:'@',
             items:'=',
-            required:'@',
-            requiredIcon:'@',
-            setmodel:'&'
+            ngModel:'=',
+            required:'@'
         },
         templateUrl: 'app/directive_tmpl/form_controls/dropdownwithlabel.tmpl.html'
     }
@@ -69,7 +86,6 @@ angular.module('application.directives',[])
             on:'@',
             off:'@',
             required:'@',
-            requiredIcon:'@',
             ngModel:'='
         },
         templateUrl: 'app/directive_tmpl/form_controls/switchwithlabel.tmpl.html'

@@ -172,200 +172,28 @@ a {
 
 
 /* start fancy bootstrap checkboxes */
-.funkyradio div {
-  clear: both;
-  /*margin: 0 50px;*/
-  overflow: hidden;
+.form-group input[type="checkbox"] {
+    display: none;
 }
-.funkyradio label {
-  /*min-width: 400px;*/
-  width: 100%;
-  border-radius: 3px;
-  border: 1px solid #D1D3D4;
-  font-weight: normal;
+
+.form-group input[type="checkbox"] + .btn-group > label span {
+    width: 20px;
 }
-.funkyradio input[type="radio"]:empty, .funkyradio input[type="checkbox"]:empty {
-  display: none;
+
+.form-group input[type="checkbox"] + .btn-group > label span:first-child {
+    display: none;
 }
-.funkyradio input[type="radio"]:empty ~ label, .funkyradio input[type="checkbox"]:empty ~ label {
-  position: relative;
-  line-height: 2.5em;
-  text-indent: 3.25em;
-  margin-top: 2em;
-  cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+.form-group input[type="checkbox"] + .btn-group > label span:last-child {
+    display: inline-block;
 }
-.funkyradio input[type="radio"]:empty ~ label:before, .funkyradio input[type="checkbox"]:empty ~ label:before {
-  position: absolute;
-  display: block;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  content:'';
-  width: 2.5em;
-  background: #D1D3D4;
-  border-radius: 3px 0 0 3px;
+
+.form-group input[type="checkbox"]:checked + .btn-group > label span:first-child {
+    display: inline-block;
 }
-.funkyradio input[type="radio"]:hover:not(:checked) ~ label:before, .funkyradio input[type="checkbox"]:hover:not(:checked) ~ label:before {
-  content:'\2714';
-  text-indent: .9em;
-  color: #C2C2C2;
-}
-.funkyradio input[type="radio"]:hover:not(:checked) ~ label, .funkyradio input[type="checkbox"]:hover:not(:checked) ~ label {
-  color: #888;
-}
-.funkyradio input[type="radio"]:checked ~ label:before, .funkyradio input[type="checkbox"]:checked ~ label:before {
-  content:'\2714';
-  text-indent: .9em;
-  color: #333;
-  background-color: #ccc;
-}
-.funkyradio input[type="radio"]:checked ~ label, .funkyradio input[type="checkbox"]:checked ~ label {
-  color: #777;
-}
-.funkyradio input[type="radio"]:focus ~ label:before, .funkyradio input[type="checkbox"]:focus ~ label:before {
-  box-shadow: 0 0 0 3px #999;
-}
-.funkyradio-default input[type="radio"]:checked ~ label:before, .funkyradio-default input[type="checkbox"]:checked ~ label:before {
-  color: #333;
-  background-color: #ccc;
-}
-.funkyradio-primary input[type="radio"]:checked ~ label:before, .funkyradio-primary input[type="checkbox"]:checked ~ label:before {
-  color: #fff;
-  background-color: #337ab7;
-}
-.funkyradio-success input[type="radio"]:checked ~ label:before, .funkyradio-success input[type="checkbox"]:checked ~ label:before {
-  color: #fff;
-  background-color: #5cb85c;
-}
-.funkyradio-danger input[type="radio"]:checked ~ label:before, .funkyradio-danger input[type="checkbox"]:checked ~ label:before {
-  color: #fff;
-  background-color: #d9534f;
-}
-.funkyradio-warning input[type="radio"]:checked ~ label:before, .funkyradio-warning input[type="checkbox"]:checked ~ label:before {
-  color: #fff;
-  background-color: #f0ad4e;
-}
-.funkyradio-info input[type="radio"]:checked ~ label:before, .funkyradio-info input[type="checkbox"]:checked ~ label:before {
-  color: #fff;
-  background-color: #5bc0de;
+.form-group input[type="checkbox"]:checked + .btn-group > label span:last-child {
+    display: none;
 }
 /* end fancy bootstrap checkbox*/
-
-/*start progress bar thin*/
-.progress {
-  height: 10px;
-  margin-bottom: 20px;
-  overflow: hidden;
-  background-color: #f5f5f5;
-  border-radius: 4px;
-  -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
-  box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
-}
-.progress {
-  background-image: -webkit-gradient(linear,left 0,left 100%,from(#ebebeb),to(#f5f5f5));
-  background-image: -webkit-linear-gradient(top,#ebebeb 0,#f5f5f5 100%);
-  background-image: -moz-linear-gradient(top,#ebebeb 0,#f5f5f5 100%);
-  background-image: linear-gradient(to bottom,#ebebeb 0,#f5f5f5 100%);
-  background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffebebeb',endColorstr='#fff5f5f5',GradientType=0);
-}
-.progress {
-  height: 5px;
-  background-color: #ebeef1;
-  background-image: none;
-  box-shadow: none;
-}
-.progress-bar {
-  float: left;
-  width: 0;
-  height: 100%;
-  font-size: 12px;
-  line-height: 20px;
-  color: #fff;
-  text-align: center;
-  background-color: #428bca;
-  -webkit-box-shadow: inset 0 -1px 0 rgba(0,0,0,0.15);
-  box-shadow: inset 0 -1px 0 rgba(0,0,0,0.15);
-  -webkit-transition: width .6s ease;
-  transition: width .6s ease;
-}
-.progress-bar {
-  background-image: -webkit-gradient(linear,left 0,left 100%,from(#428bca),to(#3071a9));
-  background-image: -webkit-linear-gradient(top,#428bca 0,#3071a9 100%);
-  background-image: -moz-linear-gradient(top,#428bca 0,#3071a9 100%);
-  background-image: linear-gradient(to bottom,#428bca 0,#3071a9 100%);
-  background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff428bca',endColorstr='#ff3071a9',GradientType=0);
-}
-.progress-bar {
-  box-shadow: none;
-  border-radius: 3px;
-  background-color: #0090D9;
-  background-image: none;
-  -webkit-transition: all 1000ms cubic-bezier(0.785, 0.135, 0.150, 0.860);
-  -moz-transition: all 1000ms cubic-bezier(0.785, 0.135, 0.150, 0.860);
-  -ms-transition: all 1000ms cubic-bezier(0.785, 0.135, 0.150, 0.860);
-  -o-transition: all 1000ms cubic-bezier(0.785, 0.135, 0.150, 0.860);
-  transition: all 1000ms cubic-bezier(0.785, 0.135, 0.150, 0.860);
-  -webkit-transition-timing-function: cubic-bezier(0.785, 0.135, 0.150, 0.860);
-  -moz-transition-timing-function: cubic-bezier(0.785, 0.135, 0.150, 0.860);
-  -ms-transition-timing-function: cubic-bezier(0.785, 0.135, 0.150, 0.860);
-  -o-transition-timing-function: cubic-bezier(0.785, 0.135, 0.150, 0.860);
-  transition-timing-function: cubic-bezier(0.785, 0.135, 0.150, 0.860);
-}
-.progress-bar-success {
-  background-image: -webkit-gradient(linear,left 0,left 100%,from(#5cb85c),to(#449d44));
-  background-image: -webkit-linear-gradient(top,#5cb85c 0,#449d44 100%);
-  background-image: -moz-linear-gradient(top,#5cb85c 0,#449d44 100%);
-  background-image: linear-gradient(to bottom,#5cb85c 0,#449d44 100%);
-  background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff5cb85c',endColorstr='#ff449d44',GradientType=0);
-}
-.progress-bar-success {
-  background-color: #0AA699;
-  background-image: none;
-}
-.progress-bar-info {
-  background-image: -webkit-gradient(linear,left 0,left 100%,from(#5bc0de),to(#31b0d5));
-  background-image: -webkit-linear-gradient(top,#5bc0de 0,#31b0d5 100%);
-  background-image: -moz-linear-gradient(top,#5bc0de 0,#31b0d5 100%);
-  background-image: linear-gradient(to bottom,#5bc0de 0,#31b0d5 100%);
-  background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff5bc0de',endColorstr='#ff31b0d5',GradientType=0);
-}
-.progress-bar-info {
-  background-color: #0090D9;
-  background-image: none;
-}
-.progress-bar-warning {
-  background-image: -webkit-gradient(linear,left 0,left 100%,from(#f0ad4e),to(#ec971f));
-  background-image: -webkit-linear-gradient(top,#f0ad4e 0,#ec971f 100%);
-  background-image: -moz-linear-gradient(top,#f0ad4e 0,#ec971f 100%);
-  background-image: linear-gradient(to bottom,#f0ad4e 0,#ec971f 100%);
-  background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff0ad4e',endColorstr='#ffec971f',GradientType=0);
-}
-.progress-bar-warning {
-  background-color: #FDD01C;
-  background-image: none;
-}
-.progress-bar-danger {
-  background-image: -webkit-gradient(linear,left 0,left 100%,from(#d9534f),to(#c9302c));
-  background-image: -webkit-linear-gradient(top,#d9534f 0,#c9302c 100%);
-  background-image: -moz-linear-gradient(top,#d9534f 0,#c9302c 100%);
-  background-image: linear-gradient(to bottom,#d9534f 0,#c9302c 100%);
-  background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffd9534f',endColorstr='#ffc9302c',GradientType=0);
-}
-.progress-bar-danger {
-  background-color: #F35958;
-  background-image: none;
-}
-/*end progress bar thin*/
 
 
 /*start cards */
@@ -630,3 +458,44 @@ a {
 }
 
 /*end cards*/
+
+/*breadcrumb with hr horizontal rule */
+
+hr {
+  height: 4px;
+  margin-left: 15px;
+  margin-bottom:-3px;
+}
+.hr-warning{
+  background-image: -webkit-linear-gradient(left, rgba(210,105,30,.8), rgba(210,105,30,.6), rgba(0,0,0,0));
+}
+.hr-success{
+  background-image: -webkit-linear-gradient(left, rgba(15,157,88,.8), rgba(15, 157, 88,.6), rgba(0,0,0,0));
+}
+.hr-primary{
+  background-image: -webkit-linear-gradient(left, rgba(66,133,244,.8), rgba(66, 133, 244,.6), rgba(0,0,0,0));
+}
+.hr-danger{
+  background-image: -webkit-linear-gradient(left, rgba(244,67,54,.8), rgba(244,67,54,.6), rgba(0,0,0,0));
+}
+
+.breadcrumb {
+  background: rgba(245, 245, 245, 0);
+  border: 0px solid rgba(245, 245, 245, 1);
+  border-radius: 25px;
+  display: block;
+}
+
+.btn-bread{
+    margin-top:10px;
+    font-size: 12px;
+
+    border-radius: 3px;
+}
+/*end breadcrumb*/
+
+/* validation panel styling */
+a:visited.validationLink {
+    color:inherit;
+}
+/* end validation panel styling */

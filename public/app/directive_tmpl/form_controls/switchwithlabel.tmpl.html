@@ -1,6 +1,12 @@
-<div class="form-group row">
+<div class="form-group">
     <label ng-attr-for="{{id}}" class="col-md-4 control-label">{{label}}&nbsp;<i ng-if="required" class="fa fa-asterisk text-danger" style="font-size:8px;"></i></label>
     <div class="col-md-8">
-        <switch ng-attr-id="{{id}}" name="{{id}}" class="wide" on="{{on}}" off={{off}} ng-model="ngModel" ng-required="required"></switch>
+        <switch ng-attr-id="{{id}}"
+        name="{{id}}"
+        class="wide"
+        on="{{on}}" off={{off}}
+        ng-model="ngModel"
+        ng-required="required"
+        disable-valid-styling="{{!required}}"></switch>
     </div>
 </div>

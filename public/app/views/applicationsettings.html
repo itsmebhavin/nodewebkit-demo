@@ -1,0 +1,22 @@
+<div class="row">
+  <hr class="hr-danger" />
+  <div class="col-xs-4">
+    <ol class="breadcrumb bread-danger">
+      <button ui-sref="main" class="btn btn-danger btn-xs"><i class="fa fa-home"></i>&nbsp;Home</button>
+      <h3 class="mdc-text-grey-400">Application Settings</h3>
+    </ol>
+  </div>
+  <div class="col-xs-8">
+  </br>
+  <div class="well">
+    <h4>Theme Settings</h4>
+    <pre>Active theme - {{themeModel || 'null'}}</pre>
+    <div class="btn-group">
+      <label class="btn btn-danger" ng-model="themeModel" btn-radio="'DARK'" uncheckable>DARK</label>
+      <label class="btn btn-danger" ng-model="themeModel" btn-radio="'LIGHT'" uncheckable>LIGHT</label>
+      <label class="btn btn-danger" ng-model="themeModel" btn-radio="'MATERIAL'" uncheckable>MATERIAL</label>
+    </div>
+  </div>
+
+</div>
+</div>

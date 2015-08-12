@@ -2,6 +2,22 @@
     <textbox-with-label id="text1" label="Required" ng-model="test" required></textbox-with-label>
     <textbox-with-label id="text2" label="Not Required" ng-model="test2"></textbox-with-label>
     <dropdown-with-label id="dropdown" label="Required" items="stateList" ng-model="test3" required></dropdown-with-label>
+    <div class="form-group">
+        <div class="input-group input-group-sm robotoregular">
+            <span class="input-group-addon" id="test3" name="test3">test3</span>
+            <input type="text"
+            class="form-control input-sm"
+            placeholder="test3"
+            id="test3"
+            name="test3"
+            ng-model="test3"
+            ng-minlength="2"
+            ng-maxlength="4"
+            ng-required="required"
+            disable-valid-styling='false'>
+        </div>
+    </div>
+
     <button class="btn btn-warning btn-sm" type="reset">Reset</button>
     <button class="btn btn-success btn-sm" type="submit">Submit</button>
 </form>

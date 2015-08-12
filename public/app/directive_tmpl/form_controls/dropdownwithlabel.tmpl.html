@@ -1,11 +1,13 @@
-<div class="form-group row">
-    <label ng-attrs-for="id" class="col-md-4 control-label">{{label}}&nbsp;<i ng-if="required" class="fa fa-asterisk text-danger" style="font-size:8px;"></i></label>
-    <div class="col-md-8">
-        <select class="form-control input-sm mdc-bg-grey-800 mdc-text-grey-100" ng-attr-id="{{id}}" ng-attr-name="{{id}}" ng-model="ngModel" ng-required="required">
+<div class="form-group">
+    <div class="input-group input-group-sm robotoregular">
+        <span class="input-group-addon">{{label | uppercase}}</span>
+        <select ng-attrs-id="id" name="{{id}}"
+        class="form-control input-primary input-sm mdc-bg-grey-700 mdc-text-grey-100"
+        ng-model="ngModel"
+        ng-required="required"
+        disable-valid-styling="{{!required}}">
             <option value=""></option>
-            <option ng-repeat="item in items" value="{{item}}">
-                {{item}}
-            </option>
+            <option ng-repeat="item in items" value="{{item}}">{{item}}</option>
         </select>
     </div>
 </div>
