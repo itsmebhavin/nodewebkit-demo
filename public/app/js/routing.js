@@ -16,6 +16,11 @@ angular.module('application.routing',[])
         templateUrl:'./app/views/applicationsettings.html',
         controller:'applicationSettingsCtrl'
     })
+    .state('usersettings',{
+      url:'/usersetting',
+      templateUrl:'./app/views/usersettings.html',
+      controller:'userSettingsCtrl'
+    })
     .state('default',{
         url:'/default/:type/:docid',
         views:{

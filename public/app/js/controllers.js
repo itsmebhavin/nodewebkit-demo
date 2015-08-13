@@ -85,12 +85,9 @@ app.controller('defaultCtrl',['$scope','$stateParams', '$state' ,function($scope
 
   $scope.init();
 }]);
-app.controller('applicationSettingsCtrl',['$scope','$rootScope',function($scope, $rootScope){
-  $rootScope.myTheme = 'darkly';
-  //  $rootScope.$watch('myTheme', function(value) {
-  //    if (value != undefined) {
-  //      $rootScope.myTheme = value;
-  //    }
-  //  });
-
-}])
+app.controller('applicationSettingsCtrl',['$scope',function($scope){
+  //TODO: application settings related code.
+}]);
+app.controller('userSettingsCtrl',['$scope',function($scope){
+  //TODO: user settings related code.
+}]);
