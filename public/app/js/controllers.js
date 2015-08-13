@@ -54,7 +54,7 @@ app.controller('indexCtrl',['$scope','windowFactory',function($scope,windowFacto
 app.controller('mainCtrl',['$scope','$state',function($scope,$state){
   $scope.today = new Date();
   $scope.format = 'M/d/yy h:mm:ss a';
-  // server.usersdb.getAll();
+  //server.usersdb.getAll();
   $scope.createNewVIN = function(){
     console.log('navigating to default page now.');
     $state.go('default',{type:'VIN',docid:uuid.v4()});
@@ -62,7 +62,6 @@ app.controller('mainCtrl',['$scope','$state',function($scope,$state){
 }]);
 
 app.controller('defaultCtrl',['$scope','$stateParams', '$state' ,function($scope,$stateParams,$state){
-  $scope.hello = "Hello Default..!!";
   $scope.doctype = $stateParams.type;
   $scope.docid = $stateParams.docid;
   $scope.tabs = [];
@@ -73,8 +72,6 @@ app.controller('defaultCtrl',['$scope','$stateParams', '$state' ,function($scope
 
       sessionStorage.setItem("activeTab", active.id);
   },true);
-
-
   $scope.init = function() {
     $scope.addTab($scope.doctype);
   }

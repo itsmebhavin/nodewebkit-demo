@@ -47,33 +47,20 @@
       <table class="table table-striped table-condensed">
         <thead>
           <tr>
+            <th>Status</th>
             <th>Field</th>
             <th>Description</th>
-            <th>Status</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>Donna R. Folse</td>
-            <td>2012/05/06</td>
-            <td>Editor</td>
+        <tbody  ng-repeat="element in vinFrm" ng-if="element.$invalid">
+          <tr ng-repeat="(key,value) in validation[element.$name].errors">
             <td><span class="label label-success">Active</span>
             </td>
+            <td>{{validation[element.$name].name}}</td>
+            <td>{{value}}</td>
           </tr>
         </tbody>
       </table>
-
-      <ul>
-        <li ng-repeat="element in vinFrm" ng-if="element.$invalid">
-          {{validation[element.$name].name}}
-          <ul>
-            <li ng-repeat="(key,value) in validation[element.$name].errors">
-              {{value}}
-            </li>
-          </ul>
-
-        </li>
-      </ul>
     </div>
   </div>
 </div>
