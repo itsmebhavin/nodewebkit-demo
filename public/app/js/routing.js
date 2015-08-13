@@ -29,7 +29,8 @@ angular.module('application.routing',[])
                 controller:'defaultCtrl'
             },
             'toolbar@default':{
-                templateUrl: './app/partial_views/toolbar.html'
+                templateUrl: './app/partial_views/toolbar.html',
+                controller: 'toolbarCtrl'
             },
             'vin@default':{
                 templateUrl: './forms/vin/partial_views/vin_main.html',

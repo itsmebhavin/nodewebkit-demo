@@ -1,8 +1,5 @@
 var server = require('../server/server');
 var uuid = require('node-uuid');
-var loki = require('lokijs');
-var db = new loki('loki.json');
-var savedForms = db.addCollection('forms');
 
 angular.isUndefinedOrNull = function(val) {
     return angular.isUndefined(val) || val === null
@@ -77,7 +74,7 @@ app.controller('defaultCtrl',['$scope','$stateParams', '$state' ,function($scope
             return tab.active;
         })[0];
 
-        sessionStorage.setItem("activeTab", (active === undefined ? '0000' : active.id));
+        server.vindb.saveLocalActive(active);
     },true);
 
     $scope.init = function() {
@@ -94,13 +91,6 @@ app.controller('defaultCtrl',['$scope','$stateParams', '$state' ,function($scope
         console.log(savedForms.get(1));
     }
 
-    $scope.saveForm = function() {
-        var id = sessionStorage.getItem('activeTab');
-        var formString = sessionStorage.getItem(id.toString());
-        var form = angular.fromJson(formString);
-        savedForms.insert(form);
-    }
-
     $scope.init();
 }]);
 app.controller('applicationSettingsCtrl',['$scope',function($scope){
@@ -109,8 +99,6 @@ app.controller('applicationSettingsCtrl',['$scope',function($scope){
 app.controller('userSettingsCtrl',['$scope',function($scope){
     //TODO: user settings related code.
 }]);
-
-// TESTING
-function dumpDatabase() {
-    db.saveDatabase();
-}
+app.controller('toolbarCtrl', ['$scope', function($scope) {
+    $scope.saveForm = server.vindb.saveForm;
+}]);

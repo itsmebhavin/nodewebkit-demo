@@ -1,3 +1,5 @@
+var server = require('../server/server');
+
 var vinmodule = angular.module('application.vin',['jcs-autoValidate','vin.factories']);
 vinmodule.controller('vinCtrl', ['$scope', '$http','vinFactory', function($scope, $http, vinFactory) {
     /* SETUP */
@@ -25,7 +27,8 @@ vinmodule.controller('vinCtrl', ['$scope', '$http','vinFactory', function($scope
         $scope.validationOpened = false;
     }
     $scope.$watchCollection('vinForm', function(nVal, oVal) {
-        sessionStorage.setItem(formId, angular.toJson(nVal));
+        server.vindb.saveLocalForm(formId, angular.toJson(nVal));
+        // sessionStorage.setItem(formId, angular.toJson(nVal));
     });
     /* END HELPER FUNCTIONS */
 }]);
