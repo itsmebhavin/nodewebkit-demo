@@ -1,51 +1,81 @@
+<style>
+.bottom-warning {
+  background-color: lightblue;
+  box-sizing: border-box;
+  display: none;
+  left: 0;
+  padding: 20px;
+  position: fixed;
+  width: 100%;
+}
+</style>
 <form class="robotoregular" name="vinFrm" novalidate="novalidate">
-    <div class="row">
-        <!-- Temporary button to open validation panel -->
-        <span class="col-xs-12" style="margin-top:-34px;" ng-class="{'mdc-bg-green-700':vinFrm.$valid, 'mdc-bg-red-700':vinFrm.$invalid}">
-            <i class="fa fa-lg pull-right" ng-class="{ 'fa-check green': b1Form.$valid, 'fa-exclamation-triangle red': b1Form.$invalid }"></i>
-        </span>
-        <div class="column col-xs-6">
-            <textbox-with-label id="inputVIN" placeholder="Enter VIN#" label="VIN" ng-model="vinForm.vin" ng-minlength="13" required></textbox-with-label>
-            <dropdown-with-label id="inputStateOfTitle" label="State Of Current Title" items="stateList" ng-model="vinForm.stateTitle"></dropdown-with-label>
-            <switch-with-label id="inputTitleCourt" label="Title or Court" on="Title" off="Court" ng-model="vinForm.titleCourt"></switch-with-label>
-            <textbox-with-label id="inputTitleCourtOrderNum" placeholder="Enter {{vinForm.titleCourt ? 'Title' : 'Court'}} Order #" label="{{vinForm.titleCourt ? 'Title' : 'Court'}} Order #" ng-model="vinForm.titleCourtOrderNum"></textbox-with-label>
-            <textbox-with-label id="inputInspectionDateTime" placeholder="Select Inspection Datetime" label="Inspection Date &amp; Time" ng-model="vinForm.inspectionDateTime"></textbox-with-label>
-            <textbox-with-label id="inputVerifyingAgency" placeholder="Enter Agency" label="Verifying Agency" ng-model="vinForm.verifyingAgency"></textbox-with-label>
-            <textbox-with-label id="inputWorkPhone" placeholder="Enter Phone#" label="Work Phone" ng-model="vinForm.workPhone"></textbox-with-label>
-        </div>
-        <div class="column col-xs-6">
-            <textbox-with-label id="inputVehicleYear" placeholder="Enter Vehicle Year" label="Vehicle Year" ng-model="vinForm.vehicleYear"></textbox-with-label>
-            <dropdown-with-label id="inputVehicleMake" label="Vehicle Make" items='vehicleMakes' ng-model="vinForm.vehicleMake" required></dropdown-with-label>
-            <dropdown-with-label id="inputVehicleModel" label="Vehicle Model" items='vehicleModels' ng-model="vinForm.vehicleModel" required></dropdown-with-label>
-            <textbox-with-label id="inputVehicleColor" placeholder="Enter Vehicle Color" label="Vehicle Color" ng-model="vinForm.vehicleColor" required></textbox-with-label>
-            <textbox-with-label id="inputOfficerName" placeholder="Enter Officer Name" label="Officer Name" ng-model="vinForm.officerName"></textbox-with-label>
-            <textbox-with-label id="inputBadgeId" placeholder="Enter Badge ID" label="Badge Id" ng-model="vinForm.badgeID"></textbox-with-label>
-            <switch-with-label id="inputFeeCollected" label="Is $25 Fee to be Collected" on="Yes" off="No" ng-model="vinForm.feeCollected"></switch-with-label>
-        </div>
-    </div>
-    <div class="panel" ng-class="{'panel-success':vinFrm.$valid, 'panel-danger':vinFrm.$invalid}">
-        <div class="panel-heading" ng-click="isCollapsed = !isCollapsed">
-            <h4 class="panel-title">
-                <span>
-                    Validation
-                </span>
-            </h4>
-        </div>
-        <div collapse="isCollapsed">
-            <div class="panel-body">
-                <ul>
-                    <li ng-repeat="element in vinFrm" ng-if="element.$invalid">
-                        {{validation[element.$name].name}}
-                        <ul>
-                            <li ng-repeat="(key,value) in validation[element.$name].errors">
-                                {{value}}
-                            </li>
-                        </ul>
+  <div class="row">
+    <!-- Temporary button to open validation panel -->
+    <!-- <span class="col-xs-12" style="margin-top:-34px;" ng-class="{'mdc-bg-green-700':vinFrm.$valid, 'mdc-bg-red-700':vinFrm.$invalid}">
+    <i class="fa fa-lg pull-right" ng-class="{ 'fa-check green': b1Form.$valid, 'fa-exclamation-triangle red': b1Form.$invalid }"></i>
+  </span> -->
+  <div class="column col-xs-6">
+    <textbox-with-label id="inputVIN" placeholder="Enter VIN#" label="VIN" ng-model="vinForm.vin" ng-minlength="13" required></textbox-with-label>
+    <dropdown-with-label id="inputStateOfTitle" label="State Of Current Title" items="stateList" ng-model="vinForm.stateTitle"></dropdown-with-label>
+    <switch-with-label id="inputTitleCourt" label="Title or Court" on="Title" off="Court" ng-model="vinForm.titleCourt"></switch-with-label>
+    <textbox-with-label id="inputTitleCourtOrderNum" placeholder="Enter {{vinForm.titleCourt ? 'Title' : 'Court'}} Order #" label="{{vinForm.titleCourt ? 'Title' : 'Court'}} Order #" ng-model="vinForm.titleCourtOrderNum"></textbox-with-label>
+    <textbox-with-label id="inputInspectionDateTime" placeholder="Select Inspection Datetime" label="Inspection Date &amp; Time" ng-model="vinForm.inspectionDateTime"></textbox-with-label>
+    <textbox-with-label id="inputVerifyingAgency" placeholder="Enter Agency" label="Verifying Agency" ng-model="vinForm.verifyingAgency"></textbox-with-label>
+    <textbox-with-label id="inputWorkPhone" placeholder="Enter Phone#" label="Work Phone" ng-model="vinForm.workPhone"></textbox-with-label>
+  </div>
+  <div class="column col-xs-6">
+    <textbox-with-label id="inputVehicleYear" placeholder="Enter Vehicle Year" label="Vehicle Year" ng-model="vinForm.vehicleYear"></textbox-with-label>
+    <dropdown-with-label id="inputVehicleMake" label="Vehicle Make" items='vehicleMakes' ng-model="vinForm.vehicleMake" required></dropdown-with-label>
+    <dropdown-with-label id="inputVehicleModel" label="Vehicle Model" items='vehicleModels' ng-model="vinForm.vehicleModel" required></dropdown-with-label>
+    <textbox-with-label id="inputVehicleColor" placeholder="Enter Vehicle Color" label="Vehicle Color" ng-model="vinForm.vehicleColor" required></textbox-with-label>
+    <textbox-with-label id="inputOfficerName" placeholder="Enter Officer Name" label="Officer Name" ng-model="vinForm.officerName"></textbox-with-label>
+    <textbox-with-label id="inputBadgeId" placeholder="Enter Badge ID" label="Badge Id" ng-model="vinForm.badgeID"></textbox-with-label>
+    <switch-with-label id="inputFeeCollected" label="Is $25 Fee to be Collected" on="Yes" off="No" ng-model="vinForm.feeCollected"></switch-with-label>
+  </div>
+</div>
+<div class="panel" ng-class="{'panel-success':vinFrm.$valid, 'panel-danger':vinFrm.$invalid}">
+  <div class="panel-heading" ng-click="isCollapsed = !isCollapsed">
+    <h4 class="panel-title">
+      <span>
+        Validation
+      </span>
+    </h4>
+  </div>
+  <div collapse="isCollapsed">
+    <div class="panel-body">
+      <table class="table table-striped table-condensed">
+        <thead>
+          <tr>
+            <th>Field</th>
+            <th>Description</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Donna R. Folse</td>
+            <td>2012/05/06</td>
+            <td>Editor</td>
+            <td><span class="label label-success">Active</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
 
-                    </li>
-                </ul>
-            </div>
-        </div>
+      <ul>
+        <li ng-repeat="element in vinFrm" ng-if="element.$invalid">
+          {{validation[element.$name].name}}
+          <ul>
+            <li ng-repeat="(key,value) in validation[element.$name].errors">
+              {{value}}
+            </li>
+          </ul>
+
+        </li>
+      </ul>
     </div>
+  </div>
+</div>
 
 </form>

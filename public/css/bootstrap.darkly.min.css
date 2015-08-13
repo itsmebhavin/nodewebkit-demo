@@ -147,6 +147,31 @@ input::-moz-focus-inner {
   border: 0;
   padding: 0;
 }
+
+/* Glow border on focus - ui.components*/
+textarea:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus,
+select:focus,
+.uneditable-input:focus {
+  border-color: #1976D2;
+  box-shadow: 0 1px 1px #1976D2 inset, 0 0 8px #1976D2;
+  outline: 0 none;
+}
+/* end of glow on focus*/
+
 input {
   line-height: normal;
 }
@@ -171,37 +196,6 @@ input[type="search"]::-webkit-search-cancel-button,
 input[type="search"]::-webkit-search-decoration {
   -webkit-appearance: none;
 }
-/* Darkstrapping Started*/
-textarea,
-input[type="text"],
-input[type="password"],
-input[type="datetime"],
-input[type="datetime-local"],
-input[type="date"],
-input[type="month"],
-input[type="time"],
-input[type="week"],
-input[type="number"],
-input[type="email"],
-input[type="url"],
-input[type="search"],
-input[type="tel"],
-input[type="color"],
-.uneditable-input {
-  background-color: #424242;
-  color:#FAFAFA;
-}
-select {
-  background-color: #424242;
-  color:#FAFAFA;
-}
-
-.uneditable-input,
-.uneditable-textarea {
-  background-color: #424242;
-  color:#FAFAFA;
-}
-/*end Darkstrapping */
 
 fieldset {
   border: 1px solid #c0c0c0;
@@ -2591,7 +2585,7 @@ output {
   font-size: 15px;
   line-height: 1.42857143;
   color: #464545;
-  background-color: #ffffff;
+  background-color: #424242;
   background-image: none;
   border: 1px solid #f1f1f1;
   border-radius: 4px;
