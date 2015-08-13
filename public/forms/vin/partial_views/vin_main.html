@@ -52,12 +52,12 @@
             <th>Description</th>
           </tr>
         </thead>
-        <tbody  ng-repeat="element in vinFrm" ng-if="element.$invalid">
+        <tbody ng-repeat="element in vinFrm" ng-if="element.$invalid">
           <tr ng-repeat="(key,value) in validation[element.$name].errors">
             <td><span class="label label-success">Active</span>
             </td>
-            <td>{{validation[element.$name].name}}</td>
-            <td>{{value}}</td>
+            <td><small>{{validation[element.$name].name}}</small></td>
+            <td><small>{{value}}</small></td>
           </tr>
         </tbody>
       </table>
