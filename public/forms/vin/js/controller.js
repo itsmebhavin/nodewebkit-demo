@@ -1,6 +1,5 @@
 var vinmodule = angular.module('application.vin',['jcs-autoValidate','vin.factories']);
-
-vinmodule.controller('vinCtrl', ['$scope', '$http','vinFactory', function($scope, $http,vinFactory) {
+vinmodule.controller('vinCtrl', ['$scope', '$http','vinFactory', function($scope, $http, vinFactory) {
     /* SETUP */
     console.log('inside vin controller');
     $scope.stateList = ['Alabama', 'Alaska', 'Arizona'];
@@ -9,6 +8,7 @@ vinmodule.controller('vinCtrl', ['$scope', '$http','vinFactory', function($scope
     $scope.vinForm = {}
     $scope.validationOpened = false;
 
+    //Retrieve local validation rules for Vin
     vinFactory.getLocalValidationRules().then(function(data){
         $scope.validation = data;
     },function(err){
