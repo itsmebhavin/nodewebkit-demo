@@ -57,7 +57,7 @@ body {
   height: 60px;
   background-color: #f5f5f5;
 }
-  
+
 
 /* Custom page CSS
 -------------------------------------------------- */
@@ -493,9 +493,3 @@ hr {
     border-radius: 3px;
 }
 /*end breadcrumb*/
-
-/* validation panel styling */
-a:visited.validationLink {
-    color:inherit;
-}
-/* end validation panel styling */

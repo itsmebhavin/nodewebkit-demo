@@ -1,37 +1,37 @@
 <!DOCTYPE html>
 <html ng-app="demoapp" >
 <head lang="en" ng-controller="cssBundleCtrl">
-    <meta charset="UTF-8">
-    <title>eForms using nw.js</title>
+  <meta charset="UTF-8">
+  <title>eForms using nw.js</title>
 </head>
 <body style="margin-left:10px;margin-right:10px;">
 
-    <!-- Fixed navbar -->
-    <nav class="navbar navbar-default navbar-fixed-top"
-    style="-webkit-user-select: none;-webkit-app-region: drag;"
-    ng-controller="indexCtrl">
-    <div class="container">
-        <div class="navbar-header">
-            <a class="navbar-brand" ui-sref="main">{{welcome}}</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul style="-webkit-user-select: none;-webkit-app-region: no-drag;"
-            class="title-bar-btns nav navbar-nav navbar-right" ng-controller="windowCtrl">
-            <li><span class="mdc-text-lime-500 fa fa-wifi fa-2x" style="padding-right: 15px;" ng-if="online" title="Connected to network"></span>&nbsp;</li>
-            <li><span class="mdc-text-green-500 fa fa-minus-circle fa-2x" data-l10n-id="hint_minimize_window" title="minimize" style="cursor: hand;padding-left:5px;" ng-click="minWindow()"></span>&nbsp;</li>
-            <li><span class="mdc-text-orange-500 fa fa-plus-circle fa-2x" data-l10n-id="hint_expand_window" style="cursor: hand;padding-left:5px;" title="restore" ng-click="maxWindow()"></span>&nbsp;</li>
-            <li><span class="mdc-text-red-500 fa fa-times-circle fa-2x" data-l10n-id="hint_close_window" style="cursor: hand;padding-left:5px;" title="close" ng-click="closeWindow()"></span>&nbsp;</li>
-        </ul>
+  <!-- Fixed navbar -->
+  <nav class="navbar navbar-default navbar-fixed-top"
+  style="-webkit-user-select: none;-webkit-app-region: drag;"
+  ng-controller="indexCtrl">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" ui-sref="main">{{welcome}}</a>
     </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul style="-webkit-user-select: none;-webkit-app-region: no-drag;"
+      class="title-bar-btns nav navbar-nav navbar-right" ng-controller="windowCtrl">
+      <li><span class="mdc-text-lime-500 fa fa-wifi fa-2x" style="padding-right: 15px;" ng-if="online" title="Connected to network"></span>&nbsp;</li>
+      <li><span class="mdc-text-green-500 fa fa-minus-circle fa-2x" data-l10n-id="hint_minimize_window" title="minimize" style="cursor: hand;padding-left:5px;" ng-click="minWindow()"></span>&nbsp;</li>
+      <li><span class="mdc-text-orange-500 fa fa-plus-circle fa-2x" data-l10n-id="hint_expand_window" style="cursor: hand;padding-left:5px;" title="restore" ng-click="maxWindow()"></span>&nbsp;</li>
+      <li><span class="mdc-text-red-500 fa fa-times-circle fa-2x" data-l10n-id="hint_close_window" style="cursor: hand;padding-left:5px;" title="close" ng-click="closeWindow()"></span>&nbsp;</li>
+    </ul>
+  </div>
 </div>
 </nav>
 <!-- Wrap all page content here -->
 <div class="container rowFullWidth" style="margin-left:10px;margin-right:10px;">
-    <div id="wrap">
-        <div class="center-container">
-            <div ui-view class="velocity-enter-transition-slideRightIn velocity-leave-transition-slideDownOut"></div>
-        </div>
+  <div id="wrap">
+    <div class="center-container">
+      <div ui-view class="velocity-enter-transition-slideRightIn velocity-leave-transition-slideDownOut"></div>
     </div>
+  </div>
 </div>
 
 

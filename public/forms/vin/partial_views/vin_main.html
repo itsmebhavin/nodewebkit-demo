@@ -1,14 +1,3 @@
-<style>
-.bottom-warning {
-  background-color: lightblue;
-  box-sizing: border-box;
-  display: none;
-  left: 0;
-  padding: 20px;
-  position: fixed;
-  width: 100%;
-}
-</style>
 <form class="robotoregular" name="vinFrm" novalidate="novalidate">
   <div class="row">
     <!-- Temporary button to open validation panel -->
@@ -56,8 +45,8 @@
           <tr ng-repeat="(key,value) in validation[element.$name].errors">
             <td><span class="label label-success">Active</span>
             </td>
-            <td><small>{{validation[element.$name].name}}</small></td>
-            <td><small>{{value}}</small></td>
+            <td>{{validation[element.$name].name}}</td>
+            <td>{{value}}</td>
           </tr>
         </tbody>
       </table>
