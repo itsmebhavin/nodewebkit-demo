@@ -68,6 +68,13 @@ app.controller('defaultCtrl',['$scope','$stateParams', '$state' ,function($scope
   $scope.docid = $stateParams.docid;
   $scope.tabs = [];
 
+  $scope.$watch('tabs', function(nVal, oVal) {
+      var active = $scope.tabs.filter(function(tab) {
+          return tab.active;
+      })[0];
+
+      sessionStorage.setItem("activeTab", active.id);
+  },true);
 
   $scope.init = function() {
     $scope.addTab($scope.doctype);
@@ -76,10 +83,17 @@ app.controller('defaultCtrl',['$scope','$stateParams', '$state' ,function($scope
   $scope.addTab = function(type) {
     var d = new Date();
     var title = '' + type + ' - ' + d.getMonth() + '/' + d.getDate() + '/' + d.getFullYear() + ' - ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
-    $scope.tabs.push({title: title, active:true, type:type});
+    $scope.tabs.push({title: title, active:true, type:type, id:uuid.v4()});
   }
   $scope.removeTab = function(index) {
     $scope.tabs.splice(index, 1);
+  }
+
+  $scope.saveForm = function() {
+      var id = sessionStorage.getItem('activeTab');
+      var formString = sessionStorage.getItem(id.toString());
+      var form = angular.fromJson(formString);
+      console.log(form);
   }
 
 
