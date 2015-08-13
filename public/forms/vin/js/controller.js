@@ -5,8 +5,9 @@ vinmodule.controller('vinCtrl', ['$scope', '$http','vinFactory', function($scope
     $scope.stateList = ['Alabama', 'Alaska', 'Arizona'];
     $scope.vehicleMakes = ['Acura', 'Ford', 'Mercedes'];
     $scope.vehicleModels = ['A', 'List', 'Item'];
-    $scope.vinForm = {}
-    $scope.validationOpened = false;
+    $scope.vinForm = {};
+    $scope.isCollapsed = true;
+    var formId = uuid.v4();
 
     //Retrieve local validation rules for Vin
     vinFactory.getLocalValidationRules().then(function(data){
@@ -23,5 +24,9 @@ vinmodule.controller('vinCtrl', ['$scope', '$http','vinFactory', function($scope
         el.focus();
         $scope.validationOpened = false;
     }
+    $scope.$watch('vinForm', function(nVal, oVal) {
+        console.log(nVal);
+        sessionStorage.setItem(angular.toJson(formId),angular.toJson(nVal));
+    }, true);
     /* END HELPER FUNCTIONS */
 }]);
