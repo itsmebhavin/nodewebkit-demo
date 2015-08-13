@@ -25,14 +25,7 @@ vinmodule.controller('vinCtrl', ['$scope', '$http','vinFactory', function($scope
         $scope.validationOpened = false;
     }
     $scope.$watchCollection('vinForm', function(nVal, oVal) {
-        if($scope.vinFrm.$pristine)
-            init();
         sessionStorage.setItem(formId, angular.toJson(nVal));
     });
-    function init() {
-        angular.forEach($scope.vinFrm.$error.required, function(field) {
-            field.$setDirty();
-        });
-    }
     /* END HELPER FUNCTIONS */
 }]);
