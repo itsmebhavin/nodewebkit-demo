@@ -7,7 +7,7 @@ angular.isUndefinedOrNull = function(val) {
 app.controller('cssBundleCtrl',['$scope','$css',function($scope,$css){
   // set the default bootswatch name
   $scope.css = angular.isUndefinedOrNull(localStorage['theme'])?
-      localStorage['theme'] :'cosmo';
+  localStorage['theme'] :'darkly';
   // create the list of bootswatches
   $scope.bootstraps = [
     { name: 'Light (cosmo)', url: 'cosmo' },
@@ -66,7 +66,9 @@ app.controller('defaultCtrl',['$scope','$stateParams', '$state' ,function($scope
   $scope.doctype = $stateParams.type;
   $scope.docid = $stateParams.docid;
   $scope.tabs = [];
+
   $scope.$watch('tabs', function(nVal, oVal) {
+    if($scope.doctype === '') return;
     var active = $scope.tabs.filter(function(tab) {
       return tab.active;
     })[0];
@@ -74,6 +76,7 @@ app.controller('defaultCtrl',['$scope','$stateParams', '$state' ,function($scope
     sessionStorage.setItem("activeTab", active.id);
   },true);
   $scope.init = function() {
+    if($scope.doctype === '') return;
     $scope.addTab($scope.doctype);
   }
   $scope.addTab = function(type) {

@@ -8,12 +8,9 @@ console.log(commands);
 
 angular.module('components.window',[])
 .run(function(){
-  console.log('Node.JS version - ' + process.versions['node']);
-  console.log('NodeWebkit version - ' + process.versions['node-webkit']);
-
-  // var tray = new gui.Tray({ icon: 'images/Sync.png' });
+  //gui.App.setCrashDumpDir(dir);
+  console.log('current exec path- ' + process.execPath)
   // Create a tray icon
-  // console.log('Trying to create tray...');
   var tray = new gui.Tray({
     title: 'Tray',
     icon: '/public/images/Sync.png',
@@ -23,7 +20,16 @@ angular.module('components.window',[])
 
   var developr = new gui.Menu({type:'menubar'});
   developr.append(new gui.MenuItem({
-    label:'Toggle Dev Tools',
+    label:'versions',
+    click:function(){
+      alert(
+        'Node.JS version - ' + process.versions['node'] + '\n' +
+        'NodeWebkit version - ' + process.versions['node-webkit']
+      );
+    }
+  }));
+  developr.append(new gui.MenuItem({
+    label:'Toggle Console Tools',
     click: function(){
       if(win.isDevToolsOpen())
       win.closeDevTools();
@@ -38,7 +44,7 @@ angular.module('components.window',[])
     }
   }));
   developr.append(new gui.MenuItem({
-    label:'Reload without Cache aka "Shift-Reload"',
+    label:'Reload w/o Cache aka "Shift-Reload"',
     click: function(){
       win.reloadIgnoringCache();
     }
