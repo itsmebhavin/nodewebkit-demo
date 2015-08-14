@@ -103,3 +103,7 @@ app.controller('applicationSettingsCtrl',['$scope',function($scope){
 app.controller('userSettingsCtrl',['$scope',function($scope){
   //TODO: user settings related code.
 }]);
+
+app.controller('releaseNotesCtrl',['$scope',function($scope){
+  //TODO: user settings related code.
+}]);

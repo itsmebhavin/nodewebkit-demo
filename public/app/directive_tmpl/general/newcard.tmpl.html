@@ -1,20 +1,8 @@
-<!-- <div class="col-xs-12">
-  <div class="thumbnail" ng-class="cardcolor">
-    <div class="caption">
-      <h1 class="text-center">{{cardtitle}}</h1>
-      <h4 class="mdc-text-grey-300">{{cardcontent}}</h4>
-      <hr class="cardcolor" />
-      <p class="text-right">
-        <ng-transclude></ng-transclude>
-      </p>
-    </div>
-  </div>
-</div> -->
 <div class="col-xs-12">
   <div class="card" ng-class="cardcolor">
     <div class="card-content">
       <h1 class="text-center">{{cardtitle}}</h1>
-      <p class="mdc-text-grey-300">{{cardcontent}}</p>
+      <p>{{cardcontent}}</p>
     </div>
     <div class="card-action well" style="border-radius:0;">
         <ng-transclude></ng-transclude>
@@ -22,7 +10,3 @@
     </div>
   </div>
 </div>
-
-<style>
-
-</style>

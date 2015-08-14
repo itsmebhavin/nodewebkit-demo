@@ -38,6 +38,13 @@ angular.module('application.routing',[])
             'asr@default':{
                 templateUrl: './forms/asr/partial_views/asr_main.html',
                 controller:'asrCtrl'
+            },
+            'releasenotes@default':{
+                templateUrl: './app/partial_views/releasenotes.html',
+                controller:'releaseNotesCtrl'
+            },
+            'recentforms@default':{
+                templateUrl: './app/partial_views/recentforms.html'
             }
         }
 
