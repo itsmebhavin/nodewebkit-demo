@@ -7,7 +7,8 @@ angular.isUndefinedOrNull = function(val) {
 
 app.controller('cssBundleCtrl',['$scope','$css',function($scope,$css){
     // set the default bootswatch name
-    $scope.css = angular.isUndefinedOrNull(localStorage['theme'])? localStorage['theme'] :'darkly';
+    $scope.css = angular.isUndefinedOrNull(localStorage['theme'])?
+    localStorage['theme'] :'darkly';
     // create the list of bootswatches
     $scope.bootstraps = [
         { name: 'Light (cosmo)', url: 'cosmo' },
@@ -27,8 +28,7 @@ app.controller('cssBundleCtrl',['$scope','$css',function($scope,$css){
 
     $scope.$watch('css',function(newval, oldval){
         console.log('new css = ' + newval);
-        if(newval == null) newval = 'darkly'; // default is darkly
-        localStorage['theme'] = newval;
+        if(newval == null) newval = 'darkly'; // default
 
         //remove old css collections
         $css.remove($scope.CssCollection);
@@ -70,6 +70,7 @@ app.controller('defaultCtrl',['$scope','$stateParams', '$state' ,function($scope
     $scope.tabs = [];
 
     $scope.$watch('tabs', function(nVal, oVal) {
+        if($scope.doctype === '') return;
         var active = $scope.tabs.filter(function(tab) {
             return tab.active;
         })[0];
@@ -78,6 +79,7 @@ app.controller('defaultCtrl',['$scope','$stateParams', '$state' ,function($scope
     },true);
 
     $scope.init = function() {
+        if($scope.doctype === '') return;
         var storedForms = server.vindb.loadLocalForms();
         angular.forEach(storedForms, function(form) {
             $scope.addTab(form.type, form.id, form.title, form.form);
@@ -111,4 +113,8 @@ app.controller('userSettingsCtrl',['$scope',function($scope){
 }]);
 app.controller('toolbarCtrl', ['$scope', function($scope) {
     $scope.saveForm = server.vindb.saveForm;
+}]);
+
+app.controller('releaseNotesCtrl',['$scope',function($scope){
+    //TODO: user settings related code.
 }]);

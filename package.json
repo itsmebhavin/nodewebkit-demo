@@ -19,7 +19,8 @@
     "width": 1068,
     "height": 720,
     "min_width": 1068,
-    "min_height": 720
+    "min_height": 720,
+    "as_desktop":true
   },
   "keywords": [
     "nw",

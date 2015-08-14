@@ -1,24 +1,12 @@
-<!-- <div class="card card-padding robotoregular" ng-class="cardcolor">
-<div class="well well-sm">
-<div class="card-image">
-<span class="card-title mdc-text-grey-300">{{cardtitle}}</span>
-</div>
-<div class="card-content">
-<p class="mdc-text-grey-300">{{cardcontent}}</p>
-</div>
-<div class="card-action">
-<ng-transclude></ng-transclude>
-</div>
-</div>
-</div> -->
 <div class="col-xs-12">
-  <div class="thumbnail" ng-class="cardcolor">
-    <div class="caption">
+  <div class="card" ng-class="cardcolor">
+    <div class="card-content">
       <h1 class="text-center">{{cardtitle}}</h1>
-      <h4 class="mdc-text-grey-300">{{cardcontent}}</h4>
-      <p class="text-right">
+      <p>{{cardcontent}}</p>
+    </div>
+    <div class="card-action well" style="border-radius:0;">
         <ng-transclude></ng-transclude>
-      </p>
+        <button class="btn btn-link" ui-sref="default">MAIN</button>
     </div>
   </div>
 </div>
