@@ -50,7 +50,8 @@ angular.module('application.directives',[])
             ngMinlength:'=',
             ngMaxlength:'=',
             required:'@',
-            ngModel:'='
+            ngModel:'=',
+            ngMinlengthErrType:'@'
         },
         templateUrl:'app/directive_tmpl/form_controls/textboxwithlabel.tmpl.html',
         link: function(scope, element, attrs) {
