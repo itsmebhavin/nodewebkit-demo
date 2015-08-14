@@ -1,9 +1,6 @@
 <form class="robotoregular" name="vinFrm" novalidate="novalidate">
     <div class="row">
         <!-- Temporary button to open validation panel -->
-        <span class="col-xs-12" style="margin-top:-34px;" ng-class="{'mdc-bg-green-700':vinFrm.$valid, 'mdc-bg-red-700':vinFrm.$invalid}">
-            <i class="fa fa-lg pull-right" ng-class="{ 'fa-check green': b1Form.$valid, 'fa-exclamation-triangle red': b1Form.$invalid }"></i>
-        </span>
         <div class="column col-xs-6">
             <textbox-with-label id="inputVIN" placeholder="Enter VIN#" label="VIN" ng-model="vinForm.vin" ng-minlength="13" required ng-minlength-err-type="minLengthWarning"></textbox-with-label>
             <dropdown-with-label id="inputStateOfTitle" label="State Of Current Title" items="stateList" ng-model="vinForm.stateTitle"></dropdown-with-label>
@@ -23,27 +20,56 @@
             <switch-with-label id="inputFeeCollected" label="Is $25 Fee to be Collected" on="Yes" off="No" ng-model="vinForm.feeCollected"></switch-with-label>
         </div>
     </div>
-    <div class="panel" ng-class="{'panel-success':vinFrm.$valid, 'panel-danger':vinFrm.$invalid}">
+    <div class="panel" ng-class="panelClass()">
         <div class="panel-heading" ng-click="isCollapsed = !isCollapsed">
             <h4 class="panel-title">
                 <span>
-                    Validation
+                    Validation Results
                 </span>
             </h4>
         </div>
         <div collapse="isCollapsed">
             <div class="panel-body">
-                <ul>
-                    <li ng-repeat="element in vinFrm" ng-if="element.$invalid">
-                        {{validation[element.$name].name}}
-                        <ul>
-                            <li ng-repeat="(key,value) in validation[element.$name].errors">
-                                {{value}}
-                            </li>
-                        </ul>
-
-                    </li>
-                </ul>
+                <tabset>
+                    <tab>
+                        <tab-heading class="mdc-text-red-500">
+                            <i class="fa fa-times-circle"></i>&nbsp;Errors
+                        </tab-heading>
+                        <table class="table table-bordered table-hover table-condensed table-responsive">
+                            <thead>
+                                <tr>
+                                    <th>Status</th>
+                                    <th>Field</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody ng-repeat="element in vinFrm" ng-if="element.$invalid">
+                                <tr ng-repeat="(key,value) in validation[element.$name].errors">
+                                    <td><span class="btn btn-danger btn-xs">Fix</span>
+                                    </td>
+                                    <td>{{validation[element.$name].name}}</td>
+                                    <td>{{value}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </tab>
+                    <tab>
+                        <tab-heading class="mdc-text-orange-500">
+                            <i class="fa fa-exclamation-triangle"></i>&nbsp;Warnings
+                        </tab-heading>
+                        <div>
+                            warnings will be here
+                        </div>
+                    </tab>
+                    <tab>
+                        <tab-heading class="mdc-text-blue-700">
+                            <i class="fa fa-info-circle"></i>&nbsp;Info
+                        </tab-heading>
+                        <div>
+                            info will be here
+                        </div>
+                    </tab>
+                </tabset>
             </div>
         </div>
     </div>

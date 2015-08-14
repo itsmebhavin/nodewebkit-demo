@@ -4,6 +4,7 @@ var uuid = require('node-uuid');
 angular.isUndefinedOrNull = function(val) {
     return angular.isUndefined(val) || val === null
 }
+
 app.controller('cssBundleCtrl',['$scope','$css',function($scope,$css){
     // set the default bootswatch name
     $scope.css = angular.isUndefinedOrNull(localStorage['theme'])? localStorage['theme'] :'darkly';
@@ -16,12 +17,12 @@ app.controller('cssBundleCtrl',['$scope','$css',function($scope,$css){
 
     $scope.CssCollection = [
         'css/material-design-color-palette.min.css',
-        'css/app.css',
         'css/animate.css',
         'lib/font-awesome/css/font-awesome.min.css',
         'lib/waves/waves.css',
         'css/booleanswitch.css',
-        'lib/angular-ui-switch/switch.css'
+        'lib/angular-ui-switch/switch.css',
+        'css/app.css'
     ];
 
     $scope.$watch('css',function(newval, oldval){
@@ -31,38 +32,37 @@ app.controller('cssBundleCtrl',['$scope','$css',function($scope,$css){
 
         //remove old css collections
         $css.remove($scope.CssCollection);
-        $css.remove(['css/bootstrap.darkly.min.css',
-        'css/bootstrap.cosmo.min.css',
-        'css/bootstrap.paper.min.css'
-    ]);
+        $css.remove([
+            'css/bootstrap.darkly.min.css',
+            'css/bootstrap.cosmo.min.css',
+            'css/bootstrap.paper.min.css'
+        ]);
 
-    //prepare for new  css collections
-    var newCssCollection = [];
-    newCssCollection.push('css/bootstrap.' + newval + '.min.css');
-    angular.forEach($scope.CssCollection,function(val){
-        newCssCollection.push(val);
-    });
-
-    //add new css collections
-    $css.add(newCssCollection);
-})
-
-
-
-
+        //prepare for new  css collections
+        var newCssCollection = [];
+        newCssCollection.push('css/bootstrap.' + newval + '.min.css');
+        angular.forEach($scope.CssCollection,function(val){
+            newCssCollection.push(val);
+        });
+        //add new css collections
+        $css.add(newCssCollection);
+    })
 }]);
+
 app.controller('indexCtrl',['$scope','windowFactory',function($scope,windowFactory){
     $scope.welcome = "eForms-nw.js";
 }]);
+
 app.controller('mainCtrl',['$scope','$state',function($scope,$state){
     $scope.today = new Date();
     $scope.format = 'M/d/yy h:mm:ss a';
-    server.usersdb.getAll();
+    //server.usersdb.getAll();
     $scope.createNewVIN = function(){
         console.log('navigating to default page now.');
         $state.go('default',{type:'VIN',docid:uuid.v4()});
     };
 }]);
+
 app.controller('defaultCtrl',['$scope','$stateParams', '$state' ,function($scope,$stateParams,$state){
     $scope.hello = "Hello Default..!!";
     $scope.doctype = $stateParams.type;
@@ -101,9 +101,11 @@ app.controller('defaultCtrl',['$scope','$stateParams', '$state' ,function($scope
 
     $scope.init();
 }]);
+
 app.controller('applicationSettingsCtrl',['$scope',function($scope){
     //TODO: application settings related code.
 }]);
+
 app.controller('userSettingsCtrl',['$scope',function($scope){
     //TODO: user settings related code.
 }]);

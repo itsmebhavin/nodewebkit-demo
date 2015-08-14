@@ -92,24 +92,6 @@ vinmodule.factory('warningModifier', [function() {
         }
     };
 
-    // var pattern = new RegExp("Warning");
-    // var makeValid = function(el) {
-    //     var el = el[0];
-    //     el.style.backgroundColor = '';
-    // }
-    // var makeInvalid = function(el, err) {
-    //     var el = el[0];
-    //     if(pattern.test(err)) {
-    //         el.style.backgroundColor = 'yellow';
-    //     } else {
-    //         el.style.backgroundColor = 'red';
-    //     }
-    // }
-    // var makeDefault = function(el) {
-    //     var el = el[0];
-    //     el.style.backgroundColor = '';
-    // }
-
     return {
         makeValid:makeValid,
         makeInvalid:makeInvalid,
@@ -143,7 +125,7 @@ vinmodule.controller('vinCtrl', ['$scope', '$http','vinFactory', function($scope
         $scope.vinForm = angular.fromJson($scope.$parent.tab.form);
     }
 
-    // Retrieve local validation rules for Vin
+    // Retrieve local validation rules for VIN
     vinFactory.getLocalValidationRules().then(function(data){
         $scope.validation = data;
     },function(err) {
@@ -161,5 +143,26 @@ vinmodule.controller('vinCtrl', ['$scope', '$http','vinFactory', function($scope
     $scope.$watchCollection('vinForm', function(nVal, oVal) {
         server.vindb.saveLocalForm(formId, angular.toJson(nVal), formType, formTitle);
     });
+    $scope.panelClass = function() {
+        if($scope.vinFrm.$valid) {
+            return 'panel-success';
+        } else if (checkForErrors()) {
+            return 'panel-danger';
+        } else {
+            return 'panel-warning';
+        }
+    }
+    function checkForErrors() {
+        var req = $scope.vinFrm.$error.required;
+        if(req === undefined)
+            return false;
+        var rl = req.length;
+        for(var i = 0; i<rl; i++) {
+            if(req[i].$name === '')
+                continue;
+            return true;
+        }
+        return false;
+    }
     /* END HELPER FUNCTIONS */
 }]);

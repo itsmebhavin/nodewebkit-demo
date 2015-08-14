@@ -493,9 +493,3 @@ hr {
     border-radius: 3px;
 }
 /*end breadcrumb*/
-
-/* validation panel styling */
-a:visited.validationLink {
-    color:inherit;
-}
-/* end validation panel styling */
