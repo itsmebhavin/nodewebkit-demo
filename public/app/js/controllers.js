@@ -78,17 +78,25 @@ app.controller('defaultCtrl',['$scope','$stateParams', '$state' ,function($scope
     },true);
 
     $scope.init = function() {
-        $scope.addTab($scope.doctype);
+        var storedForms = server.vindb.loadLocalForms();
+        angular.forEach(storedForms, function(form) {
+            $scope.addTab(form.type, form.id, form.title, form.form);
+        });
+        $scope.addTab($scope.doctype, uuid.v4(), null);
     }
 
-    $scope.addTab = function(type) {
-        var d = new Date();
-        var title = '' + type + ' - ' + d.getMonth() + '/' + d.getDate() + '/' + d.getFullYear() + ' - ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
-        $scope.tabs.push({title: title, active:true, type:type, id:uuid.v4()});
+    $scope.addTab = function(type, id, title, form) {
+        if(!title) {
+            var d = new Date();
+            title = '' + type + ' - ' + d.getMonth() + '/' + d.getDate() + '/' + d.getFullYear() + ' - ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
+        }
+        $scope.tabs.push({title:title, active:true, type:type, id:id, form:form});
     }
     $scope.removeTab = function(index) {
+        //TODO: Remove form from the local db
+        var formId = $scope.tabs[index].id;
+        server.vindb.deleteLocalForm(formId);
         $scope.tabs.splice(index, 1);
-        console.log(savedForms.get(1));
     }
 
     $scope.init();

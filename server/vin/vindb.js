@@ -15,14 +15,19 @@ exports.saveLocalActive = function(active) {
     }
 }
 
-exports.saveLocalForm = function(id, form) {
+exports.saveLocalForm = function(id, form, type, title) {
     var entry = localForms.findOne({id: {$eq: id}});
     if(entry === null) {
-        localForms.insert({id:id, form:form});
+        localForms.insert({id:id, form:form, type:type, title:title});
     } else {
         entry.form = form;
         localForms.update(entry);
     }
+}
+
+exports.deleteLocalForm = function(id) {
+    var x = localForms.findOne({'id':id});
+    localForms.remove(x);
 }
 
 exports.saveForm = function() {
@@ -35,6 +40,10 @@ exports.saveForm = function() {
         savedForm = localForm;
         savedForms.update(savedForm);
     }
+}
+
+exports.loadLocalForms = function() {
+    return localForms.find({});
 }
 
 // DEBUGGING/TESTING FUNCTIONS

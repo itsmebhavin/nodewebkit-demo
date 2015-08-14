@@ -10,8 +10,15 @@ vinmodule.controller('vinCtrl', ['$scope', '$http','vinFactory', function($scope
     $scope.vinForm = {};
     $scope.isCollapsed = true;
     var formId = $scope.$parent.tab.id;
+    var formType = $scope.$parent.tab.type;
+    var formTitle = $scope.$parent.tab.title;
 
-    //Retrieve local validation rules for Vin
+    // If exists, load existing form
+    if($scope.$parent.tab.form !== null) {
+        $scope.vinForm = angular.fromJson($scope.$parent.tab.form);
+    }
+
+    // Retrieve local validation rules for Vin
     vinFactory.getLocalValidationRules().then(function(data){
         $scope.validation = data;
     },function(err) {
@@ -27,8 +34,7 @@ vinmodule.controller('vinCtrl', ['$scope', '$http','vinFactory', function($scope
         $scope.validationOpened = false;
     }
     $scope.$watchCollection('vinForm', function(nVal, oVal) {
-        server.vindb.saveLocalForm(formId, angular.toJson(nVal));
-        // sessionStorage.setItem(formId, angular.toJson(nVal));
+        server.vindb.saveLocalForm(formId, angular.toJson(nVal), formType, formTitle);
     });
     /* END HELPER FUNCTIONS */
 }]);
