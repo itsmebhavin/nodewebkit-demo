@@ -29,9 +29,21 @@ angular.module('components.window',[])
     }
   }));
   developr.append(new gui.MenuItem({
+    label:'Reload (same as toolbar reload)',
+    click: function(){
+      win.reloadDev();
+    }
+  }));
+  developr.append(new gui.MenuItem({
     label:'Reload without Cache aka "Shift-Reload"',
     click: function(){
       win.reloadIgnoringCache();
+    }
+  }));
+  developr.append(new gui.MenuItem({
+    label:'test progress',
+    click: function(){
+      win.setBadgeLabel('30');
     }
   }));
 

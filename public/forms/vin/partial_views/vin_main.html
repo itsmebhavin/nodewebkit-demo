@@ -23,17 +23,17 @@
     <switch-with-label id="inputFeeCollected" label="Is $25 Fee to be Collected" on="Yes" off="No" ng-model="vinForm.feeCollected"></switch-with-label>
   </div>
 </div>
-<div class="panel" ng-class="{'panel-success':vinFrm.$valid, 'panel-danger':vinFrm.$invalid}">
+<div class="panel mdc-text-grey-200" ng-class="{'panel-success':vinFrm.$valid, 'panel-danger':vinFrm.$invalid}">
   <div class="panel-heading" ng-click="isCollapsed = !isCollapsed">
     <h4 class="panel-title">
       <span>
-        Validation
+        Validation <span class="mdc-text-red-900">(Errors & Warnings)</span>
       </span>
     </h4>
   </div>
   <div collapse="isCollapsed">
     <div class="panel-body">
-      <table class="table table-striped table-condensed">
+      <table class="table table-bordered table-hover table-condensed table-responsive">
         <thead>
           <tr>
             <th>Status</th>
