@@ -1,6 +1,5 @@
 bower_components
 node_modules
 run.bat
-package.json
 local.json
 loki.json
