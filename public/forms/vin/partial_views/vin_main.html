@@ -23,33 +23,57 @@
     <switch-with-label id="inputFeeCollected" label="Is $25 Fee to be Collected" on="Yes" off="No" ng-model="vinForm.feeCollected"></switch-with-label>
   </div>
 </div>
-<div class="panel mdc-text-grey-200" ng-class="{'panel-success':vinFrm.$valid, 'panel-danger':vinFrm.$invalid}">
+<div class="panel" ng-class="{'panel-success':vinFrm.$valid, 'panel-danger':vinFrm.$invalid}">
   <div class="panel-heading" ng-click="isCollapsed = !isCollapsed">
     <h4 class="panel-title">
       <span>
-        Validation <span class="mdc-text-red-900">(Errors & Warnings)</span>
+        Validation Results
       </span>
     </h4>
   </div>
   <div collapse="isCollapsed">
     <div class="panel-body">
-      <table class="table table-bordered table-hover table-condensed table-responsive">
-        <thead>
-          <tr>
-            <th>Status</th>
-            <th>Field</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody ng-repeat="element in vinFrm" ng-if="element.$invalid">
-          <tr ng-repeat="(key,value) in validation[element.$name].errors">
-            <td><span class="label label-success">Active</span>
-            </td>
-            <td>{{validation[element.$name].name}}</td>
-            <td>{{value}}</td>
-          </tr>
-        </tbody>
-      </table>
+      <tabset>
+        <tab>
+          <tab-heading class="mdc-text-red-500">
+            <i class="fa fa-times-circle"></i>&nbsp;Errors
+          </tab-heading>
+          <table class="table table-bordered table-hover table-condensed table-responsive">
+            <thead>
+              <tr>
+                <th>Status</th>
+                <th>Field</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody ng-repeat="element in vinFrm" ng-if="element.$invalid">
+              <tr ng-repeat="(key,value) in validation[element.$name].errors">
+                <td><span class="btn btn-danger btn-xs">Fix</span>
+                </td>
+                <td>{{validation[element.$name].name}}</td>
+                <td>{{value}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </tab>
+        <tab>
+          <tab-heading class="mdc-text-orange-500">
+            <i class="fa fa-exclamation-triangle"></i>&nbsp;Warnings
+          </tab-heading>
+          <div>
+            warnings will be here
+          </div>
+        </tab>
+        <tab>
+          <tab-heading class="mdc-text-blue-700">
+            <i class="fa fa-info-circle"></i>&nbsp;Info
+          </tab-heading>
+          <div>
+            info will be here
+          </div>
+        </tab>
+      </tabset>
+
     </div>
   </div>
 </div>

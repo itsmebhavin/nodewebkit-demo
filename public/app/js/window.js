@@ -2,6 +2,9 @@
 
 var gui = require('nw.gui');
 var win = gui.Window.get(); // to get current window context.
+var commands = gui.App.argv;
+console.log('Commands - ');
+console.log(commands);
 
 angular.module('components.window',[])
 .run(function(){
