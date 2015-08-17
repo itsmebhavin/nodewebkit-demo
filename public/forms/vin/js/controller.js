@@ -10,7 +10,7 @@ vinmodule.run(['defaultErrorMessageResolver', 'validator', 'warningModifier', fu
     validator.setDefaultElementModifier(warningModifier.key);
 }]);
 
-vinmodule.controller('vinCtrl', ['$scope', '$http','vinFactory', function($scope, $http, vinFactory) {
+vinmodule.controller('vinCtrl', ['$scope', '$http','vinFactory', '$timeout', function($scope, $http, vinFactory, $timeout) {
     /* SETUP */
     console.log('inside vin controller');
     $scope.stateList = ['Alabama', 'Alaska', 'Arizona'];
@@ -38,9 +38,17 @@ vinmodule.controller('vinCtrl', ['$scope', '$http','vinFactory', function($scope
     /* HELPER FUNCTIONS */
     $scope.focusOn = function(id) {
         var el = document.getElementsByName(id)[0];
-        console.log(el);
+        // el.style.border = 'double';
         el.focus();
-        $scope.validationOpened = false;
+
+        // $timeout(function() {
+        //     el.style.border = 'none';
+        // }, 1000);
+
+        // $scope.isCollapsed = true;
+    }
+    $scope.submitForm = function() {
+        alert('test');
     }
     $scope.$watchCollection('vinForm', function(nVal, oVal) {
         server.vindb.saveLocalForm(formId, angular.toJson(nVal), formType, formTitle);

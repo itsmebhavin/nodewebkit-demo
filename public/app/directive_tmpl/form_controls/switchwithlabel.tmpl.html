@@ -1,12 +1,15 @@
 <div class="form-group">
-    <label ng-attr-for="{{id}}" class="col-md-4 control-label">{{label}}&nbsp;<i ng-if="required" class="fa fa-asterisk text-danger" style="font-size:8px;"></i></label>
-    <div class="col-md-8">
+    <div class="input-group input-group-sm robotoregular">
+        <span class="input-group-addon">{{label | uppercase}}</span>
+        &nbsp;
         <switch ng-attr-id="{{id}}"
         name="{{id}}"
         class="wide"
+        style="height:100%"
         on="{{on}}" off={{off}}
         ng-model="ngModel"
         ng-required="required"
         disable-valid-styling="{{!required}}"></switch>
+        <input type="text" class="hidden" disable-valid-styling="{{!required}}">
     </div>
 </div>

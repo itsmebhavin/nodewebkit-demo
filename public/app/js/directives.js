@@ -55,9 +55,7 @@ angular.module('application.directives',[])
         },
         templateUrl:'app/directive_tmpl/form_controls/textboxwithlabel.tmpl.html',
         link: function(scope, element, attrs) {
-            if(attrs.required == '') {
-                attrs.required = true;
-            } else {
+            if(attrs.required === undefined) {
                 attrs.required = false;
             }
         }
@@ -74,7 +72,12 @@ angular.module('application.directives',[])
             ngModel:'=',
             required:'@'
         },
-        templateUrl: 'app/directive_tmpl/form_controls/dropdownwithlabel.tmpl.html'
+        templateUrl: 'app/directive_tmpl/form_controls/dropdownwithlabel.tmpl.html',
+        link: function(scope, element, attrs) {
+            if(attrs.required === undefined) {
+                attrs.required = false;
+            }
+        }
     }
 })
 .directive('switchWithLabel', function() {
@@ -89,7 +92,12 @@ angular.module('application.directives',[])
             required:'@',
             ngModel:'='
         },
-        templateUrl: 'app/directive_tmpl/form_controls/switchwithlabel.tmpl.html'
+        templateUrl: 'app/directive_tmpl/form_controls/switchwithlabel.tmpl.html',
+        link: function(scope, element, attrs) {
+            if(attrs.required === undefined) {
+                attrs.required = false;
+            }
+        }
     }
 })
 .directive('sortableTab', function($timeout, $document) {

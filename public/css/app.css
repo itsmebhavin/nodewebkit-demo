@@ -274,9 +274,6 @@ hr {
     border-radius: 3px;
 }
 /*end breadcrumb*/
-<<<<<<< HEAD
-=======
-
 
 /*Start Timeline*/
 .timeline {
@@ -420,4 +417,7 @@ hr {
     color: #d73814;
 }
 /* end alert cards*/
->>>>>>> 0aa2a03f20ccb701141f84df2841e55dc6608f11
+
+.pointer {
+    cursor: pointer;
+}

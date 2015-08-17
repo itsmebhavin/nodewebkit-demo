@@ -1,4 +1,4 @@
-<form class="robotoregular" name="vinFrm" novalidate="novalidate">
+<form class="robotoregular" name="vinFrm" novalidate="novalidate" ng-submit="submitForm()">
     <div class="row">
         <!-- Temporary button to open validation panel -->
         <div class="column col-xs-6">
@@ -45,7 +45,7 @@
                             </thead>
                             <tbody ng-repeat="element in vinFrm" ng-if="element.$invalid">
                                 <tr ng-repeat="(key,value) in element.$error" ng-if="validation[element.$name].errors[key]">
-                                    <td><span class="btn btn-danger btn-xs">Fix</span></td>
+                                    <td><button type="submit" class="btn btn-danger btn-xs" ng-click="focusOn(element.$name)">Fix</button></td>
                                     <td>{{validation[element.$name].name}}</td>
                                     <td>{{validation[element.$name].errors[key]}}</td>
                                 </tr>
@@ -66,7 +66,7 @@
                             </thead>
                             <tbody ng-repeat="element in vinFrm" ng-if="element.$invalid">
                                 <tr ng-repeat="(key,value) in element.$error" ng-if="validation[element.$name].warnings[key]">
-                                    <td><span class="btn btn-danger btn-xs">Fix</span></td>
+                                    <td><span class="btn btn-danger btn-xs" ng-click="focusOn(element.$name)">Fix</span></td>
                                     <td>{{validation[element.$name].name}}</td>
                                     <td>{{validation[element.$name].warnings[key]}}</td>
                                 </tr>
