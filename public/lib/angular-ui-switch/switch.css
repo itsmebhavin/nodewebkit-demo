@@ -38,7 +38,7 @@
 }
 /*wider switch text moves small further to the right*/
 .switch.wide.checked small {
-  left:50px;
+  left:48px;
 }
 /*styles for switch-text*/
 .switch .switch-text {
