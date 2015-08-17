@@ -20,7 +20,7 @@
     "height": 720,
     "min_width": 1068,
     "min_height": 720,
-    "as_desktop":true
+    "as_desktop": true
   },
   "keywords": [
     "nw",
@@ -32,5 +32,6 @@
   "dependencies": {
     "bower": "^1.4.1",
     "node-uuid": "^1.4.3"
-  }
+  },
+  "devDependencies": {}
 }
