@@ -2,7 +2,9 @@
     "inputVIN": {
         "name": "VIN",
         "errors": {
-            "required": "VIN is required",
+            "required": "VIN is required"
+        },
+        "warnings": {
             "minlength": "VIN must be at least 13 characters"
         }
     },

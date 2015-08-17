@@ -44,11 +44,10 @@
                                 </tr>
                             </thead>
                             <tbody ng-repeat="element in vinFrm" ng-if="element.$invalid">
-                                <tr ng-repeat="(key,value) in validation[element.$name].errors">
-                                    <td><span class="btn btn-danger btn-xs">Fix</span>
-                                    </td>
+                                <tr ng-repeat="(key,value) in element.$error" ng-if="validation[element.$name].errors[key]">
+                                    <td><span class="btn btn-danger btn-xs">Fix</span></td>
                                     <td>{{validation[element.$name].name}}</td>
-                                    <td>{{value}}</td>
+                                    <td>{{validation[element.$name].errors[key]}}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -57,9 +56,22 @@
                         <tab-heading class="mdc-text-orange-500">
                             <i class="fa fa-exclamation-triangle"></i>&nbsp;Warnings
                         </tab-heading>
-                        <div>
-                            warnings will be here
-                        </div>
+                        <table class="table table-bordered table-hover table-condensed table-responsive">
+                            <thead>
+                                <tr>
+                                    <th>Status</th>
+                                    <th>Field</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody ng-repeat="element in vinFrm" ng-if="element.$invalid">
+                                <tr ng-repeat="(key,value) in element.$error" ng-if="validation[element.$name].warnings[key]">
+                                    <td><span class="btn btn-danger btn-xs">Fix</span></td>
+                                    <td>{{validation[element.$name].name}}</td>
+                                    <td>{{validation[element.$name].warnings[key]}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </tab>
                     <tab>
                         <tab-heading class="mdc-text-blue-700">

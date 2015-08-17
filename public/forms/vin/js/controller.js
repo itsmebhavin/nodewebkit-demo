@@ -17,7 +17,7 @@ vinmodule.controller('vinCtrl', ['$scope', '$http','vinFactory', function($scope
     $scope.vehicleMakes = ['Acura', 'Ford', 'Mercedes'];
     $scope.vehicleModels = ['A', 'List', 'Item'];
     $scope.vinForm = {};
-    $scope.isCollapsed = true;
+    $scope.isCollapsed = false;
     var formId = $scope.$parent.tab.id;
     var formType = $scope.$parent.tab.type;
     var formTitle = $scope.$parent.tab.title;
