@@ -66,7 +66,7 @@
                             </thead>
                             <tbody ng-repeat="element in vinFrm" ng-if="element.$invalid">
                                 <tr ng-repeat="(key,value) in element.$error" ng-if="validation[element.$name].warnings[key]">
-                                    <td><span class="btn btn-danger btn-xs" ng-click="focusOn(element.$name)">Fix</span></td>
+                                    <td><button type="submit" class="btn btn-danger btn-xs" ng-click="focusOn(element.$name)">Fix</button></td>
                                     <td>{{validation[element.$name].name}}</td>
                                     <td>{{validation[element.$name].warnings[key]}}</td>
                                 </tr>
