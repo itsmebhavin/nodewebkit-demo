@@ -1,6 +1,6 @@
 var server = require('../server/server');
 
-var vinmodule = angular.module('application.vin',['jcs-autoValidate','vin.factories']);
+var vinmodule = angular.module('application.vin',['jcs-autoValidate','vin.factories','vin.directives']);
 
 vinmodule.run(['defaultErrorMessageResolver', 'validator', 'warningModifier', function(defaultErrorMessageResolver, validator, warningModifier) {
     defaultErrorMessageResolver.getErrorMessages().then(function(errorMessages) {
