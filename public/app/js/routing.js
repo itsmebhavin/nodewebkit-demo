@@ -22,7 +22,7 @@ angular.module('application.routing',[])
       controller:'userSettingsCtrl'
     })
     .state('default',{
-        url:'/default/:type/:docid',
+        url:'/default/:type',
         views:{
             '':{
                 templateUrl: './app/views/default.html',
@@ -32,6 +32,13 @@ angular.module('application.routing',[])
                 templateUrl: './app/partial_views/toolbar.html',
                 controller: 'toolbarCtrl'
             },
+            'releasenotes@default':{
+                templateUrl: './app/partial_views/releasenotes.html',
+                controller:'releaseNotesCtrl'
+            },
+            'recentforms@default':{
+                templateUrl: './app/partial_views/recentforms.html'
+            },
             'vin@default':{
                 templateUrl: './forms/vin/partial_views/vin_main.html',
                 controller:'vinCtrl'
@@ -39,15 +46,9 @@ angular.module('application.routing',[])
             'asr@default':{
                 templateUrl: './forms/asr/partial_views/asr_main.html',
                 controller:'asrCtrl'
-            },
-            'releasenotes@default':{
-                templateUrl: './app/partial_views/releasenotes.html',
-                controller:'releaseNotesCtrl'
-            },
-            'recentforms@default':{
-                templateUrl: './app/partial_views/recentforms.html'
             }
         }
 
     });
+
 }]);
