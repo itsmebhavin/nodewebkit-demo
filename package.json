@@ -12,7 +12,7 @@
         "show_in_taskbar": true,
         "transparent": false,
         "resizable": true,
-        "toolbar": true,
+        "toolbar": false,
         "frame": false,
         "always-on-top": false,
         "visible-on-all-workspaces": true,
