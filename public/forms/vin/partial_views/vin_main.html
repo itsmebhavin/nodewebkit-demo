@@ -20,7 +20,7 @@
       <switch-with-label id="inputFeeCollected" label="Is $25 Fee to be Collected" on="Yes" off="No" ng-model="vinForm.feeCollected"></switch-with-label>
     </div>
   </div>
-  
+
   <div class="panel" ng-class="panelClass()">
     <div class="panel-heading" ng-click="isCollapsed = !isCollapsed">
       <h4 class="panel-title">
@@ -46,7 +46,7 @@
               </thead>
               <tbody ng-repeat="element in vinFrm" ng-if="element.$invalid">
                 <tr ng-repeat="(key,value) in element.$error" ng-if="validation[element.$name].errors[key]">
-                  <td><button type="submit" class="btn btn-danger btn-xs" ng-click="focusOn(element.$name)">Fix</button></td>
+                  <td><button type="button" class="btn btn-danger btn-xs" ng-click="focusOn(element.$name)">Fix</button></td>
                   <td>{{validation[element.$name].name}}</td>
                   <td>{{validation[element.$name].errors[key]}}</td>
                 </tr>
@@ -67,7 +67,7 @@
               </thead>
               <tbody ng-repeat="element in vinFrm" ng-if="element.$invalid">
                 <tr ng-repeat="(key,value) in element.$error" ng-if="validation[element.$name].warnings[key]">
-                  <td><button type="submit" class="btn btn-danger btn-xs" ng-click="focusOn(element.$name)">Fix</button></td>
+                  <td><button type="button" class="btn btn-danger btn-xs" ng-click="focusOn(element.$name)">Fix</button></td>
                   <td>{{validation[element.$name].name}}</td>
                   <td>{{validation[element.$name].warnings[key]}}</td>
                 </tr>
