@@ -7,7 +7,8 @@
           panelheadertext : '@',
           ngClass : '&',
           form : '=',
-          validationrules : '='
+          validationrules: '=',
+          focusOnFn : '&'
       },
       restrict:'E',
       templateUrl:'forms/vin/directive_tmpl/validation.tmpl.html'
