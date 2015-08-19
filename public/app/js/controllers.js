@@ -109,7 +109,7 @@ app.controller('defaultCtrl',['$scope','$stateParams', '$state' ,function($scope
     }
 }]);
 
-app.controller('openFormCtrl', ['$scope', '$state', function($scope, $state) {
+app.controller('openFormCtrl', ['$scope', '$state',function($scope, $state) {
     $scope.recent = server.vindb.loadFormList();
 
     $scope.openForm = function(title) {
@@ -117,6 +117,7 @@ app.controller('openFormCtrl', ['$scope', '$state', function($scope, $state) {
         server.vindb.saveLocalForm(form.id, form.form, form.type, form.title);
         $state.go('default',{type:'VIN', newform: false});
     }
+
 }]);
 app.controller('applicationSettingsCtrl',['$scope',function($scope){
     //TODO: application settings related code.
