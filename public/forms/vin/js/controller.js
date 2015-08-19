@@ -38,13 +38,7 @@ vinmodule.controller('vinCtrl', ['$scope', '$http','vinFactory', '$timeout', fun
     /* HELPER FUNCTIONS */
     $scope.focusOn = function(id) {
         var el = document.getElementsByName(id)[0];
-        // el.style.border = 'double';
         el.focus();
-
-        // $timeout(function() {
-        //     el.style.border = 'none';
-        // }, 1000);
-
         // $scope.isCollapsed = true;
     }
     $scope.submitForm = function() {
@@ -64,12 +58,13 @@ vinmodule.controller('vinCtrl', ['$scope', '$http','vinFactory', '$timeout', fun
     }
     function checkForErrors() {
         var req = $scope.vinFrm.$error.required;
-        if(req === undefined)
+        if(req === undefined) {
             return false;
+        }
         var rl = req.length;
         for(var i = 0; i<rl; i++) {
             if(req[i].$name === '')
-                continue;
+            continue;
             return true;
         }
         return false;
