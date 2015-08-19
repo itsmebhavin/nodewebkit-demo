@@ -42,6 +42,10 @@ exports.saveForm = function() {
     }
 }
 
+exports.openForm = function() {
+    
+}
+
 exports.loadLocalForms = function() {
     return localForms.find({});
 }

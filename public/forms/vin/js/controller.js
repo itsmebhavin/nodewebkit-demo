@@ -64,12 +64,13 @@ vinmodule.controller('vinCtrl', ['$scope', '$http','vinFactory', '$timeout', fun
     }
     function checkForErrors() {
         var req = $scope.vinFrm.$error.required;
-        if(req === undefined)
+        if(req === undefined) {
             return false;
+        }
         var rl = req.length;
         for(var i = 0; i<rl; i++) {
             if(req[i].$name === '')
-                continue;
+            continue;
             return true;
         }
         return false;
