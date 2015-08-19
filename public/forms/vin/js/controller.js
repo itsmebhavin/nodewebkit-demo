@@ -1,6 +1,6 @@
 var server = require('../server/server');
 
-var vinmodule = angular.module('application.vin',['jcs-autoValidate','vin.factories']);
+var vinmodule = angular.module('application.vin',['jcs-autoValidate','vin.factories','vin.directives']);
 
 vinmodule.run(['defaultErrorMessageResolver', 'validator', 'warningModifier', function(defaultErrorMessageResolver, validator, warningModifier) {
     defaultErrorMessageResolver.getErrorMessages().then(function(errorMessages) {
@@ -38,13 +38,7 @@ vinmodule.controller('vinCtrl', ['$scope', '$http','vinFactory', '$timeout', fun
     /* HELPER FUNCTIONS */
     $scope.focusOn = function(id) {
         var el = document.getElementsByName(id)[0];
-        // el.style.border = 'double';
         el.focus();
-
-        // $timeout(function() {
-        //     el.style.border = 'none';
-        // }, 1000);
-
         // $scope.isCollapsed = true;
     }
     $scope.submitForm = function() {

@@ -59,14 +59,14 @@ app.controller('mainCtrl',['$scope','$state',function($scope,$state){
     //server.usersdb.getAll();
     $scope.createNewVIN = function(){
         console.log('navigating to default page now.');
-        $state.go('default',{type:'VIN',docid:uuid.v4()});
+        $state.go('default',{type:'VIN',newform:true});
     };
 }]);
 
 app.controller('defaultCtrl',['$scope','$stateParams', '$state' ,function($scope,$stateParams,$state){
-    $scope.hello = "Hello Default..!!";
+    console.log("Hello Default..!!");
     $scope.doctype = $stateParams.type;
-    //$scope.docid = $stateParams.docid;
+    var newform = $stateParams.newform;
     $scope.tabs = [];
 
     $scope.$watch('tabs', function(nVal, oVal) {
@@ -84,20 +84,19 @@ app.controller('defaultCtrl',['$scope','$stateParams', '$state' ,function($scope
         angular.forEach(storedForms, function(form) {
             $scope.addTab(form.type, form.id, form.title, form.form);
         });
-        $scope.addTab($scope.doctype, uuid.v4(), null);
+        console.log(newform);
+        if(newform) {
+            $scope.addTab($scope.doctype, uuid.v4());
+        }
     }
 
     $scope.addTab = function(type, id, title, form) {
         if(!title) {
-            var d = new Date();
-            //form# format change
-            d.setMonth(d.getMonth() + 1);
-            title = d.getFullYear() + '' + addLeadingChars(d.getMonth()) + '' + addLeadingChars(d.getDate()) + ''+ addLeadingChars(d.getHours()) +  ''+ addLeadingChars(d.getMinutes()) + ''+ addLeadingChars(d.getSeconds()) + ''+ type;
+            title = new Date();
         }
         $scope.tabs.push({title:title, active:true, type:type, id:id, form:form});
     }
     $scope.removeTab = function(index) {
-        //TODO: Remove form from the local db
         var formId = $scope.tabs[index].id;
         server.vindb.deleteLocalForm(formId);
         $scope.tabs.splice(index, 1);
@@ -110,6 +109,15 @@ app.controller('defaultCtrl',['$scope','$stateParams', '$state' ,function($scope
     }
 }]);
 
+app.controller('openFormCtrl', ['$scope', '$state', function($scope, $state) {
+    $scope.recent = server.vindb.loadFormList();
+
+    $scope.openForm = function(title) {
+        var form = server.vindb.loadForm(title);
+        server.vindb.saveLocalForm(form.id, form.form, form.type, form.title);
+        $state.go('default',{type:'VIN', newform: false});
+    }
+}]);
 app.controller('applicationSettingsCtrl',['$scope',function($scope){
     //TODO: application settings related code.
 }]);

@@ -11,6 +11,11 @@ angular.module('application.routing',[])
         url:'/home',
         templateUrl:'./app/views/test.html'
     })
+    .state('openform',{
+        url:'/openform',
+        templateUrl:'./app/views/openform.html',
+        controller:'openFormCtrl'
+    })
     .state('applicationsettings',{
         url:'/appsetting',
         templateUrl:'./app/views/applicationsettings.html',
@@ -22,7 +27,7 @@ angular.module('application.routing',[])
       controller:'userSettingsCtrl'
     })
     .state('default',{
-        url:'/default/:type',
+        url:'/default/:type/:newform',
         views:{
             '':{
                 templateUrl: './app/views/default.html',
