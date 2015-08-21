@@ -17,9 +17,9 @@
                 </div>
                 <div class="col-xs-8">
                     <div class="btn-group">
-                        <label class="btn btn-danger" ng-model="css" btn-radio="'darkly'" uncheckable>darkly</label>
-                        <label class="btn btn-danger" ng-model="css" btn-radio="'cosmo'" uncheckable>cosmo</label>
-                        <label class="btn btn-danger" ng-model="css" btn-radio="'paper'" uncheckable>paper</label>
+                        <label class="btn btn-danger" ng-model="css" btn-radio="'darkly'" uncheckable ng-click="saveTheme('darkly')">darkly</label>
+                        <label class="btn btn-danger" ng-model="css" btn-radio="'cosmo'" uncheckable ng-click="saveTheme('cosmo')">cosmo</label>
+                        <label class="btn btn-danger" ng-model="css" btn-radio="'paper'" uncheckable ng-click="saveTheme('paper')">paper</label>
                     </div>
                 </div>
             </div>

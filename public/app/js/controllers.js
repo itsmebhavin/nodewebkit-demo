@@ -7,8 +7,10 @@ angular.isUndefinedOrNull = function (val) {
 
 app.controller('cssBundleCtrl', ['$scope', '$css', function ($scope, $css) {
     // set the default bootswatch name
-    $scope.css = angular.isUndefinedOrNull(localStorage['theme']) ?
-    localStorage['theme'] : 'darkly';
+    var dbtheme = server.appsettingsdb.loadTheme();
+    console.log('-----theme----');
+    console.log(dbtheme);
+    $scope.css = dbtheme == 'undefined' ? 'darkly' : dbtheme;
     // create the list of bootswatches
     $scope.bootstraps = [
         { name: 'Light (cosmo)', url: 'cosmo' },
@@ -48,6 +50,10 @@ app.controller('cssBundleCtrl', ['$scope', '$css', function ($scope, $css) {
         //add new css collections
         $css.add(newCssCollection);
     })
+
+    $scope.saveTheme = function (theme) {
+        server.appsettingsdb.saveTheme(theme);
+    }
 }]);
 
 app.controller('indexCtrl', ['$scope', 'hotkeys', function ($scope, hotkeys) {
@@ -125,7 +131,8 @@ app.controller('openFormCtrl', ['$scope', '$state', function ($scope, $state) {
 }]);
 app.controller('applicationSettingsCtrl', ['$scope', 'hotkeys', function ($scope, hotkeys) {
     //TODO: application settings related code.
-
+    
+    //server.dumpDatabase();
 }]);
 
 app.controller('userSettingsCtrl', ['$scope', function ($scope) {
