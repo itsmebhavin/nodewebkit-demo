@@ -1,35 +1,41 @@
 <div class="row">
-  <hr class="hr-danger" />
-  <div class="col-xs-4">
-    <ol class="breadcrumb bread-danger">
-      <button ui-sref="main" class="btn btn-danger btn-xs"><i class="fa fa-home"></i>&nbsp;Home</button>
-      <h3 class="mdc-text-grey-400">Application Settings</h3>
-    </ol>
-    <i class="fa fa-cogs mdc-text-grey-500" style="padding-top:70%;font-size:200px;margin-left:-100px;"></i>
-  </div>
-  <div class="col-xs-8">
-    <br/>
-    <div class="well well-sm" ng-controller="cssBundleCtrl">
-      <h4>Theme Settings</h4>
-      <div class="row">
-        <div class="col-xs-4">
-          <pre>Active theme - {{css || 'darkly'}}</pre>
-        </div>
-        <div class="col-xs-8">
-          <div class="btn-group">
-            <label class="btn btn-danger" ng-model="css" btn-radio="'darkly'" uncheckable>darkly</label>
-            <label class="btn btn-danger" ng-model="css" btn-radio="'cosmo'" uncheckable>cosmo</label>
-            <label class="btn btn-danger" ng-model="css" btn-radio="'paper'" uncheckable>paper</label>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-xs-12">
-          <blockquote>
-            <footer><i class="fa fa-question-circle fa-lg"></i>&nbsp;<kbd>Darkly</kbd> : Dark mode, <kbd>Cosmo</kbd> : Light mode, <kbd>Paper</kbd> : Material mode</footer>
-          </blockquote>
-        </div>
-      </div>
+    <hr class="hr-danger" />
+    <div class="col-xs-4">
+        <ol class="breadcrumb bread-danger">
+            <button ui-sref="main" class="btn btn-danger btn-xs"><i class="fa fa-home"></i>&nbsp;Home</button>
+            <h3 class="mdc-text-grey-400">Application Settings</h3>
+        </ol>
+        <i class="fa fa-cogs mdc-text-grey-500" style="padding-top:70%;font-size:200px;margin-left:-100px;"></i>
     </div>
-  </div>
+    <div class="col-xs-8">
+        <br />
+        <div class="well well-sm" ng-controller="cssBundleCtrl">
+            <h4>Theme Settings</h4>
+            <div class="row">
+                <div class="col-xs-4">
+                    <pre>Active theme - {{css || 'darkly'}}</pre>
+                </div>
+                <div class="col-xs-8">
+                    <div class="btn-group">
+                        <label class="btn btn-danger" ng-model="css" btn-radio="'darkly'" uncheckable>darkly</label>
+                        <label class="btn btn-danger" ng-model="css" btn-radio="'cosmo'" uncheckable>cosmo</label>
+                        <label class="btn btn-danger" ng-model="css" btn-radio="'paper'" uncheckable>paper</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <blockquote>
+                        <footer><i class="fa fa-question-circle fa-lg"></i>&nbsp;<kbd>Darkly</kbd> : Dark mode, <kbd>Cosmo</kbd> : Light mode, <kbd>Paper</kbd> : Material mode</footer>
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+        <div class="well well-sm">
+            <h4>Keyboard Shortcuts</h4>
+            <blockquote>
+                <footer>Press <kbd>?</kbd> to view application level keyboard shortcuts</footer>
+            </blockquote>
+        </div>
+    </div>
 </div>

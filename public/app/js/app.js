@@ -1,4 +1,4 @@
-var app = angular.module('demoapp',[
+var app = angular.module('demoapp', [
     'ui.router',
     'ngAnimate',
     'components.window',
@@ -10,18 +10,20 @@ var app = angular.module('demoapp',[
     'uiSwitch',
     'angular-velocity',
     'pageslide-directive',
-    'door3.css'
+    'door3.css',
+    'cfp.hotkeys'
 ])
-.run(['$window','$rootScope',function($window, $rootScope) {
+
+.run(['$window', '$rootScope', function ($window, $rootScope) {
     $rootScope.online = navigator.onLine;
 
     $window.addEventListener("offline", function () {
-        $rootScope.$apply(function() {
+        $rootScope.$apply(function () {
             $rootScope.online = false;
         });
     }, false);
     $window.addEventListener("online", function () {
-        $rootScope.$apply(function() {
+        $rootScope.$apply(function () {
             $rootScope.online = true;
         });
     }, false);
