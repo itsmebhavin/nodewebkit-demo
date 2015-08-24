@@ -1,4 +1,4 @@
-var app = angular.module('demoapp', [
+angular.module('demoapp', [
     'ui.router',
     'ngAnimate',
     'components.window',
@@ -460,8 +460,7 @@ var uuid = require('node-uuid');
 angular.isUndefinedOrNull = function (val) {
     return angular.isUndefined(val) || val === null
 }
-angular.module('demoapp')
-.controller('cssBundleCtrl', ['$scope', '$css', function ($scope, $css) {
+angular.module('demoapp').controller('cssBundleCtrl', ['$scope', '$css', function ($scope, $css) {
     // set the default bootswatch name
     var dbtheme = server.appsettingsdb.loadTheme().then(function (theme) {
         localStorage.setItem('theme', theme);
@@ -488,8 +487,8 @@ angular.module('demoapp')
 
     $scope.$watch('css', function (newval, oldval) {
         console.log('new css = ' + newval);
-        if (newval == null) newval = 'darkly'; // default
-
+        if (newval == 'null') newval = 'darkly'; // default
+        
         //remove old css collections
         $css.remove($scope.CssCollection);
         $css.remove([
@@ -517,7 +516,8 @@ angular.module('demoapp')
     }
 }]);
 
-app.controller('indexCtrl', ['$scope', 'hotkeys', function ($scope, hotkeys) {
+
+angular.module('demoapp').controller('indexCtrl', ['$scope', 'hotkeys', function ($scope, hotkeys) {
     $scope.welcome = "eForms-nw.js";
     hotkeys.add({
         combo: 'shift+v',
@@ -526,12 +526,12 @@ app.controller('indexCtrl', ['$scope', 'hotkeys', function ($scope, hotkeys) {
     });
 }]);
 
-app.controller('mainCtrl', ['$scope', '$state', 'hotkeys', function ($scope, $state, hotkeys) {
+angular.module('demoapp').controller('mainCtrl', ['$scope', '$state', 'hotkeys', function ($scope, $state, hotkeys) {
     $scope.today = new Date();
     $scope.format = 'M/d/yy h:mm:ss a';
 }]);
 
-app.controller('defaultCtrl', ['$scope', '$stateParams', '$state', function ($scope, $stateParams, $state) {
+angular.module('demoapp').controller('defaultCtrl', ['$scope', '$stateParams', '$state', function ($scope, $stateParams, $state) {
     console.log("Hello Default..!!");
     $scope.doctype = $stateParams.type;
     var newform = $stateParams.newform;
@@ -580,7 +580,7 @@ app.controller('defaultCtrl', ['$scope', '$stateParams', '$state', function ($sc
     }
 }]);
 
-app.controller('openFormCtrl', ['$scope', '$state', function ($scope, $state) {
+angular.module('demoapp').controller('openFormCtrl', ['$scope', '$state', function ($scope, $state) {
     $scope.recent = server.vindb.loadFormList();
     $scope.selectedForm;
     $scope.selectedFormTitle;
@@ -598,19 +598,19 @@ app.controller('openFormCtrl', ['$scope', '$state', function ($scope, $state) {
     }
 
 }]);
-app.controller('applicationSettingsCtrl', ['$scope', 'hotkeys', function ($scope, hotkeys) {
+angular.module('demoapp').controller('applicationSettingsCtrl', ['$scope', 'hotkeys', function ($scope, hotkeys) {
     //TODO: application settings related code.
 
     //server.dumpDatabase();
 }]);
 
-app.controller('userSettingsCtrl', ['$scope', function ($scope) {
+angular.module('demoapp').controller('userSettingsCtrl', ['$scope', function ($scope) {
     //TODO: user settings related code.
 }]);
-app.controller('toolbarCtrl', ['$scope', function ($scope) {
+angular.module('demoapp').controller('toolbarCtrl', ['$scope', function ($scope) {
     $scope.saveForm = server.vindb.saveForm;
 }]);
 
-app.controller('releaseNotesCtrl', ['$scope', function ($scope) {
+angular.module('demoapp').controller('releaseNotesCtrl', ['$scope', function ($scope) {
     //TODO: user settings related code.
 }]);

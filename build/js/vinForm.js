@@ -1,8 +1,8 @@
 var server = require('../server/server');
 
-var vinmodule = angular.module('application.vin',['jcs-autoValidate','vin.factories','vin.directives']);
+angular.module('application.vin',['jcs-autoValidate','vin.factories','vin.directives']);
 
-vinmodule.run(['defaultErrorMessageResolver', 'validator', 'warningModifier', function(defaultErrorMessageResolver, validator, warningModifier) {
+angular.module('application.vin').run(['defaultErrorMessageResolver', 'validator', 'warningModifier', function(defaultErrorMessageResolver, validator, warningModifier) {
     defaultErrorMessageResolver.getErrorMessages().then(function(errorMessages) {
         errorMessages['minLengthWarning'] = 'Warning: Should be at least {0} characters';
     });
@@ -10,7 +10,7 @@ vinmodule.run(['defaultErrorMessageResolver', 'validator', 'warningModifier', fu
     validator.setDefaultElementModifier(warningModifier.key);
 }]);
 
-vinmodule.controller('vinCtrl', ['$scope', '$http','vinFactory', '$timeout', function($scope, $http, vinFactory, $timeout) {
+angular.module('application.vin').controller('vinCtrl', ['$scope', '$http','vinFactory', '$timeout', function($scope, $http, vinFactory, $timeout) {
     /* SETUP */
     console.log('inside vin controller');
     $scope.stateList = ['Alabama', 'Alaska', 'Arizona'];

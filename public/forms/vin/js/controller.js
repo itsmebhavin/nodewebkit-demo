@@ -2,7 +2,7 @@ var server = require('../server/server');
 
 angular.module('application.vin',['jcs-autoValidate','vin.factories','vin.directives']);
 
-vinmodule.run(['defaultErrorMessageResolver', 'validator', 'warningModifier', function(defaultErrorMessageResolver, validator, warningModifier) {
+angular.module('application.vin').run(['defaultErrorMessageResolver', 'validator', 'warningModifier', function(defaultErrorMessageResolver, validator, warningModifier) {
     defaultErrorMessageResolver.getErrorMessages().then(function(errorMessages) {
         errorMessages['minLengthWarning'] = 'Warning: Should be at least {0} characters';
     });

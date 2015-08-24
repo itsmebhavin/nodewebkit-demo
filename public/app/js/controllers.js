@@ -31,8 +31,8 @@ angular.module('demoapp').controller('cssBundleCtrl', ['$scope', '$css', functio
 
     $scope.$watch('css', function (newval, oldval) {
         console.log('new css = ' + newval);
-        if (newval == null) newval = 'darkly'; // default
-
+        if (newval == 'null') newval = 'darkly'; // default
+        
         //remove old css collections
         $css.remove($scope.CssCollection);
         $css.remove([
