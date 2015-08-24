@@ -1,4 +1,4 @@
-var app = angular.module('demoapp', [
+angular.module('demoapp', [
     'ui.router',
     'ngAnimate',
     'components.window',
@@ -9,7 +9,6 @@ var app = angular.module('demoapp', [
     'ui.bootstrap',
     'uiSwitch',
     'angular-velocity',
-    'pageslide-directive',
     'door3.css',
     'cfp.hotkeys'
 ])

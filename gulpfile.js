@@ -8,28 +8,28 @@ gulp.task('coreScripts', function() {
 });
 
 gulp.task('pluginScripts', function() {
-    return gulp.src(['bower_components/angular/angular.min.js',
-                    'public/lib/angular-ui-bootstrap/ui-bootstrap-tpls.min.js',
-                    'public/lib/angular/angular-animate.js',
-                    'public/lib/angular/angular-ui-router.min.js',
-                    'public/lib/angular/angular-mocks.js',
-                    'public/lib/angular-ui-switch/switch.js',
-                    'public/lib/waves/waves.js',
-                    'bower_components/velocity/velocity.min.js',
-                    'bower_components/velocity/velocity.ui.min.js',
-                    'bower_components/angular-velocity/angular-velocity.min.js',
-                    'public/lib/ng-pageslide/ng-pageslide.js',
-                    'bower_components/angular-auto-validate/dist/jcs-auto-validate.min.js',
-                    'bower_components/angular-css/angular-css.min.js',
-                    'public/lib/angular-hotkeys/build/hotkeys.min.js'])
+    return gulp.src(['bower_components/angular/angular.min.js'
+                    ,'public/lib/angular-ui-bootstrap/ui-bootstrap-tpls.min.js'
+                    // ,'public/lib/angular/angular-animate.js'
+                    // ,'public/lib/angular/angular-ui-router.js'
+                    // ,'public/lib/angular/angular-mocks.js'
+                    // ,'public/lib/angular-ui-switch/switch.js'
+                    // ,'public/lib/waves/waves.js'
+                    // ,'bower_components/velocity/velocity.js'
+                    // ,'bower_components/velocity/velocity.ui.js'
+                    // ,'bower_components/angular-velocity/angular-velocity.js'
+                    // ,'bower_components/angular-auto-validate/dist/jcs-auto-validate.js'
+                    // ,'bower_components/angular-css/angular-css.js'
+                    // ,'public/lib/angular-hotkeys/build/hotkeys.js'
+                ])
         .pipe(concat('plugins.js'))
         .pipe(gulp.dest('build/js'));
 });
 
 gulp.task('vinForm', function() {
-    return gulp.src(['public/forms/vin/js/controller.js',
-                    'public/forms/vin/js/factories.js',
-                    'public/forms/vin/js/directives.js'])
+    return gulp.src(['public/forms/vin/js/controller.js'
+                    ,'public/forms/vin/js/factories.js'
+                    ,'public/forms/vin/js/directives.js'])
         .pipe(concat('vinForm.js'))
         .pipe(gulp.dest('build/js'));
 });
@@ -42,6 +42,7 @@ gulp.task('asrForm', function() {
 
 gulp.task('default',
     [
+        'pluginScripts',
         'coreScripts',
         'vinForm',
         'asrForm'

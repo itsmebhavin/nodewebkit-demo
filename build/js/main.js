@@ -9,7 +9,6 @@ var app = angular.module('demoapp', [
     'ui.bootstrap',
     'uiSwitch',
     'angular-velocity',
-    'pageslide-directive',
     'door3.css',
     'cfp.hotkeys'
 ])
@@ -461,8 +460,8 @@ var uuid = require('node-uuid');
 angular.isUndefinedOrNull = function (val) {
     return angular.isUndefined(val) || val === null
 }
-
-app.controller('cssBundleCtrl', ['$scope', '$css', function ($scope, $css) {
+angular.module('demoapp')
+.controller('cssBundleCtrl', ['$scope', '$css', function ($scope, $css) {
     // set the default bootswatch name
     var dbtheme = server.appsettingsdb.loadTheme();
     console.log('-----theme----');
