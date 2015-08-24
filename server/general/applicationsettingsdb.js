@@ -1,6 +1,6 @@
 'use strict'
 var loki, db, appsettings;
-
+var q = require('q');
 init();
 
 function init() {
@@ -18,31 +18,40 @@ function init() {
         });
     }
     catch (e) {
-        console.log('----- Error : ' + e);
+        console.log('Exception(appSettings_init):' + e);
     }
 }
 exports.saveTheme = function (theme) {
-    console.log(appsettings);
-    console.log('Save theme called with theme - ' + theme);
-    var entry = appsettings.findOne({ activetheme: { $contains: '' } });
-    if (entry === null) {
-        appsettings.insert({ activetheme: theme })
-    } else {
-        entry.activetheme = theme;
-        appsettings.update(entry);
+    var defer = q.defer();
+    try{
+        var entry = appsettings.findOne({ activetheme: { $contains: '' } });
+        if (entry === null) {
+            appsettings.insert({ activetheme: theme })
+        } else {
+            entry.activetheme = theme;
+            appsettings.update(entry);
+        }
+        db.saveDatabase();
+        defer.resolve(true);
     }
-    db.saveDatabase();
-    this.loadTheme();
+    catch (e) {
+        defer.reject('Exception(saveTheme):' + e);
+    }
+    return defer.promise;
 }
 exports.loadTheme = function () {
-    var entry = appsettings.findOne({ activetheme: { $contains: '' } });
-    console.log('===>');
-    if (entry === null) {
-        console.log('theme is not available')
+    var defer = q.defer();
+    try{
+        var entry = appsettings.findOne({ activetheme: { $contains: '' } });
+        if (entry === null) {
+            defer.resolve(null);
+        }
+        else {
+            defer.resolve(entry.activetheme);
+        }
     }
-    else {
-        console.log('Theme found');
-        console.log(entry.activetheme);
-        return entry.activetheme;
+    catch (e) {
+        defer.reject('Exception(loadTheme):' + e);
     }
+    return defer.promise;
 }

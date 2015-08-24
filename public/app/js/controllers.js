@@ -6,10 +6,11 @@ angular.isUndefinedOrNull = function (val) {
 }
 angular.module('demoapp').controller('cssBundleCtrl', ['$scope', '$css', function ($scope, $css) {
     // set the default bootswatch name
-    var dbtheme = server.appsettingsdb.loadTheme();
-    console.log('-----theme----');
-    console.log(dbtheme);
-    $scope.css = dbtheme == 'undefined' ? 'darkly' : dbtheme;
+    var dbtheme = server.appsettingsdb.loadTheme().then(function (theme) {
+        localStorage.setItem('theme', theme);
+    });
+    $scope.css = localStorage.getItem('theme');
+
     // create the list of bootswatches
     $scope.bootstraps = [
         { name: 'Light (cosmo)', url: 'cosmo' },
@@ -51,7 +52,11 @@ angular.module('demoapp').controller('cssBundleCtrl', ['$scope', '$css', functio
     })
 
     $scope.saveTheme = function (theme) {
-        server.appsettingsdb.saveTheme(theme);
+        localStorage.setItem('theme', theme);
+        server.appsettingsdb.saveTheme(theme).then(function (response) {
+            if(response)
+                alert('Theme changed successfully.');
+        });
     }
 }]);
 
