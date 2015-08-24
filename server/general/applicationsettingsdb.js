@@ -1,4 +1,4 @@
-﻿'use strict'
+'use strict'
 var loki, db, appsettings;
 
 init();
@@ -8,13 +8,14 @@ function init() {
         console.log('Initializing database');
         loki = require('lokijs');
         db = new loki('loki.json');
-        if (db.collections.length > 0) {
-            appsettings = db.getCollection('appsettings');
-        }
-        else {
-            appsettings = db.addCollection('appsettings');
-        }
-        
+        db.loadDatabase({}, function() {
+            var nameList = db.collections.map(function(collection) {return collection.name});
+            if (nameList.indexOf('appsettings') > -1) {
+                appsettings = db.getCollection('appsettings');
+            } else {
+                appsettings = db.addCollection('appsettings');
+            }
+        });
     }
     catch (e) {
         console.log('----- Error : ' + e);
@@ -42,5 +43,6 @@ exports.loadTheme = function () {
     else {
         console.log('Theme found');
         console.log(entry.activetheme);
+        return entry.activetheme;
     }
 }

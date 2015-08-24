@@ -131,7 +131,7 @@ app.controller('openFormCtrl', ['$scope', '$state', function ($scope, $state) {
 }]);
 app.controller('applicationSettingsCtrl', ['$scope', 'hotkeys', function ($scope, hotkeys) {
     //TODO: application settings related code.
-    
+
     //server.dumpDatabase();
 }]);
 

@@ -8,7 +8,9 @@ function init() {
     localForms = localdb.addCollection('localForms');
     db = new loki('loki.json');
     db.loadDatabase({}, function() {
-        if(db.collections.length > 0) {
+        var nameList = db.collections.map(function(collection) {return collection.name});
+
+        if(nameList.indexOf('forms') > -1) {
             savedForms = db.getCollection('forms');
         } else {
             savedForms = db.addCollection('forms');
