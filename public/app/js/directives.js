@@ -79,12 +79,16 @@ angular.module('application.directives', [])
             ngMaxlength: '=',
             required: '@',
             ngModel: '=',
-            ngMinlengthErrType: '@'
+            ngMinlengthErrType: '@',
+            static: '@'
         },
         templateUrl: 'app/directive_tmpl/form_controls/textboxwithlabel.tmpl.html',
         link: function (scope, element, attrs) {
             if (attrs.required === undefined) {
                 attrs.required = false;
+            }
+            if(attrs.static === undefined) {
+                attrs.static = false;
             }
         }
     }

@@ -99,10 +99,11 @@ app.controller('defaultCtrl', ['$scope', '$stateParams', '$state', function ($sc
 
     $scope.addTab = function (type, id, title, form) {
         if (!title) {
-            var d = new Date();
-            //form# format change
-            d.setMonth(d.getMonth() + 1);
-            title = d.getFullYear() + '' + addLeadingChars(d.getMonth()) + '' + addLeadingChars(d.getDate()) + '' + addLeadingChars(d.getHours()) + '' + addLeadingChars(d.getMinutes()) + '' + addLeadingChars(d.getSeconds()) + '' + type;
+            var title = new Date();
+            // var d = new Date();
+            // //form# format change
+            // d.setMonth(d.getMonth() + 1);
+            // title = d.getFullYear() + '' + addLeadingChars(d.getMonth()) + '' + addLeadingChars(d.getDate()) + '' + addLeadingChars(d.getHours()) + '' + addLeadingChars(d.getMinutes()) + '' + addLeadingChars(d.getSeconds()) + '' + type;
         }
         $scope.tabs.push({ title: title, active: true, type: type, id: id, form: form });
     }
@@ -121,6 +122,12 @@ app.controller('defaultCtrl', ['$scope', '$stateParams', '$state', function ($sc
 
 app.controller('openFormCtrl', ['$scope', '$state', function ($scope, $state) {
     $scope.recent = server.vindb.loadFormList();
+    $scope.selectedForm;
+
+    $scope.showFormDetails = function(title) {
+        var formEntry = server.vindb.loadForm(title);
+        $scope.selectedForm = angular.fromJson(formEntry.form);
+    }
 
     $scope.openForm = function (title) {
         var form = server.vindb.loadForm(title);
@@ -140,7 +147,6 @@ app.controller('userSettingsCtrl', ['$scope', function ($scope) {
 }]);
 app.controller('toolbarCtrl', ['$scope', function ($scope) {
     $scope.saveForm = server.vindb.saveForm;
-    $scope.openForm = server.vindb.openForm;
 }]);
 
 app.controller('releaseNotesCtrl', ['$scope', function ($scope) {
