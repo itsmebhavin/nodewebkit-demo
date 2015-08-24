@@ -48,10 +48,12 @@ exports.saveForm = function() {
     var localForm = localForms.findOne({id: {$eq: id}});
     var savedForm = savedForms.findOne({id: {$eq: id}});
     if(savedForm === null) {
-        savedForms.insert({id:localForm.id, form:localForm.form, title:localForm.title, type:localForm.type, lastchanged:new Date()});
+        savedForms.insert({id:localForm.id, form:localForm.form, title:localForm.title, type:localForm.type, dateIssued:new Date(), lastchanged:new Date()});
     } else {
+        var created = localForm.dateissued;
         savedForm = localForm;
         savedForm.lastchanged = new Date();
+        savedForm.dateissued = created;
         savedForms.update(savedForm);
     }
     db.saveDatabase();

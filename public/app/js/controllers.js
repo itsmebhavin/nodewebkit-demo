@@ -99,11 +99,10 @@ app.controller('defaultCtrl', ['$scope', '$stateParams', '$state', function ($sc
 
     $scope.addTab = function (type, id, title, form) {
         if (!title) {
-            var title = new Date();
-            // var d = new Date();
-            // //form# format change
-            // d.setMonth(d.getMonth() + 1);
-            // title = d.getFullYear() + '' + addLeadingChars(d.getMonth()) + '' + addLeadingChars(d.getDate()) + '' + addLeadingChars(d.getHours()) + '' + addLeadingChars(d.getMinutes()) + '' + addLeadingChars(d.getSeconds()) + '' + type;
+            var d = new Date();
+            //form# format change
+            d.setMonth(d.getMonth() + 1);
+            title = d.getFullYear() + '' + addLeadingChars(d.getMonth()) + '' + addLeadingChars(d.getDate()) + '' + addLeadingChars(d.getHours()) + '' + addLeadingChars(d.getMinutes()) + '' + addLeadingChars(d.getSeconds()) + '' + type;
         }
         $scope.tabs.push({ title: title, active: true, type: type, id: id, form: form });
     }
@@ -123,9 +122,11 @@ app.controller('defaultCtrl', ['$scope', '$stateParams', '$state', function ($sc
 app.controller('openFormCtrl', ['$scope', '$state', function ($scope, $state) {
     $scope.recent = server.vindb.loadFormList();
     $scope.selectedForm;
+    $scope.selectedFormTitle;
 
     $scope.showFormDetails = function(title) {
         var formEntry = server.vindb.loadForm(title);
+        $scope.selectedFormTitle = title;
         $scope.selectedForm = angular.fromJson(formEntry.form);
     }
 

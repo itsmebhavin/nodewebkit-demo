@@ -2,7 +2,7 @@
 <tabset>
     <tab sortable-tab ng-repeat="tab in tabs" active="tab.active" disable="tab.disabled">
         <tab-heading>
-            {{tab.title | date:'short'}} &nbsp;
+            {{tab.title}} &nbsp;
             <a ng-click="removeTab($index)" href="" class="tabCloseBtn">
                 <i class="fa fa-times"></i>
             </a>
@@ -43,6 +43,6 @@
                 </div>
             </div>
         </div>
-        
+
     </tab>
 </tabset>
