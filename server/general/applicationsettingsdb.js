@@ -22,17 +22,22 @@ function init() {
     }
 }
 exports.saveTheme = function (theme) {
-    console.log(appsettings);
-    console.log('Save theme called with theme - ' + theme);
-    var entry = appsettings.findOne({ activetheme: { $contains: '' } });
-    if (entry === null) {
-        appsettings.insert({ activetheme: theme })
-    } else {
-        entry.activetheme = theme;
-        appsettings.update(entry);
+    var defer = q.defer();
+    try{
+        var entry = appsettings.findOne({ activetheme: { $contains: '' } });
+        if (entry === null) {
+            appsettings.insert({ activetheme: theme })
+        } else {
+            entry.activetheme = theme;
+            appsettings.update(entry);
+        }
+        db.saveDatabase();
+        defer.resolve(true);
     }
-    db.saveDatabase();
-    this.loadTheme();
+    catch (e) {
+        defer.reject('Exception(saveTheme):' + e);
+    }
+    return defer.promise;
 }
 exports.loadTheme = function () {
     var defer = q.defer();

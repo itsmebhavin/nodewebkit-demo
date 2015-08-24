@@ -54,7 +54,10 @@ app.controller('cssBundleCtrl', ['$scope', '$css', function ($scope, $css) {
 
     $scope.saveTheme = function (theme) {
         localStorage.setItem('theme', theme);
-        server.appsettingsdb.saveTheme(theme);
+        server.appsettingsdb.saveTheme(theme).then(function (response) {
+            if(response)
+                alert('Theme changed successfully.');
+        });
     }
 }]);
 
