@@ -18,7 +18,7 @@ function init() {
         });
     }
     catch (e) {
-        console.log('----- Error : ' + e);
+        console.log('Exception(appSettings_init):' + e);
     }
 }
 exports.saveTheme = function (theme) {
