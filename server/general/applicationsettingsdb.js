@@ -1,6 +1,6 @@
 'use strict'
 var loki, db, appsettings;
-
+var q = require('q');
 init();
 
 function init() {
@@ -35,14 +35,18 @@ exports.saveTheme = function (theme) {
     this.loadTheme();
 }
 exports.loadTheme = function () {
-    var entry = appsettings.findOne({ activetheme: { $contains: '' } });
-    console.log('===>');
-    if (entry === null) {
-        console.log('theme is not available')
+    var defer = q.defer();
+    try{
+        var entry = appsettings.findOne({ activetheme: { $contains: '' } });
+        if (entry === null) {
+            defer.resolve(null);
+        }
+        else {
+            defer.resolve(entry.activetheme);
+        }
     }
-    else {
-        console.log('Theme found');
-        console.log(entry.activetheme);
-        return entry.activetheme;
+    catch (e) {
+        defer.reject('Exception(loadTheme):' + e);
     }
+    return defer.promise;
 }
