@@ -1,43 +1,55 @@
 {
-  "name": "nodewebkit-demo",
-  "version": "1.0.0",
-  "description": "nodewebkit known as nw.js now, this is a sample using nw.js and creating basic window with menu options. ",
-  "main": "./public/start.html",
-  "scripts": {
-    "start": "node server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "window": {
-    "show": true,
-    "show_in_taskbar": true,
-    "transparent": false,
-    "resizable": true,
-    "toolbar": true,
-    "frame": false,
-    "always-on-top": false,
-    "visible-on-all-workspaces": true,
-    "width": 1068,
-    "height": 720,
-    "min_width": 1068,
-    "min_height": 720,
-    "as_desktop": true
-  },
+  "app_name": "eforms-nwjs",
   "keywords": [
     "nw",
     "nodewebkit",
     "menu"
   ],
-  "author": "bhavin patel",
-  "license": "MIT",
-  "dependencies": {
-    "bower": "^1.4.1",
-    "lokijs": "^1.3.7",
-    "node-uuid": "^1.4.3",
-    "q": "^1.4.1"
-  },
   "devDependencies": {
     "gulp": "^3.9.0",
     "gulp-concat": "^2.6.0",
-    "gulp-htmlmin": "^1.1.4"
-  }
+    "gulp-htmlmin": "^1.1.4",
+    "gulp-util": "^3.0.6",
+    "nw-builder": "^2.0.2"
+  },
+  "author": "bhavin patel",
+  "window": {
+    "show": true,
+    "always-on-top": false,
+    "frame": false,
+    "height": 720,
+    "visible": true,
+    "as_desktop": true,
+    "min_width": 1068,
+    "fullscreen": false,
+    "title": "nodewebkit-demo",
+    "mac_icon": "",
+    "exe_icon": "arkansaspolice.png",
+    "width": 1068,
+    "visible-on-all-workspaces": true,
+    "resizable": true,
+    "kiosk": false,
+    "min_height": 720,
+    "show_in_taskbar": true,
+    "transparent": false,
+    "toolbar": false,
+    "icon": "arkansaspolice.png",
+    "kiosk_emulation": false,
+    "position": "center"
+  },
+  "version": "1.0.0",
+  "main": "public\\start.html",
+  "description": "nodewebkit known as nw.js now, this is a sample using nw.js and creating basic window with menu options. ",
+  "dependencies": {
+    "lokijs": "^1.3.7",
+    "node-uuid": "^1.4.3",
+    "bower": "^1.4.1",
+    "q": "^1.4.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "gulp"
+  },
+  "name": "nodewebkit-demo",
+  "license": "MIT"
 }

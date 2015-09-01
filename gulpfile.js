@@ -1,31 +1,37 @@
 var gulp = require('gulp');
 var concat = require('gulp-concat');
 var htmlmin = require('gulp-htmlmin');
+var gutil = require('gulp-util');
+var NwBuilder = require('nw-builder');
 
-//gulp.task('coreScripts', function () {
-//    return gulp.src(['public/app/js/app.js',
-//            'public/app/js/window.js',
-//            'public/app/js/directives.js',
-//            'public/app/js/routing.js',
-//            'public/app/js/controllers.js'
-//    ])
-//        .pipe(concat('main.js'))
-//        .pipe(gulp.dest('build/js'));
-//});
+gulp.task('nw', function () {
+    var nw = new NwBuilder({
+        appName: 'nwjsapp',
+        files: [
+            "package.json",
+            "./build/**/*",
+            "./public/**/*",
+            "./server/**/*",
+            "./node_modules/lokijs/**/*",
+            "./node_modules/node-uuid/**/*",
+            "./node_modules/q/**/*",
+            "bower.json",
+            "loki.json",
+            "run.bat"
+        ],
+        platforms: ["win32","win64"],
+        version:"0.12.1"
+    })
+    // Log stuff you want
+    nw.on('log', function (msg) {
+        console.log('nw-builder:'+ msg);
+    });
 
-//gulp.task('vinForm', function () {
-//    return gulp.src(['public/forms/vin/js/controller.js'
-//                    , 'public/forms/vin/js/factories.js'
-//                    , 'public/forms/vin/js/directives.js'])
-//        .pipe(concat('vinForm.js'))
-//        .pipe(gulp.dest('build/js'));
-//});
-//gulp.task('asrForm', function () {
-//    return gulp.src(['public/forms/asr/js/controller.js'])
-//        .pipe(concat('asrForm.js'))
-//        .pipe(gulp.dest('build/js'));
-//});
-
+    // Build returns a promise, return it so the task isn't called in parallel
+    return nw.build().catch(function (err) {
+        console.log('nw-builder:'+ err);
+    });
+});
 
 gulp.task('coreScripts', function () {
     return gulp.src('public/app/*.js')
