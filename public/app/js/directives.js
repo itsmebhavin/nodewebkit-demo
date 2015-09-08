@@ -1,5 +1,5 @@
 angular.module('application.directives', [])
-.directive('newCard', function () {
+.directive('newCard', function ($templateCache) {
     return {
         transclude: true,
         scope: {
@@ -10,7 +10,8 @@ angular.module('application.directives', [])
             // cardactionclick:'&'
         },
         restrict: 'E',
-        templateUrl: 'app/directive_tmpl/general/newcard.tmpl.html'
+        //templateUrl: 'app/directive_tmpl/general/newcard.tmpl.html'
+        template: $templateCache.get('newcard.tmpl.html')
     }
 })
 
@@ -42,7 +43,7 @@ angular.module('application.directives', [])
         });
     }
 })
-.directive('wellCard', function () {
+.directive('wellCard', function ($templateCache) {
     return {
         transclude: true,
         scope: {
@@ -53,7 +54,8 @@ angular.module('application.directives', [])
             wellcontent: '@'
         },
         restrict: 'E',
-        templateUrl: 'app/directive_tmpl/general/smallwell.tmpl.html'
+        template: $templateCache.get('smallwell.tmpl.html')
+        //templateUrl: 'app/directive_tmpl/general/smallwell.tmpl.html'
     }
 })
 .directive('uppercased', function () {
@@ -67,7 +69,7 @@ angular.module('application.directives', [])
         }
     }
 })
-.directive('textboxWithLabel', function () {
+.directive('textboxWithLabel', function ($templateCache) {
     return {
         restrict: 'E',
         replace: true,
@@ -82,18 +84,19 @@ angular.module('application.directives', [])
             ngMinlengthErrType: '@',
             static: '@'
         },
-        templateUrl: 'app/directive_tmpl/form_controls/textboxwithlabel.tmpl.html',
+        //templateUrl: 'app/directive_tmpl/form_controls/textboxwithlabel.tmpl.html',
+        template: $templateCache.get('textboxwithlabel.tmpl.html'),
         link: function (scope, element, attrs) {
             if (attrs.required === undefined) {
                 attrs.required = false;
             }
-            if(attrs.static === undefined) {
+            if (attrs.static === undefined) {
                 attrs.static = false;
             }
         }
     }
 })
-.directive('dropdownWithLabel', function () {
+.directive('dropdownWithLabel', function ($templateCache) {
     return {
         restrict: 'E',
         replace: true,
@@ -104,7 +107,8 @@ angular.module('application.directives', [])
             ngModel: '=',
             required: '@'
         },
-        templateUrl: 'app/directive_tmpl/form_controls/dropdownwithlabel.tmpl.html',
+        //templateUrl: 'app/directive_tmpl/form_controls/dropdownwithlabel.tmpl.html',
+        template: $templateCache.get('dropdownwithlabel.tmpl.html'),
         link: function (scope, element, attrs) {
             if (attrs.required === undefined) {
                 attrs.required = false;
@@ -112,7 +116,7 @@ angular.module('application.directives', [])
         }
     }
 })
-.directive('switchWithLabel', function () {
+.directive('switchWithLabel', function ($templateCache) {
     return {
         restrict: 'E',
         replace: true,
@@ -124,7 +128,8 @@ angular.module('application.directives', [])
             required: '@',
             ngModel: '='
         },
-        templateUrl: 'app/directive_tmpl/form_controls/switchwithlabel.tmpl.html',
+        //templateUrl: 'app/directive_tmpl/form_controls/switchwithlabel.tmpl.html',
+        template: $templateCache.get('switchwithlabel.tmpl.html'),
         link: function (scope, element, attrs) {
             if (attrs.required === undefined) {
                 attrs.required = false;

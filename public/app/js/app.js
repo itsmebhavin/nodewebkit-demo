@@ -4,6 +4,7 @@ angular.module('demoapp', [
     'components.window',
     'application.routing',
     'application.directives',
+    'application.templates',
     'application.vin',
     'application.asr',
     'ui.bootstrap',

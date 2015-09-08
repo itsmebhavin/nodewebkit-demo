@@ -20,7 +20,6 @@ angular.module('demoapp').controller('cssBundleCtrl', ['$scope', '$css', functio
 
     $scope.CssCollection = [
         'css/material-design-color-palette.min.css',
-        'css/animate.css',
         'lib/font-awesome/css/font-awesome.min.css',
         'lib/waves/waves.css',
         'css/booleanswitch.css',
@@ -54,8 +53,19 @@ angular.module('demoapp').controller('cssBundleCtrl', ['$scope', '$css', functio
     $scope.saveTheme = function (theme) {
         localStorage.setItem('theme', theme);
         server.appsettingsdb.saveTheme(theme).then(function (response) {
-            if(response)
-                alert('Theme changed successfully.');
+            if (response) {
+                var notification = new Notification('NW.JS eForms', {
+                    icon: "icon32.png",
+                    body: "Theme changed successfully to - " + theme
+                });
+                notification.onclick = function () {
+                    console.log("theme - Notification clicked");
+                };
+                notification.onshow = function () {
+                    console.log('Show');
+                    setTimeout(function () { notification.close(); }, 1000);
+                };
+            }
         });
     }
 }]);

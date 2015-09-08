@@ -7,7 +7,7 @@ console.log('Commands - ');
 console.log(commands);
 
 angular.module('components.window',[])
-.run(function(){
+.run(function($interval){
     //gui.App.setCrashDumpDir(dir);
     console.log('current exec path- ' + process.execPath)
     // Create a tray icon
@@ -20,7 +20,7 @@ angular.module('components.window',[])
 
     var developr = new gui.Menu({type:'menubar'});
     developr.append(new gui.MenuItem({
-        label:'versions',
+        label:'Check Versions',
         click:function(){
             alert(
                 'Node.JS version - ' + process.versions['node'] + '\n' +
@@ -50,12 +50,38 @@ angular.module('components.window',[])
         }
     }));
     developr.append(new gui.MenuItem({
-        label:'test progress',
-        click: function(){
-            win.setBadgeLabel('30');
+        label:'Test update progress',
+        click: function () {
+            var promise, index = 1;
+            win.setBadgeLabel(10 * 1);
+            function start() {
+                stop();
+                promise = $interval(function () {
+                    if ((index * 10) >= 100)
+                        stop();
+                    index += 1;
+                    win.setBadgeLabel(10 * index);
+                }, 20000);
+            }
+            function stop() {
+                $interval.cancel(promise);
+            }
+            start();
+
         }
     }));
-
+    developr.append(new gui.MenuItem({
+        label: 'Quit',
+        click:  function() {
+            // Hide the window to give user the feeling of closing immediately
+            win.hide();
+            // If the new window is still open then close it.
+            if (win != null)
+                win.close(true);
+            // After closing the new window, close the main window.
+            win.close();
+        }    
+    }));
 
     tray.menu = developr;
     // console.log('our tray is now completed and ready..!!')
