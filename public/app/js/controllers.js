@@ -106,7 +106,7 @@ angular.module('demoapp').controller('defaultCtrl', ['$scope', '$stateParams', '
         angular.forEach(storedForms, function (form) {
             $scope.addTab(form.type, form.id, form.title, form.form);
         });
-        if (newform === 'true') {
+        if (newform == 'true') {
             $scope.addTab($scope.doctype, uuid.v4());
         }
     }
