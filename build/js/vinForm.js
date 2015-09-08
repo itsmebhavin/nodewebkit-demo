@@ -1,6 +1,11 @@
 var server = require('../server/server');
 
-angular.module('application.vin',['jcs-autoValidate','vin.factories','vin.directives']);
+angular.module('application.vin', [
+    'jcs-autoValidate',
+    'vin.factories',
+    'vin.directives',
+    'vin.templates'
+]);
 
 angular.module('application.vin').run(['defaultErrorMessageResolver', 'validator', 'warningModifier', function(defaultErrorMessageResolver, validator, warningModifier) {
     defaultErrorMessageResolver.getErrorMessages().then(function(errorMessages) {
@@ -72,22 +77,23 @@ angular.module('application.vin').controller('vinCtrl', ['$scope', '$http','vinF
     /* END HELPER FUNCTIONS */
 }]);
 
-(function(angular){
-  angular.module('vin.directives',[])
-  .directive('validation',function(){
-    return{
-      transclude : true,
-      scope : {
-          panelheadertext : '@',
-          ngClass : '&',
-          form : '=',
-          validationrules: '=',
-          focusOnFn : '&'
-      },
-      restrict:'E',
-      templateUrl:'forms/vin/directive_tmpl/validation.tmpl.html'
-    }
-  })
+(function (angular) {
+    angular.module('vin.directives', [])
+    .directive('validation', function ($templateCache) {
+        return {
+            transclude: true,
+            scope: {
+                panelheadertext: '@',
+                ngClass: '&',
+                form: '=',
+                validationrules: '=',
+                focusOnFn: '&'
+            },
+            restrict: 'E',
+            //templateUrl: 'forms/vin/directive_tmpl/validation.tmpl.html'
+            template: $templateCache.get('validation.tmpl.html')
+        }
+    })
 }(angular));
 
 (function(angular){
