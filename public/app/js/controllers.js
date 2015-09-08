@@ -31,7 +31,7 @@ angular.module('demoapp').controller('cssBundleCtrl', ['$scope', '$css', functio
     $scope.$watch('css', function (newval, oldval) {
         console.log('new css = ' + newval);
         if (newval == 'null') newval = 'darkly'; // default
-        
+
         //remove old css collections
         $css.remove($scope.CssCollection);
         $css.remove([
@@ -106,8 +106,7 @@ angular.module('demoapp').controller('defaultCtrl', ['$scope', '$stateParams', '
         angular.forEach(storedForms, function (form) {
             $scope.addTab(form.type, form.id, form.title, form.form);
         });
-        console.log(newform);
-        if (newform) {
+        if (newform === 'true') {
             $scope.addTab($scope.doctype, uuid.v4());
         }
     }
