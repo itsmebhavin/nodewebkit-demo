@@ -140,7 +140,8 @@ angular.module('demoapp').controller('openFormCtrl', ['$scope', '$state', functi
 
     $scope.showFormDetails = function(title) {
         var formEntry = server.vindb.loadForm(title);
-        $scope.selectedFormTitle = title;
+        console.log(formEntry);
+        $scope.selectedFormTitle = formEntry.formInfo.title;
         $scope.selectedForm = angular.fromJson(formEntry.form);
     }
 

@@ -48,12 +48,23 @@ exports.saveForm = function() {
     var localForm = localForms.findOne({id: {$eq: id}});
     var savedForm = savedForms.findOne({id: {$eq: id}});
     if(savedForm === null) {
-        savedForms.insert({id:localForm.id, form:localForm.form, title:localForm.title, type:localForm.type, dateIssued:new Date(), lastchanged:new Date()});
+        // savedForms.insert({id:localForm.id, form:localForm.form, title:localForm.title, type:localForm.type, dateIssued:new Date(), lastchanged:new Date()});
+        savedForms.insert({
+            title:localForm.title,
+            formInfo: {
+                id:localForm.id,
+                title:localForm.title,
+                type:localForm.type,
+                dateIssued:new Date(),
+                lastChanged:new Date()
+            },
+            form:localForm.form
+        });
     } else {
-        var created = localForm.dateissued;
+        // var created = localForm.dateissued;
         savedForm = localForm;
-        savedForm.lastchanged = new Date();
-        savedForm.dateissued = created;
+        savedForm.formInfo.lastchanged = new Date();
+        // savedForm.dateissued = created;
         savedForms.update(savedForm);
     }
     db.saveDatabase();
@@ -61,7 +72,7 @@ exports.saveForm = function() {
 
 exports.loadFormList = function() {
     var forms = savedForms.find({});
-    var result = forms.map(function(form) {return {title:form.title,type:form.type}});
+    var result = forms.map(function(form) {return {title:form.formInfo.title,type:form.formInfo.type}});
     return result;
 }
 

@@ -137,7 +137,7 @@ angular.module('demoapp').controller('defaultCtrl', ['$scope', '$stateParams', '
         angular.forEach(storedForms, function (form) {
             $scope.addTab(form.type, form.id, form.title, form.form);
         });
-        if (newform === 'true') {
+        if (newform == 'true') {
             $scope.addTab($scope.doctype, uuid.v4());
         }
     }
@@ -171,7 +171,8 @@ angular.module('demoapp').controller('openFormCtrl', ['$scope', '$state', functi
 
     $scope.showFormDetails = function(title) {
         var formEntry = server.vindb.loadForm(title);
-        $scope.selectedFormTitle = title;
+        console.log(formEntry);
+        $scope.selectedFormTitle = formEntry.formInfo.title;
         $scope.selectedForm = angular.fromJson(formEntry.form);
     }
 
