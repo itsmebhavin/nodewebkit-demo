@@ -127,32 +127,49 @@ angular.module('demoapp').controller('defaultCtrl', ['$scope', '$stateParams', '
         var active = $scope.tabs.filter(function (tab) {
             return tab.active;
         })[0];
-
-        server.vindb.saveLocalActive(active);
+        try {
+            server.vindb.saveLocalActive(active.form.formInfo.id);
+        } catch(e) {
+            server.vindb.saveLocalActive(0);
+        }
     }, true);
 
     $scope.init = function () {
         if ($scope.doctype === '') return;
         var storedForms = server.vindb.loadLocalForms();
         angular.forEach(storedForms, function (form) {
-            $scope.addTab(form.type, form.id, form.title, form.form);
+            // $scope.addTab(form.type, form.id, form.title, form.form);
+            $scope.addTab(form);
         });
         if (newform == 'true') {
-            $scope.addTab($scope.doctype, uuid.v4());
+            // $scope.addTab($scope.doctype, uuid.v4());
+            $scope.addTab({formInfo:{type:$scope.doctype}, form:{}})
         }
     }
 
-    $scope.addTab = function (type, id, title, form) {
-        if (!title) {
+    // $scope.addTab = function (type, id, title, form) {
+    $scope.addTab = function(form) {
+        if(form.constructor === String) {
+            var formType = form;
+            form = {
+                formInfo:{type: formType},
+                form: {}
+            }
+        }
+        if (!form.formInfo.title) {
+            form.formInfo.id = uuid.v4();
             var d = new Date();
             //form# format change
             d.setMonth(d.getMonth() + 1);
-            title = d.getFullYear() + '' + addLeadingChars(d.getMonth()) + '' + addLeadingChars(d.getDate()) + '' + addLeadingChars(d.getHours()) + '' + addLeadingChars(d.getMinutes()) + '' + addLeadingChars(d.getSeconds()) + '' + type;
+            title = d.getFullYear() + '' + addLeadingChars(d.getMonth()) + '' + addLeadingChars(d.getDate()) + '' + addLeadingChars(d.getHours()) + '' + addLeadingChars(d.getMinutes()) + '' + addLeadingChars(d.getSeconds()) + '' + form.formInfo.type;
+            form.formInfo.title = title;
         }
-        $scope.tabs.push({ title: title, active: true, type: type, id: id, form: form });
+        // $scope.tabs.push({ title: title, active: true, type: type, id: id, form: form });
+        $scope.tabs.push({active:true, form:form});
     }
     $scope.removeTab = function (index) {
-        var formId = $scope.tabs[index].id;
+        var formId = $scope.tabs[index].form.formInfo.id;
+        console.log(formId);
         server.vindb.deleteLocalForm(formId);
         $scope.tabs.splice(index, 1);
     }
@@ -171,14 +188,14 @@ angular.module('demoapp').controller('openFormCtrl', ['$scope', '$state', functi
 
     $scope.showFormDetails = function(title) {
         var formEntry = server.vindb.loadForm(title);
-        console.log(formEntry);
         $scope.selectedFormTitle = formEntry.formInfo.title;
         $scope.selectedForm = angular.fromJson(formEntry.form);
     }
 
     $scope.openForm = function (title) {
         var form = server.vindb.loadForm(title);
-        server.vindb.saveLocalForm(form.id, form.form, form.type, form.title);
+        // server.vindb.saveLocalForm(form.formInfo.id, form.form, form.formInfo.type, form.title);
+        server.vindb.saveLocalForm(form.formInfo, form.form);
         $state.go('default', { type: 'VIN', newform: false });
     }
 
@@ -194,6 +211,7 @@ angular.module('demoapp').controller('userSettingsCtrl', ['$scope', function ($s
 }]);
 angular.module('demoapp').controller('toolbarCtrl', ['$scope', function ($scope) {
     $scope.saveForm = server.vindb.saveForm;
+    $scope.finalizeForm = server.vindb.finalizeForm;
 }]);
 
 angular.module('demoapp').controller('releaseNotesCtrl', ['$scope', function ($scope) {

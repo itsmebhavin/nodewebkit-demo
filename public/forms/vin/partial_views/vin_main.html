@@ -1,6 +1,7 @@
 <form class="robotoregular" name="vinFrm" novalidate="novalidate" ng-submit="submitForm()">
     <div class="row">
         <!-- Temporary button to open validation panel -->
+        <fieldset ng-disabled="false">
         <div class="column col-xs-6">
             <textbox-with-label id="inputVIN" placeholder="Enter VIN#" label="VIN" ng-model="vinForm.vin" ng-minlength="13" required ng-minlength-err-type="minLengthWarning"></textbox-with-label>
             <dropdown-with-label id="inputStateOfTitle" label="State Of Current Title" items="stateList" ng-model="vinForm.stateTitle"></dropdown-with-label>
@@ -19,6 +20,7 @@
             <textbox-with-label id="inputBadgeId" placeholder="Enter Badge ID" label="Badge Id" ng-model="vinForm.badgeID"></textbox-with-label>
             <switch-with-label id="inputFeeCollected" label="Is $25 Fee to be Collected" on="Yes" off="No" ng-model="vinForm.feeCollected"></switch-with-label>
         </div>
+        </fieldset>
     </div>
 
    <validation panelheadertext ="Validation Results"

@@ -2,14 +2,14 @@
 <tabset>
     <tab sortable-tab ng-repeat="tab in tabs" active="tab.active" disable="tab.disabled">
         <tab-heading>
-            {{tab.title}} &nbsp;
+            {{tab.form.formInfo.title}} &nbsp;
             <a ng-click="removeTab($index)" href="" class="tabCloseBtn">
                 <i class="fa fa-times"></i>
             </a>
         </tab-heading>
         <div style="padding-left:10px; padding-right:10px;">
-            <div ui-view="vin" ng-if="tab.type == 'VIN'"></div>
-            <div ui-view="asr" ng-if="tab.type == 'ASR'"></div>
+            <div ui-view="vin" ng-if="tab.form.formInfo.type == 'VIN'"></div>
+            <div ui-view="asr" ng-if="tab.form.formInfo.type == 'ASR'"></div>
         </div>
     </tab>
 

@@ -18,20 +18,20 @@ function init() {
     });
 }
 
-exports.saveLocalActive = function(active) {
+exports.saveLocalActive = function(id) {
     var entry = localActive.findOne({activeTab: {$contains: ''}});
     if(entry === null) {
-        localActive.insert({activeTab: active.id})
+        localActive.insert({activeTab: id})
     } else {
-        entry.activeTab = (active === undefined ? '0000' : active.id);
+        entry.activeTab = (id === undefined ? '0000' : id);
         localActive.update(entry);
     }
 }
 
-exports.saveLocalForm = function(id, form, type, title) {
-    var entry = localForms.findOne({id: {$eq: id}});
+exports.saveLocalForm = function(info, form) {//id, form, type, title) {
+    var entry = localForms.findOne({'formInfo.id': info.id});
     if(entry === null) {
-        localForms.insert({id:id, form:form, type:type, title:title});
+        localForms.insert({form:form, formInfo:info})
     } else {
         entry.form = form;
         localForms.update(entry);
@@ -39,33 +39,57 @@ exports.saveLocalForm = function(id, form, type, title) {
 }
 
 exports.deleteLocalForm = function(id) {
-    var x = localForms.findOne({'id':id});
-    localForms.remove(x);
+    var x = localForms.findOne({'formInfo.id':id});
+    if(x !== null) {
+        localForms.remove(x);
+    }
 }
 
 exports.saveForm = function() {
     var id = localActive.findOne({activeTab: {$contains: ''}}).activeTab;
-    var localForm = localForms.findOne({id: {$eq: id}});
-    var savedForm = savedForms.findOne({id: {$eq: id}});
+    var localForm = localForms.findOne({'formInfo.id': id});
+    // var savedForm = savedForms.findOne({$and:[{'formInfo':{$contains:'id'}},{'formInfo.id':id}]});
+    var savedForm = savedForms.findOne({'formInfo.id': id});
     if(savedForm === null) {
-        // savedForms.insert({id:localForm.id, form:localForm.form, title:localForm.title, type:localForm.type, dateIssued:new Date(), lastchanged:new Date()});
         savedForms.insert({
-            title:localForm.title,
             formInfo: {
-                id:localForm.id,
-                title:localForm.title,
-                type:localForm.type,
+                id:localForm.formInfo.id,
+                title:localForm.formInfo.title,
+                type:localForm.formInfo.type,
                 dateIssued:new Date(),
                 lastChanged:new Date()
             },
             form:localForm.form
         });
     } else {
-        // var created = localForm.dateissued;
         savedForm = localForm;
         savedForm.formInfo.lastchanged = new Date();
-        // savedForm.dateissued = created;
         savedForms.update(savedForm);
+    }
+    db.saveDatabase();
+}
+
+exports.finalizeForm = function() {
+    var id = localActive.findOne({activeTab: {$contains: ''}}).activeTab;
+    var localForm = localForms.findOne({'formInfo.id': id});
+    var savedForm = savedForms.findOne({$and:[{'formInfo':{$contains:'id'}},{'formInfo.id':id}]});
+    if(savedForm === null) {
+        savedForms.insert({
+            //title:localForm.title,
+            formInfo: {
+                id:localForm.id,
+                title:localForm.title,
+                type:localForm.type,
+                dateIssued:new Date(),
+                lastChanged:new Date(),
+                finalized:true,
+                finalizedDate:new Date()
+            },
+            form:localForm.form
+        });
+    } else {
+        savedForm.formInfo.finalized = true;
+        savedForm.formInfo.finalizedDate = new Date()
     }
     db.saveDatabase();
 }
@@ -77,13 +101,13 @@ exports.loadFormList = function() {
 }
 
 exports.loadForm = function(t) {
-    var form = savedForms.findOne({title: {$eq: t}});
+    var form = savedForms.findOne({'formInfo.title': t});
     return form;
 }
 
 exports.loadRecents = function() {
-    var forms = savedForms.chain().find().simplesort('lastchanged').limit(5).data();
-    var result = forms.map(function(form) {return {title:form.title, type:form.type}});
+    var forms = savedForms.chain().find().simplesort('formInfo.lastchanged').limit(5).data();
+    var result = forms.map(function(form) {return {title:form.formInfo.title, type:form.formInfo.type}});
     return result;
 }
 
@@ -95,7 +119,4 @@ exports.loadLocalForms = function() {
 exports.dumpDatabase = function() {
     localdb.saveDatabase();
     db.saveDatabase();
-}
-exports.loadDatabase = function() {
-    loki.loadDatabase();
 }
