@@ -1,12 +1,11 @@
 var squel = require('squel');
 
 /* VIN (start) */
-exports.SUBMIT_VIN_FORM_DATA = function(form) {
+exports.SUBMIT_VIN_FORM_DATA = function(form, id) {
     console.log(form);
     return squel.insert();
-                .into("Documents")
-                .set('VINInspectionID', 1)
-                .set('DocumentID', 1)
+                .into("VINInspections")
+                .set('DocumentID', id)
                 .set('TitleState', form.stateTitle)
                 .set('IsTitleorCourtNum', form.titleCourt)
                 .set('TitleOrCourtNum', form.titleCourtOrderNum)
@@ -22,24 +21,24 @@ exports.SUBMIT_VIN_FORM_DATA = function(form) {
 exports.SUBMIT_VIN_FORM_INFO = function(info) {
     console.log(info);
     return squel.insert()
-                .into("VINInspections")
+                .into("Documents")
                 .set('DocumentID', info.id)
                 .set('TicketNum', info.title)
                 .set('CreateDate', info.createDate)
                 .set('Finalized', info.finalized)
                 .set('FinalizedDate', info.finalizedDate)
                 .set('Transferred', info.transferred)
-                .set('TransferredDate', info.transferredDate)
-                .set('StatusID', 1)
-                .set('StatusText', 1)
-                .set('TypeID', 1)
-                .set('TypeText', 1)
+                .set('TransferDate', info.transferredDate)
+                .set('StatusID', 4)
+                .set('StatusText', 'Transferred')
+                .set('TypeID', 8)
+                .set('TypeText', 'Vin Inspection')
                 .set('CreateUserID', 1)
                 .set('OfficerName', 1)
                 .set('AgencyOri', 1)
                 .set('OfficerId', 1)
                 .set('Deleted', 1)
-                .set('LastModifiedDate', 1)
+                .set('LastModifiedDate', new Date())
                 .set('Username', 1)
                 .set('VersionNumber', 1);
 }
