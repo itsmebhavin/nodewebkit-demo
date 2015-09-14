@@ -3,6 +3,7 @@ console.log('inside server and server.js is launched.')
 
 exports.vindb = require('./vin/vindb.js');
 exports.appsettingsdb = require('./general/applicationsettingsdb.js');
+exports.remotedb = require('./general/remotedb.js');
 
 //var sqlite3 = require('sqlite3').verbose();
 //var db = new sqlite3.Database('eForms.sqlite');

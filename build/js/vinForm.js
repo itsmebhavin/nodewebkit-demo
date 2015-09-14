@@ -18,7 +18,7 @@ angular.module('application.vin').run(['defaultErrorMessageResolver', 'validator
 angular.module('application.vin').controller('vinCtrl', ['$scope', '$http','vinFactory', '$timeout', function($scope, $http, vinFactory, $timeout) {
     /* SETUP */
     console.log('inside vin controller');
-    $scope.stateList = ['Alabama', 'Alaska', 'Arizona'];
+    $scope.stateList = ['AL', 'AK', 'AR'];
     $scope.vehicleMakes = ['Acura', 'Ford', 'Mercedes'];
     $scope.vehicleModels = ['A', 'List', 'Item'];
     $scope.vinForm = {};

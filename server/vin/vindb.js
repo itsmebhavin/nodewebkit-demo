@@ -69,7 +69,7 @@ exports.saveForm = function() {
     db.saveDatabase();
 }
 
-exports.finalizeForm = function() {
+exports.finalizeForm = function(finalize) {
     var id = localActive.findOne({activeTab: {$contains: ''}}).activeTab;
     var localForm = localForms.findOne({'formInfo.id': id});
     var savedForm = savedForms.findOne({$and:[{'formInfo':{$contains:'id'}},{'formInfo.id':id}]});
@@ -88,8 +88,8 @@ exports.finalizeForm = function() {
             form:localForm.form
         });
     } else {
-        savedForm.formInfo.finalized = true;
-        savedForm.formInfo.finalizedDate = new Date()
+        savedForm.formInfo.finalized = finalize;
+        savedForm.formInfo.finalizedDate = finalize ? new Date() : null;
     }
     db.saveDatabase();
 }
@@ -113,6 +113,12 @@ exports.loadRecents = function() {
 
 exports.loadLocalForms = function() {
     return localForms.find({});
+}
+
+exports.loadFinalizedForms = function() {
+    return savedForms.find({
+        'formInfo.finalized': true
+    });
 }
 
 // DEBUGGING/TESTING FUNCTIONS

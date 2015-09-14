@@ -1,25 +1,25 @@
 <form class="robotoregular" name="vinFrm" novalidate="novalidate" ng-submit="submitForm()">
     <div class="row">
         <!-- Temporary button to open validation panel -->
-        <fieldset ng-disabled="false">
-        <div class="column col-xs-6">
-            <textbox-with-label id="inputVIN" placeholder="Enter VIN#" label="VIN" ng-model="vinForm.vin" ng-minlength="13" required ng-minlength-err-type="minLengthWarning"></textbox-with-label>
-            <dropdown-with-label id="inputStateOfTitle" label="State Of Current Title" items="stateList" ng-model="vinForm.stateTitle"></dropdown-with-label>
-            <switch-with-label id="inputTitleCourt" label="Title or Court" on="Title" off="Court" ng-model="vinForm.titleCourt"></switch-with-label>
-            <textbox-with-label id="inputTitleCourtOrderNum" placeholder="Enter {{vinForm.titleCourt ? 'Title' : 'Court'}} Order #" label="{{vinForm.titleCourt ? 'Title' : 'Court'}} Order #" ng-model="vinForm.titleCourtOrderNum"></textbox-with-label>
-            <textbox-with-label id="inputInspectionDateTime" placeholder="Select Inspection Datetime" label="Inspection Date &amp; Time" ng-model="vinForm.inspectionDateTime"></textbox-with-label>
-            <textbox-with-label id="inputVerifyingAgency" placeholder="Enter Agency" label="Verifying Agency" ng-model="vinForm.verifyingAgency"></textbox-with-label>
-            <textbox-with-label id="inputWorkPhone" placeholder="Enter Phone#" label="Work Phone" ng-model="vinForm.workPhone"></textbox-with-label>
-        </div>
-        <div class="column col-xs-6">
-            <textbox-with-label id="inputVehicleYear" placeholder="Enter Vehicle Year" label="Vehicle Year" ng-model="vinForm.vehicleYear"></textbox-with-label>
-            <dropdown-with-label id="inputVehicleMake" label="Vehicle Make" items='vehicleMakes' ng-model="vinForm.vehicleMake" required></dropdown-with-label>
-            <dropdown-with-label id="inputVehicleModel" label="Vehicle Model" items='vehicleModels' ng-model="vinForm.vehicleModel" required></dropdown-with-label>
-            <textbox-with-label id="inputVehicleColor" placeholder="Enter Vehicle Color" label="Vehicle Color" ng-model="vinForm.vehicleColor" required></textbox-with-label>
-            <textbox-with-label id="inputOfficerName" placeholder="Enter Officer Name" label="Officer Name" ng-model="vinForm.officerName"></textbox-with-label>
-            <textbox-with-label id="inputBadgeId" placeholder="Enter Badge ID" label="Badge Id" ng-model="vinForm.badgeID"></textbox-with-label>
-            <switch-with-label id="inputFeeCollected" label="Is $25 Fee to be Collected" on="Yes" off="No" ng-model="vinForm.feeCollected"></switch-with-label>
-        </div>
+        <fieldset ng-disabled="tab.form.formInfo.finalized">
+            <div class="column col-xs-6">
+                <textbox-with-label id="inputVIN" placeholder="Enter VIN#" label="VIN" ng-model="vinForm.vin" ng-minlength="13" required ng-minlength-err-type="minLengthWarning"></textbox-with-label>
+                <dropdown-with-label id="inputStateOfTitle" label="State Of Current Title" items="stateList" ng-model="vinForm.stateTitle"></dropdown-with-label>
+                <switch-with-label id="inputTitleCourt" label="Title or Court" on="Title" off="Court" ng-model="vinForm.titleCourt"></switch-with-label>
+                <textbox-with-label id="inputTitleCourtOrderNum" placeholder="Enter {{vinForm.titleCourt ? 'Title' : 'Court'}} Order #" label="{{vinForm.titleCourt ? 'Title' : 'Court'}} Order #" ng-model="vinForm.titleCourtOrderNum"></textbox-with-label>
+                <textbox-with-label id="inputInspectionDateTime" placeholder="Select Inspection Datetime" label="Inspection Date &amp; Time" ng-model="vinForm.inspectionDateTime"></textbox-with-label>
+                <textbox-with-label id="inputVerifyingAgency" placeholder="Enter Agency" label="Verifying Agency" ng-model="vinForm.verifyingAgency"></textbox-with-label>
+                <textbox-with-label id="inputWorkPhone" placeholder="Enter Phone#" label="Work Phone" ng-model="vinForm.workPhone"></textbox-with-label>
+            </div>
+            <div class="column col-xs-6">
+                <textbox-with-label id="inputVehicleYear" placeholder="Enter Vehicle Year" label="Vehicle Year" ng-model="vinForm.vehicleYear"></textbox-with-label>
+                <dropdown-with-label id="inputVehicleMake" label="Vehicle Make" items='vehicleMakes' ng-model="vinForm.vehicleMake" required></dropdown-with-label>
+                <dropdown-with-label id="inputVehicleModel" label="Vehicle Model" items='vehicleModels' ng-model="vinForm.vehicleModel" required></dropdown-with-label>
+                <textbox-with-label id="inputVehicleColor" placeholder="Enter Vehicle Color" label="Vehicle Color" ng-model="vinForm.vehicleColor" required></textbox-with-label>
+                <textbox-with-label id="inputOfficerName" placeholder="Enter Officer Name" label="Officer Name" ng-model="vinForm.officerName"></textbox-with-label>
+                <textbox-with-label id="inputBadgeId" placeholder="Enter Badge ID" label="Badge Id" ng-model="vinForm.badgeID"></textbox-with-label>
+                <switch-with-label id="inputFeeCollected" label="Is $25 Fee to be Collected" on="Yes" off="No" ng-model="vinForm.feeCollected"></switch-with-label>
+            </div>
         </fieldset>
     </div>
 

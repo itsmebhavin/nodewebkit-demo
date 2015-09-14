@@ -11,7 +11,8 @@ angular.module('demoapp', [
     'uiSwitch',
     'angular-velocity',
     'door3.css',
-    'cfp.hotkeys'
+    'cfp.hotkeys',
+    'pageslide-directive'
 ])
 
 .run(['$window', '$rootScope', function ($window, $rootScope) {
@@ -202,20 +203,41 @@ angular.module('demoapp').controller('openFormCtrl', ['$scope', '$state', functi
 }]);
 angular.module('demoapp').controller('applicationSettingsCtrl', ['$scope', 'hotkeys', function ($scope, hotkeys) {
     //TODO: application settings related code.
-
-    //server.dumpDatabase();
 }]);
 
 angular.module('demoapp').controller('userSettingsCtrl', ['$scope', function ($scope) {
     //TODO: user settings related code.
 }]);
-angular.module('demoapp').controller('toolbarCtrl', ['$scope', function ($scope) {
+angular.module('demoapp').controller('toolbarCtrl', ['$scope', '$rootScope', function ($scope, $rootScope) {
     $scope.saveForm = server.vindb.saveForm;
     $scope.finalizeForm = server.vindb.finalizeForm;
+    $scope.openTransferPanel = function() {
+        $rootScope.$broadcast('openTransferPanel', {});
+    }
 }]);
-
 angular.module('demoapp').controller('releaseNotesCtrl', ['$scope', function ($scope) {
     //TODO: user settings related code.
+}]);
+angular.module('demoapp').controller('transferCtrl', ['$scope', '$rootScope', function($scope, $rootScope) {
+    $scope.checked = false;
+    $scope.transferList = [];
+
+    $scope.open = function() {
+        $scope.finalizedForms = server.vindb.loadFinalizedForms();
+        $scope.checked = !$scope.checked
+    }
+
+    $scope.transfer = function() {
+        for(var i=0;i<$scope.transferList.length; i++) {
+            if($scope.transferList[i]) {
+                server.remotedb.submitForm($scope.finalizedForms[i]);
+            }
+        }
+    }
+
+    $rootScope.$on('openTransferPanel', function(event,data) {
+        $scope.open();
+    });
 }]);
 
 angular.module('application.directives', [])

@@ -1,25 +1,26 @@
 var squel = require('squel');
+var uuid = require('node-uuid');
 
 /* VIN (start) */
 exports.SUBMIT_VIN_FORM_DATA = function(form, id) {
-    console.log(form);
-    return squel.insert();
+    return squel.insert()
                 .into("VINInspections")
+                .set('VinInspectionID', uuid.v4())
                 .set('DocumentID', id)
                 .set('TitleState', form.stateTitle)
-                .set('IsTitleorCourtNum', form.titleCourt)
+                .set('IsTitleorCourtNum', (form.titleCourt ? 'T' : 'C'))
                 .set('TitleOrCourtNum', form.titleCourtOrderNum)
-                .set('InspectionDateTime', form.inpsectionDateTime)
-                .set('WorkPhone', form.WorkPhone)
-                .set('AIRSWebServiceResponseID', 1)
-                .set('AIRSWebServiceRequestCounter', 1)
-                .set('AIRSWebServiceRequestStatusID', 1)
-                .set('AIRSWebServiceRequestNote', 1)
-                .set('AIRSWebServiceInvalidateNote', 1)
-                .set('Is25FeeCollected', form.feeCollected);
+                .set('InspectionDateTime', (form.inpsectionDateTime ? form.InspectionDateTime : null))
+                .set('WorkPhone', (form.WorkPhone ? form.WorkPhone : null))
+                .set('AIRSWebServiceResponseID', null)
+                .set('AIRSWebServiceRequestCounter', null)
+                .set('AIRSWebServiceRequestStatusID', null)
+                .set('AIRSWebServiceRequestNote', null)
+                .set('AIRSWebServiceInvalidateNote', null)
+                .set('Is25FeeCollected', form.feeCollected.toString()).toString();
 }
 exports.SUBMIT_VIN_FORM_INFO = function(info) {
-    console.log(info);
+    var modified = new Date();
     return squel.insert()
                 .into("Documents")
                 .set('DocumentID', info.id)
@@ -33,13 +34,13 @@ exports.SUBMIT_VIN_FORM_INFO = function(info) {
                 .set('StatusText', 'Transferred')
                 .set('TypeID', 8)
                 .set('TypeText', 'Vin Inspection')
-                .set('CreateUserID', 1)
-                .set('OfficerName', 1)
-                .set('AgencyOri', 1)
-                .set('OfficerId', 1)
-                .set('Deleted', 1)
-                .set('LastModifiedDate', new Date())
+                .set('CreateUserID', null)
+                .set('OfficerName', null)
+                .set('AgencyOri', null)
+                .set('OfficerId', null)
+                .set('Deleted', false)
+                .set('LastModifiedDate', modified.toISOString())
                 .set('Username', 1)
-                .set('VersionNumber', 1);
+                .set('VersionNumber', 1).toString();
 }
 /* VIN (end) */

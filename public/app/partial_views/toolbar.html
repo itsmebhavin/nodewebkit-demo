@@ -3,6 +3,8 @@
     <ol class="breadcrumb bread-success">
         <button ui-sref="main" class="btn btn-success btn-sm"><i class="fa fa-home"></i>&nbsp;Home</button>
         <button class="btn btn-default btn-sm" ng-click="saveForm()"><i class="fa fa-floppy-o"></i>&nbsp;Save</button>
-        <button class="btn btn-warning btn-sm" ng-click="finalizeForm()"><i class="fa fa-lock"></i>&nbsp;Finalize</button>
+        <button class="btn btn-warning btn-sm" ng-click="finalizeForm(true)"><i class="fa fa-lock"></i>&nbsp;Finalize</button>
+        <button class="btn btn-warning btn-sm" ng-click="finalizeForm(false)"><i class="fa fa-unlock"></i>&nbsp;Un-Finalize</button>
+        <button class="btn btn-danger btn-sm" ng-click="openTransferPanel()"><i class="fa fa-upload"></i>&nbsp;Transfer</button>
     </ol>
 </div>

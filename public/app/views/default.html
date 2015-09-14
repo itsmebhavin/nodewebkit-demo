@@ -1,4 +1,5 @@
 <div ui-view="toolbar"></div>
+
 <tabset>
     <tab sortable-tab ng-repeat="tab in tabs" active="tab.active" disable="tab.disabled">
         <tab-heading>
@@ -46,3 +47,16 @@
 
     </tab>
 </tabset>
+
+<div ng-controller="transferCtrl">
+    <pageslide ps-open="checked" ps-side="right" ps-size="500px">
+        <div style="padding:20px;padding-top:100px">
+            <p ng-repeat="form in finalizedForms track by $index">
+                <input type="checkbox" ng-model="transferList[$index]">
+                {{form.formInfo.title}}
+            </p>
+            <button class="btn btn-success btn-sm" ng-click="transfer()">Transfer</button>
+            <button class="btn btn-danger btn-sm" ng-click="checked = false">Close</button>
+        </div>
+    </pageslide>
+</div>

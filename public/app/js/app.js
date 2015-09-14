@@ -11,7 +11,8 @@ angular.module('demoapp', [
     'uiSwitch',
     'angular-velocity',
     'door3.css',
-    'cfp.hotkeys'
+    'cfp.hotkeys',
+    'pageslide-directive'
 ])
 
 .run(['$window', '$rootScope', function ($window, $rootScope) {
