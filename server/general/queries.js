@@ -12,7 +12,7 @@ exports.SUBMIT_VIN_FORM_DATA = function(form, id) {
                 .set('TitleOrCourtNum', form.titleCourtOrderNum)
                 .set('InspectionDateTime', (form.inpsectionDateTime ? form.InspectionDateTime : null))
                 .set('WorkPhone', (form.WorkPhone ? form.WorkPhone : null))
-                .set('Is25FeeCollected', form.feeCollected.toString())
+                .set('Is25FeeCollected', (form.feeCollected ? form.feeCollected.toString() : 'false'))
                 .toString();
 }
 exports.SUBMIT_VIN_FORM_INFO = function(info) {

@@ -199,6 +199,7 @@ angular.module('demoapp').controller('transferCtrl', ['$scope', '$rootScope', fu
         for(var i=0;i<$scope.transferList.length; i++) {
             if($scope.transferList[i]) {
                 server.remotedb.submitForm($scope.finalizedForms[i]);
+                server.vindb.markTransferred($scope.finalizedForms[i].formInfo.id);
             }
         }
     }

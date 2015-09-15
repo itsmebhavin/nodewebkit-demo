@@ -38,7 +38,6 @@ function submitVin(data) {
         return q.promise;
     }
 
-
     form = data.form;
     info = data.formInfo;
     var formQuery = query.SUBMIT_VIN_FORM_DATA(form, info.id);

@@ -27,6 +27,7 @@ angular.module('application.vin').controller('vinCtrl', ['$scope', '$http','vinF
     var formId = $scope.tab.form.formInfo.id;
     var formType = $scope.tab.form.formInfo.type;
     var formTitle = $scope.tab.form.formInfo.title;
+    console.log(formId);
 
     // If exists, load existing form
     if($scope.$parent.tab.form.form !== null) {

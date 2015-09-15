@@ -71,8 +71,8 @@ exports.saveForm = function() {
 
 exports.finalizeForm = function(finalize) {
     var id = localActive.findOne({activeTab: {$contains: ''}}).activeTab;
-    var localForm = localForms.findOne({'formInfo.id': id});
-    var savedForm = savedForms.findOne({$and:[{'formInfo':{$contains:'id'}},{'formInfo.id':id}]});
+    var localForm = localForms.findOne({'formInfo.id':id});
+    var savedForm = savedForms.findOne({'formInfo.id':id});
     if(savedForm === null) {
         savedForms.insert({
             //title:localForm.title,
@@ -91,6 +91,13 @@ exports.finalizeForm = function(finalize) {
         savedForm.formInfo.finalized = finalize;
         savedForm.formInfo.finalizedDate = finalize ? new Date() : null;
     }
+    db.saveDatabase();
+}
+
+exports.markTransferred = function(id) {
+    var savedForm = savedForms.findOne({'formInfo.id':id});
+    savedForm.formInfo.transferred = true;
+    savedForm.formInfo.transferredDate = new Date();
     db.saveDatabase();
 }
 

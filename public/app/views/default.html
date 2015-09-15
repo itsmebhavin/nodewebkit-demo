@@ -51,7 +51,7 @@
 <div ng-controller="transferCtrl">
     <pageslide ps-open="checked" ps-side="right" ps-size="500px">
         <div style="padding:20px;padding-top:100px">
-            <p ng-repeat="form in finalizedForms track by $index">
+            <p ng-repeat="form in finalizedForms track by $index" ng-if="!form.formInfo.transferred">
                 <input type="checkbox" ng-model="transferList[$index]">
                 {{form.formInfo.title}}
             </p>
