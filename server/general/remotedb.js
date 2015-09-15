@@ -14,38 +14,37 @@ exports.submitForm = function(data) {
 
 function submitVin(data) {
     var form, info;
+
+    function executeQuery(query) {
+        var q = queue.defer();
+        try {
+            var connection = new sql.Connection(config.database, function(err) {
+                if(!err) {
+                    var request = new sql.Request(connection);
+                    request.query(query, function(err, recordsets, returnValue) {
+                        if(err) {
+                            q.reject('ERROR(sql)' + err);
+                        } else {
+                            q.resolve(recordsets);
+                        }
+                    });
+                } else {
+                    q.reject('ERROR(sql-conn)' + err);
+                }
+            });
+        } catch (e) {
+            q.reject('EXCEPTION(submitVin):' + e);
+        }
+        return q.promise;
+    }
+
+
     form = data.form;
     info = data.formInfo;
     var formQuery = query.SUBMIT_VIN_FORM_DATA(form, info.id);
     var infoQuery = query.SUBMIT_VIN_FORM_INFO(info);
-    console.log("==========");
-    console.log(formQuery);
-    console.log(infoQuery);
-    console.log("==========");
 
-    // var q = queue.defer();
-    try {
-        var connection = new sql.Connection(config.database, function(err) {
-            if(!err) {
-                var request = new sql.Request(connection);
-                request.query(formQuery, function(err, recordsets, returnValue) {
-                    if(err) {
-                        console.log("error");
-                        console.log(err);
-                        // q.reject('ERROR(sql)' + err);
-                    } else {
-                        console.log("success");
-                        // q.resolve(recordsets);
-                    }
-                });
-            } else {
-                console.log("failed");
-                // q.reject('ERROR(sql-conn)' + err);
-            }
-        });
-    } catch (e) {
-        console.log("catch");
-        // q.reject('EXCEPTION(submitVin):' + e);
-    }
-    // return q.promise;
+    executeQuery(formQuery).then(function(data) {
+        return executeQuery(infoQuery);
+    });
 }
