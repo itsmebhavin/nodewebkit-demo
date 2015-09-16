@@ -523,3 +523,40 @@ hr {
 .pointer {
     cursor: pointer;
 }
+/* Ends - other */
+
+/* Pageslide */
+html {
+    overflow-x: hidden;
+}
+.ng-pageslide {
+    background: #444;
+}
+body.ng-pageslide-body-open::before {
+    content: '.';
+    display: block;
+    position: absolute;
+    top: 0;
+    background-color: #444;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    opacity: 0.5;
+    transition: opacity 1s;
+}
+body.ng-pageslide-body-closed::before {
+    transition: opacity 1s;
+    opacity: 0;
+    content: '.';
+    display: block;
+    position: absolute;
+    top: 0;
+    background-color: #444;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    pointer-events: none;
+}
+/* Ends - Pageslide */

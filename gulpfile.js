@@ -81,6 +81,7 @@ gulp.task('pluginScripts', function () {
                     , 'bower_components/angular-auto-validate/dist/jcs-auto-validate.js'
                     , 'bower_components/angular-css/angular-css.js'
                     , 'public/lib/angular-hotkeys/build/hotkeys.js'
+                    , 'public/lib/ng-pageslide/angular-pageslide.js'
     ])
         .pipe(concat('plugins.js'))
         .pipe(gulp.dest('build/js'));
@@ -134,7 +135,7 @@ gulp.task('default',
         'coreHtmlMin',
         'vinHtmlMin',
         'asrHtmlMin',
-        //JS 
+        //JS
         'pluginScripts',
         'coreTemplates',
         'coreScripts',

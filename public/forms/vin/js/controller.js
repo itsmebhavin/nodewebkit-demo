@@ -18,22 +18,24 @@ angular.module('application.vin').run(['defaultErrorMessageResolver', 'validator
 angular.module('application.vin').controller('vinCtrl', ['$scope', '$http','vinFactory', '$timeout', function($scope, $http, vinFactory, $timeout) {
     /* SETUP */
     console.log('inside vin controller');
-    $scope.stateList = ['Alabama', 'Alaska', 'Arizona'];
+    $scope.stateList = ['AL', 'AK', 'AR'];
     $scope.vehicleMakes = ['Acura', 'Ford', 'Mercedes'];
     $scope.vehicleModels = ['A', 'List', 'Item'];
     $scope.vinForm = {};
     $scope.isCollapsed = true;
-    var formId = $scope.$parent.tab.id;
-    var formType = $scope.$parent.tab.type;
-    var formTitle = $scope.$parent.tab.title;
+    $scope.tab = $scope.$parent.tab;
+    var formId = $scope.tab.form.formInfo.id;
+    var formType = $scope.tab.form.formInfo.type;
+    var formTitle = $scope.tab.form.formInfo.title;
+    console.log(formId);
 
     // If exists, load existing form
-    if($scope.$parent.tab.form !== null) {
-        $scope.vinForm = angular.fromJson($scope.$parent.tab.form);
+    if($scope.$parent.tab.form.form !== null) {
+        $scope.vinForm = angular.fromJson($scope.tab.form.form);
     }
 
     // Retrieve local validation rules for VIN
-    vinFactory.getLocalValidationRules().then(function(data){
+    vinFactory.getLocalValidationRules().then(function(data) {
         $scope.validation = data;
     },function(err) {
         console.error(err);
@@ -50,7 +52,7 @@ angular.module('application.vin').controller('vinCtrl', ['$scope', '$http','vinF
         alert('test');
     }
     $scope.$watchCollection('vinForm', function(nVal, oVal) {
-        server.vindb.saveLocalForm(formId, angular.toJson(nVal), formType, formTitle);
+        server.vindb.saveLocalForm($scope.tab.form.formInfo, nVal);
     });
     $scope.panelClass = function() {
         if($scope.vinFrm.$valid) {

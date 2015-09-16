@@ -11,7 +11,8 @@ angular.module('demoapp', [
     'uiSwitch',
     'angular-velocity',
     'door3.css',
-    'cfp.hotkeys'
+    'cfp.hotkeys',
+    'pageslide-directive'
 ])
 
 .run(['$window', '$rootScope', function ($window, $rootScope) {
@@ -35,7 +36,6 @@ var uuid = require('node-uuid');
 angular.isUndefinedOrNull = function (val) {
     return angular.isUndefined(val) || val === null
 }
-
 angular.module('demoapp').controller('cssBundleCtrl', ['$scope', '$css', function ($scope, $css) {
     // set the default bootswatch name
     var dbtheme = server.appsettingsdb.loadTheme().then(function (theme) {
@@ -63,7 +63,7 @@ angular.module('demoapp').controller('cssBundleCtrl', ['$scope', '$css', functio
     $scope.$watch('css', function (newval, oldval) {
         console.log('new css = ' + newval);
         if (newval == 'null') newval = 'darkly'; // default
-        
+
         //remove old css collections
         $css.remove($scope.CssCollection);
         $css.remove([
@@ -102,6 +102,7 @@ angular.module('demoapp').controller('cssBundleCtrl', ['$scope', '$css', functio
     }
 }]);
 
+
 angular.module('demoapp').controller('indexCtrl', ['$scope', 'hotkeys', function ($scope, hotkeys) {
     $scope.welcome = "eForms-nw.js";
     hotkeys.add({
@@ -116,55 +117,65 @@ angular.module('demoapp').controller('mainCtrl', ['$scope', '$state', 'hotkeys',
     $scope.format = 'M/d/yy h:mm:ss a';
 }]);
 
-angular.module('demoapp').controller('defaultCtrl', ['$scope', '$stateParams', '$state', '$rootScope', function ($scope, $stateParams, $state, $rootScope) {
+angular.module('demoapp').controller('defaultCtrl', ['$scope', '$stateParams', '$state', function ($scope, $stateParams, $state) {
+    console.log("Hello Default..!!");
     $scope.doctype = $stateParams.type;
     var newform = $stateParams.newform;
     $scope.tabs = [];
 
-    $rootScope.saveButtonStatus = false;
-
     $scope.$watch('tabs', function (nVal, oVal) {
-        if ($scope.doctype === '') {
-            return;
-        };
+        if ($scope.doctype === '') return;
         var active = $scope.tabs.filter(function (tab) {
             return tab.active;
         })[0];
-        server.vindb.saveLocalActive(active);
+        try {
+            server.vindb.saveLocalActive(active.form.formInfo.id);
+        } catch(e) {
+            server.vindb.saveLocalActive(0);
+        }
     }, true);
 
     $scope.init = function () {
-        if ($scope.doctype === '') {
-            return;
-        }
+        if ($scope.doctype === '') return;
         var storedForms = server.vindb.loadLocalForms();
         angular.forEach(storedForms, function (form) {
-            $scope.addTab(form.type, form.id, form.title, form.form);
+            // $scope.addTab(form.type, form.id, form.title, form.form);
+            $scope.addTab(form);
         });
-        console.log(newform);
-        if (newform) {
-            $scope.addTab($scope.doctype, uuid.v4());
+        if (newform == 'true') {
+            // $scope.addTab($scope.doctype, uuid.v4());
+            $scope.addTab({formInfo:{type:$scope.doctype}, form:{}})
         }
     }
 
-    $scope.addTab = function (type, id, title, form) {
-        if (!title) {
+    // $scope.addTab = function (type, id, title, form) {
+    $scope.addTab = function(form) {
+        if(form.constructor === String) {
+            var formType = form;
+            form = {
+                formInfo:{type: formType},
+                form: {}
+            }
+        }
+        if (!form.formInfo.title) {
+            form.formInfo.id = uuid.v4();
             var d = new Date();
             //form# format change
             d.setMonth(d.getMonth() + 1);
-            title = d.getFullYear() + '' + addLeadingChars(d.getMonth()) + '' + addLeadingChars(d.getDate()) + '' + addLeadingChars(d.getHours()) + '' + addLeadingChars(d.getMinutes()) + '' + addLeadingChars(d.getSeconds()) + '' + type;
+            title = d.getFullYear() + '' + addLeadingChars(d.getMonth()) + '' + addLeadingChars(d.getDate()) + '' + addLeadingChars(d.getHours()) + '' + addLeadingChars(d.getMinutes()) + '' + addLeadingChars(d.getSeconds()) + '' + form.formInfo.type;
+            form.formInfo.title = title;
         }
-        $scope.tabs.push({ title: title, active: true, type: type, id: id, form: form });
+        // $scope.tabs.push({ title: title, active: true, type: type, id: id, form: form });
+        $scope.tabs.push({active:true, form:form});
     }
-
     $scope.removeTab = function (index) {
-        var formId = $scope.tabs[index].id;
+        var formId = $scope.tabs[index].form.formInfo.id;
+        console.log(formId);
         server.vindb.deleteLocalForm(formId);
         $scope.tabs.splice(index, 1);
     }
 
     $scope.init();
-
     function addLeadingChars(string, nrOfChars, leadingChar) {
         string = string + '';
         return Array(Math.max(0, (nrOfChars || 2) - string.length + 1)).join(leadingChar || '0') + string;
@@ -178,36 +189,58 @@ angular.module('demoapp').controller('openFormCtrl', ['$scope', '$state', functi
 
     $scope.showFormDetails = function(title) {
         var formEntry = server.vindb.loadForm(title);
-        $scope.selectedFormTitle = title;
+        $scope.selectedFormTitle = formEntry.formInfo.title;
         $scope.selectedForm = angular.fromJson(formEntry.form);
     }
 
     $scope.openForm = function (title) {
         var form = server.vindb.loadForm(title);
-        server.vindb.saveLocalForm(form.id, form.form, form.type, form.title);
+        // server.vindb.saveLocalForm(form.formInfo.id, form.form, form.formInfo.type, form.title);
+        server.vindb.saveLocalForm(form.formInfo, form.form);
         $state.go('default', { type: 'VIN', newform: false });
     }
 
 }]);
-
 angular.module('demoapp').controller('applicationSettingsCtrl', ['$scope', 'hotkeys', function ($scope, hotkeys) {
     //TODO: application settings related code.
-
-    //server.dumpDatabase();
 }]);
 
 angular.module('demoapp').controller('userSettingsCtrl', ['$scope', function ($scope) {
     //TODO: user settings related code.
 }]);
-
 angular.module('demoapp').controller('toolbarCtrl', ['$scope', '$rootScope', function ($scope, $rootScope) {
     $scope.saveForm = server.vindb.saveForm;
-    $rootScope.saveButtonStatus = false;
+    $scope.finalizeForm = server.vindb.finalizeForm;
+    $scope.openTransferPanel = function() {
+        $rootScope.$broadcast('openTransferPanel', {});
+    }
 }]);
-
 angular.module('demoapp').controller('releaseNotesCtrl', ['$scope', function ($scope) {
     //TODO: user settings related code.
 }]);
+angular.module('demoapp').controller('transferCtrl', ['$scope', '$rootScope', function($scope, $rootScope) {
+    $scope.checked = false;
+    $scope.transferList = [];
+
+    $scope.open = function() {
+        $scope.finalizedForms = server.vindb.loadFinalizedForms();
+        $scope.checked = !$scope.checked
+    }
+
+    $scope.transfer = function() {
+        for(var i=0;i<$scope.transferList.length; i++) {
+            if($scope.transferList[i]) {
+                server.remotedb.submitForm($scope.finalizedForms[i]);
+                server.vindb.markTransferred($scope.finalizedForms[i].formInfo.id);
+            }
+        }
+    }
+
+    $rootScope.$on('openTransferPanel', function(event,data) {
+        $scope.open();
+    });
+}]);
+
 angular.module('application.directives', [])
 .directive('newCard', function ($templateCache) {
     return {
