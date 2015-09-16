@@ -35,7 +35,7 @@ exports.INSERT_VIN_FORM_INFO = function(info) {
                 .set('TicketNum', info.title)
                 .set('CreateDate', (info.createDate ? info.createDate : (new Date()).toISOString()))
                 .set('Finalized', info.finalized.toString())
-                .set('FinalizedDate', info.finalizedDate)
+                .set('FinalizedDate', info.finalizedDate.toISOString())
                 .set('Transferred', 'true')
                 .set('TransferDate', (info.transferredDate ? info.transferredDate : (new Date()).toISOString()))
                 .set('StatusID', 4)

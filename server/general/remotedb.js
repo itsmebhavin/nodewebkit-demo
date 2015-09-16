@@ -48,23 +48,19 @@ function submitVin(data) {
     form = data.form;
     info = data.formInfo;
     var existsQuery = query.DOES_DOCUMENT_EXIST(info.id);
-    var exists = false;
-
+    var qqq = query.INSERT_VIN_FORM_INFO(info);
+    console.log(qqq);
     executeQuery(existsQuery).then(function(data) {
-        if(data.length > 0) exists = true;
-        if(exists) {
-            return executeQuery(query.UPDATE_VIN_FORM_DATA(form, info.id));
+        if(data.length > 0) {
+            executeQuery(query.UPDATE_VIN_FORM_INFO(info))
+                .then(function(data) {
+                    executeQuery(query.UPDATE_VIN_FORM_DATA(form, info.id));
+                });
         } else {
-            return executeQuery(query.INSERT_VIN_FORM_DATA(form, info.id));
+            executeQuery(query.INSERT_VIN_FORM_INFO(info))
+                .then(function(data) {
+                    executeQuery(query.INSERT_VIN_FORM_FORM(form, info.id));
+                });
         }
-    }).then(function(data) {
-        if(exists) {
-            return executeQuery(query.UPDATE_VIN_FORM_INFO(info));
-        } else {
-            console.log("Doesn't Exist");
-            return executeQuery(query.INSERT_VIN_FORM_INFO(info));
-        }
-    }).then(function(data) {
-        console.log(data);
     });
 }
