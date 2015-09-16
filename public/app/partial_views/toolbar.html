@@ -2,6 +2,6 @@
     <hr class="hr-success" />
     <ol class="breadcrumb bread-success">
         <button ui-sref="main" class="btn btn-success btn-sm"><i class="fa fa-home"></i>&nbsp;Home</button>
-        <button class="btn btn-default btn-sm" ng-click="saveForm()"><i class="fa fa-floppy-o"></i>&nbsp;Save</button>
+        <button class="btn btn-default btn-sm" ng-disabled="saveButtonStatus" ng-click="saveForm()"><i class="fa fa-floppy-o"></i>&nbsp;Save</button>
     </ol>
 </div>
