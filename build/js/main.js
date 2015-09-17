@@ -115,6 +115,8 @@ angular.module('demoapp').controller('indexCtrl', ['$scope', 'hotkeys', function
 angular.module('demoapp').controller('mainCtrl', ['$scope', '$state', 'hotkeys', function ($scope, $state, hotkeys) {
     $scope.today = new Date();
     $scope.format = 'M/d/yy h:mm:ss a';
+
+    server.vindb.printReport();
 }]);
 
 angular.module('demoapp').controller('defaultCtrl', ['$scope', '$stateParams', '$state', function ($scope, $stateParams, $state) {
@@ -616,8 +618,10 @@ angular.module('components.window',[])
                 promise = $interval(function () {
                     if ((index * 10) >= 100)
                         stop();
-                    index += 1;
-                    win.setBadgeLabel(10 * index);
+                    else {
+                        index += 1;
+                        win.setBadgeLabel(10 * index);
+                    }
                 }, 20000);
             }
             function stop() {
