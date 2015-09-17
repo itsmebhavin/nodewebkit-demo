@@ -11,33 +11,19 @@ exports.submitForm = function(data) {
             return null;
     }
 }
+exports.loadFormsForUser = function(username) {
+    var q = queue.defer();
+    executeQuery(query.SELECT_DOCUMENTS_BY_USER(username)).then(function(records) {
+        q.resolve(records);
+    }, function(err) {
+        console.log("loadFormsForUser: " + err);
+        q.reject(err);
+    });
+    return q.promise;
+}
 
 function submitVin(data) {
     var form, info;
-
-    function executeQuery(query) {
-        console.log(query);
-        var q = queue.defer();
-        try {
-            var connection = new sql.Connection(config.database, function(err) {
-                if(!err) {
-                    var request = new sql.Request(connection);
-                    request.query(query, function(err, recordsets, returnValue) {
-                        if(err) {
-                            q.reject('ERROR(sql)' + err);
-                        } else {
-                            q.resolve(recordsets);
-                        }
-                    });
-                } else {
-                    q.reject('ERROR(sql-conn)' + err);
-                }
-            });
-        } catch (e) {
-            q.reject('EXCEPTION(submitVin):' + e);
-        }
-        return q.promise;
-    }
 
     form = data.form;
     info = data.formInfo;
@@ -70,4 +56,28 @@ function submitVin(data) {
             });
         }
     });
+}
+
+function executeQuery(query) {
+    console.log(query);
+    var q = queue.defer();
+    try {
+        var connection = new sql.Connection(config.database, function(err) {
+            if(!err) {
+                var request = new sql.Request(connection);
+                request.query(query, function(err, recordsets, returnValue) {
+                    if(err) {
+                        q.reject('ERROR(sql)' + err);
+                    } else {
+                        q.resolve(recordsets);
+                    }
+                });
+            } else {
+                q.reject('ERROR(sql-conn)' + err);
+            }
+        });
+    } catch (e) {
+        q.reject('EXCEPTION(submitVin):' + e);
+    }
+    return q.promise;
 }

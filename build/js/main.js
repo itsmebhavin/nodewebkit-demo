@@ -184,7 +184,7 @@ angular.module('demoapp').controller('defaultCtrl', ['$scope', '$stateParams', '
     }
 }]);
 
-angular.module('demoapp').controller('openFormCtrl', ['$scope', '$state', function ($scope, $state) {
+angular.module('demoapp').controller('openFormLocalCtrl', ['$scope', '$state', function ($scope, $state) {
     $scope.recent = server.vindb.loadFormList();
     $scope.selectedForm;
     $scope.selectedFormTitle;
@@ -202,6 +202,19 @@ angular.module('demoapp').controller('openFormCtrl', ['$scope', '$state', functi
         $state.go('default', { type: 'VIN', newform: false });
     }
 
+}]);
+angular.module('demoapp').controller('openFormServerCtrl', ['$scope', function($scope) {
+    $scope.documents;
+    $scope.selectedForm;
+
+    server.remotedb.loadFormsForUser('zm0307').then(function(data) {
+        $scope.documents = data;
+    });
+
+
+    $scope.showFormDetails = function(doc) {
+        $scope.selectedForm = doc
+    }
 }]);
 angular.module('demoapp').controller('applicationSettingsCtrl', ['$scope', 'hotkeys', function ($scope, hotkeys) {
     //TODO: application settings related code.
@@ -510,10 +523,15 @@ angular.module('application.routing', [])
         url: '/home',
         templateUrl: './app/views/test.html'
     })
-    .state('openform', {
-        url: '/openform',
-        templateUrl: './app/views/openform.html',
-        controller: 'openFormCtrl'
+    .state('openformlocal', {
+        url: '/openformlocal',
+        templateUrl: './app/views/openformlocal.html',
+        controller: 'openFormLocalCtrl'
+    })
+    .state('openformserver', {
+        url: '/openformserver',
+        templateUrl: './app/views/openformserver.html',
+        controller: 'openFormServerCtrl'
     })
     .state('applicationsettings', {
         url: '/appsetting',

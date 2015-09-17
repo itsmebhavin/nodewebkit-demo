@@ -82,4 +82,10 @@ exports.DOES_DOCUMENT_EXIST = function(id) {
                 .where('DocumentID = ?', id)
                 .toString();
 }
+exports.SELECT_DOCUMENTS_BY_USER = function(username) {
+    return squel.select()
+                .from('Documents')
+                .where('Username = ?', username)
+                .toString();
+}
 /* VIN (end) */

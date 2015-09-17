@@ -152,7 +152,7 @@ angular.module('demoapp').controller('defaultCtrl', ['$scope', '$stateParams', '
     }
 }]);
 
-angular.module('demoapp').controller('openFormCtrl', ['$scope', '$state', function ($scope, $state) {
+angular.module('demoapp').controller('openFormLocalCtrl', ['$scope', '$state', function ($scope, $state) {
     $scope.recent = server.vindb.loadFormList();
     $scope.selectedForm;
     $scope.selectedFormTitle;
@@ -170,6 +170,19 @@ angular.module('demoapp').controller('openFormCtrl', ['$scope', '$state', functi
         $state.go('default', { type: 'VIN', newform: false });
     }
 
+}]);
+angular.module('demoapp').controller('openFormServerCtrl', ['$scope', function($scope) {
+    $scope.documents;
+    $scope.selectedForm;
+
+    server.remotedb.loadFormsForUser('zm0307').then(function(data) {
+        $scope.documents = data;
+    });
+
+
+    $scope.showFormDetails = function(doc) {
+        $scope.selectedForm = doc
+    }
 }]);
 angular.module('demoapp').controller('applicationSettingsCtrl', ['$scope', 'hotkeys', function ($scope, hotkeys) {
     //TODO: application settings related code.
