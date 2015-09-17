@@ -35,7 +35,7 @@ exports.INSERT_VIN_FORM_INFO = function(info) {
                 .set('TicketNum', info.title)
                 .set('CreateDate', (info.createDate ? info.createDate : (new Date()).toISOString()))
                 .set('Finalized', info.finalized.toString())
-                .set('FinalizedDate', info.finalizedDate.toISOString())
+                .set('FinalizedDate', (info.finalizedDate ? info.FinalizedDate : (new Date()).toISOString()))
                 .set('Transferred', 'true')
                 .set('TransferDate', (info.transferredDate ? info.transferredDate : (new Date()).toISOString()))
                 .set('StatusID', 4)
@@ -54,12 +54,12 @@ exports.INSERT_VIN_FORM_INFO = function(info) {
 }
 exports.UPDATE_VIN_FORM_INFO = function(info) {
     return squel.update()
-                .into("Documents")
+                .table("Documents")
                 .set('DocumentID', info.id)
                 .set('TicketNum', info.title)
                 .set('CreateDate', (info.createDate ? info.createDate : (new Date()).toISOString()))
                 .set('Finalized', info.finalized.toString())
-                .set('FinalizedDate', info.finalizedDate)
+                .set('FinalizedDate', (info.finalizedDate ? info.FinalizedDate : (new Date()).toISOString()))
                 .set('Transferred', 'true')
                 .set('TransferDate', (info.transferredDate ? info.transferredDate : (new Date()).toISOString()))
                 .set('StatusID', 4)

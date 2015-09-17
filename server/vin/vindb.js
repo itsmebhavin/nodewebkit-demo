@@ -73,9 +73,12 @@ exports.finalizeForm = function(finalize) {
     var id = localActive.findOne({activeTab: {$contains: ''}}).activeTab;
     var localForm = localForms.findOne({'formInfo.id':id});
     var savedForm = savedForms.findOne({'formInfo.id':id});
+
+    localForm.formInfo.finalized = finalize;
+    localForm.formInfo.finalizedDate = finalize ? new Date() : null;
+
     if(savedForm === null) {
         savedForms.insert({
-            //title:localForm.title,
             formInfo: {
                 id:localForm.id,
                 title:localForm.title,
@@ -89,7 +92,7 @@ exports.finalizeForm = function(finalize) {
         });
     } else {
         savedForm.formInfo.finalized = finalize;
-        savedForm.formInfo.finalizedDate = finalize ? new Date() : null;
+        savedForm.formInfo.finalizedDate = finalize ? localForm.formInfo.finalizedDate : null;
     }
     db.saveDatabase();
 }

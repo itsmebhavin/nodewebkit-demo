@@ -24,22 +24,16 @@ function submitVin(data) {
                     var request = new sql.Request(connection);
                     request.query(query, function(err, recordsets, returnValue) {
                         if(err) {
-                            console.log('remotedb - line 27')
-                            console.log(err);
                             q.reject('ERROR(sql)' + err);
                         } else {
                             q.resolve(recordsets);
                         }
                     });
                 } else {
-                    console.log('remotedb - line 35')
-                    console.log(err);
                     q.reject('ERROR(sql-conn)' + err);
                 }
             });
         } catch (e) {
-            console.log('remotedb - line 41')
-            console.log(e);
             q.reject('EXCEPTION(submitVin):' + e);
         }
         return q.promise;
@@ -47,20 +41,25 @@ function submitVin(data) {
 
     form = data.form;
     info = data.formInfo;
-    var existsQuery = query.DOES_DOCUMENT_EXIST(info.id);
-    var qqq = query.INSERT_VIN_FORM_INFO(info);
-    console.log(qqq);
-    executeQuery(existsQuery).then(function(data) {
+    var existsQ = query.DOES_DOCUMENT_EXIST(info.id);
+    var insertFormQ = query.INSERT_VIN_FORM_DATA(form, info.id);
+    var updateFormQ = query.UPDATE_VIN_FORM_DATA(form, info.id);
+    var insertInfoQ = query.INSERT_VIN_FORM_INFO(info);
+    var updateInfoQ = query.UPDATE_VIN_FORM_INFO(info);
+
+    executeQuery(existsQ).then(function(data) {
         if(data.length > 0) {
-            executeQuery(query.UPDATE_VIN_FORM_INFO(info))
-                .then(function(data) {
-                    executeQuery(query.UPDATE_VIN_FORM_DATA(form, info.id));
-                });
+            executeQuery(updateFormQ).then(function(ufq) {
+                return executeQuery(updateInfoQ);
+            }).then(function(uiq) {
+
+            });
         } else {
-            executeQuery(query.INSERT_VIN_FORM_INFO(info))
-                .then(function(data) {
-                    executeQuery(query.INSERT_VIN_FORM_FORM(form, info.id));
-                });
+            executeQuery(insertFormQ).then(function(a,b,c) {
+                return executeQuery(insertInfoQ);
+            }).then(function(iiq) {
+
+            });
         }
     });
 }
