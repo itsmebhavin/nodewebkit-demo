@@ -1,0 +1,18 @@
+﻿{
+  "AgencyORI": "ARASP001",
+  "BadgeNum": "B1212",
+  "ControlNumber": "p02",
+  "CreatedDate": "09/17/2015",
+  "IsFeeCollectedNo": false,
+  "IsFeeCollectedYes": true,
+  "OfficerName": "bpatel",
+  "OfficerSign": "",
+  "TitleOrCourtOrderNum": "123",
+  "VehicleColor": "WHITE",
+  "VehicleMake": "KIA",
+  "VehicleModel": "SORENTO",
+  "VehicleState": "AR",
+  "VehicleYear": "2014",
+  "VIN": "23232323232323232",
+  "WorkPhone": "888-888-8888"
+}

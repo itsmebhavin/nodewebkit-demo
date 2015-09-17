@@ -83,6 +83,8 @@ angular.module('demoapp').controller('indexCtrl', ['$scope', 'hotkeys', function
 angular.module('demoapp').controller('mainCtrl', ['$scope', '$state', 'hotkeys', function ($scope, $state, hotkeys) {
     $scope.today = new Date();
     $scope.format = 'M/d/yy h:mm:ss a';
+
+    server.vindb.printReport();
 }]);
 
 angular.module('demoapp').controller('defaultCtrl', ['$scope', '$stateParams', '$state', function ($scope, $stateParams, $state) {

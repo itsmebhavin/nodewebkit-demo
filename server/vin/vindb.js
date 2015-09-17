@@ -1,6 +1,8 @@
 var loki, localdb, localActive, localForms, db, savedForms;
 init();
 
+var report = require('./vinreport');
+
 function init() {
     loki = require('lokijs');
     localdb = new loki('local.json');
@@ -135,4 +137,9 @@ exports.loadFinalizedForms = function() {
 exports.dumpDatabase = function() {
     localdb.saveDatabase();
     db.saveDatabase();
+}
+
+
+exports.printReport = function () {
+    report.printReport();
 }
