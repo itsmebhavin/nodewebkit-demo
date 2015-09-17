@@ -232,9 +232,8 @@ angular.module('demoapp').controller('transferCtrl', ['$scope', '$rootScope', fu
     $scope.transfer = function() {
         for(var i=0;i<$scope.transferList.length; i++) {
             if($scope.transferList[i]) {
-                console.log($scope.finalizedForms[i]);
-                // server.remotedb.submitForm($scope.finalizedForms[i]);
-                // server.vindb.markTransferred($scope.finalizedForms[i].formInfo.id);
+                server.remotedb.submitForm($scope.finalizedForms[i]);
+                server.vindb.markTransferred($scope.finalizedForms[i].formInfo.id);
             }
         }
     }

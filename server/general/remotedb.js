@@ -51,14 +51,22 @@ function submitVin(data) {
         if(data.length > 0) {
             executeQuery(updateFormQ).then(function(ufq) {
                 return executeQuery(updateInfoQ);
+            }, function(err) {
+                console.log("Update Form Query: " + err);
             }).then(function(uiq) {
 
+            }, function (err) {
+                console.log("Update Info Query: " + err);
             });
         } else {
             executeQuery(insertFormQ).then(function(a,b,c) {
                 return executeQuery(insertInfoQ);
+            }, function(err) {
+                console.log("Insert Form Query: " + err);
             }).then(function(iiq) {
 
+            }, function(err) {
+                console.log("Insert Info Query: " + err);
             });
         }
     });
