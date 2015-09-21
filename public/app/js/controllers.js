@@ -179,9 +179,14 @@ angular.module('demoapp').controller('openFormServerCtrl', ['$scope', function($
         $scope.documents = data;
     });
 
+    $scope.openForm = function(docId) {
+        var form = server.remotedb.loadForm(docId);
+        console.log(form);
+    }
+
 
     $scope.showFormDetails = function(doc) {
-        $scope.selectedForm = doc
+        $scope.selectedForm = doc;
     }
 }]);
 angular.module('demoapp').controller('applicationSettingsCtrl', ['$scope', 'hotkeys', function ($scope, hotkeys) {
@@ -193,7 +198,10 @@ angular.module('demoapp').controller('userSettingsCtrl', ['$scope', function ($s
 }]);
 angular.module('demoapp').controller('toolbarCtrl', ['$scope', '$rootScope', function ($scope, $rootScope) {
     $scope.saveForm = server.vindb.saveForm;
-    $scope.finalizeForm = server.vindb.finalizeForm;
+    $scope.finalizeForm = function(finalize) {
+        var ret = server.vindb.finalizeForm(finalize);
+        if(ret === 'Invalid') console.log("Invalid Form, not finalized");
+    }
     $scope.openTransferPanel = function() {
         $rootScope.$broadcast('openTransferPanel', {});
     }

@@ -59,7 +59,8 @@ exports.saveForm = function() {
                 title:localForm.formInfo.title,
                 type:localForm.formInfo.type,
                 dateIssued:new Date(),
-                lastChanged:new Date()
+                lastChanged:new Date(),
+                valid:localForm.formInfo.valid
             },
             form:localForm.form
         });
@@ -75,6 +76,10 @@ exports.finalizeForm = function(finalize) {
     var id = localActive.findOne({activeTab: {$contains: ''}}).activeTab;
     var localForm = localForms.findOne({'formInfo.id':id});
     var savedForm = savedForms.findOne({'formInfo.id':id});
+
+    if(localForm.formInfo.valid !== true) {
+        return "Invalid";
+    }
 
     localForm.formInfo.finalized = finalize;
     localForm.formInfo.finalizedDate = finalize ? new Date() : null;

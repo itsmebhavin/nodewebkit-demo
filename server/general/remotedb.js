@@ -7,6 +7,7 @@ exports.submitForm = function(data) {
     switch(data.formInfo.type) {
         case 'VIN':
             submitVin(data);
+            break;
         default:
             return null;
     }
@@ -21,6 +22,11 @@ exports.loadFormsForUser = function(username) {
     });
     return q.promise;
 }
+exports.loadForm = function(docId) {
+    var q = queue.defer();
+    q.resolve(true);
+    return q.promise;
+}
 
 function submitVin(data) {
     var form, info;
@@ -32,6 +38,8 @@ function submitVin(data) {
     var updateFormQ = query.UPDATE_VIN_FORM_DATA(form, info.id);
     var insertInfoQ = query.INSERT_VIN_FORM_INFO(info);
     var updateInfoQ = query.UPDATE_VIN_FORM_INFO(info);
+    var insertVehicleQ = query.INSERT_VEHICLE_DATA(form, info.id);
+    var updateVehicleQ = query.UPDATE_VEHICLE_DATA(form, info.id);
 
     executeQuery(existsQ).then(function(data) {
         if(data.length > 0) {
@@ -40,9 +48,13 @@ function submitVin(data) {
             }, function(err) {
                 console.log("Update Form Query: " + err);
             }).then(function(uiq) {
-
+                return executeQuery(updateVehicleQ);
             }, function (err) {
                 console.log("Update Info Query: " + err);
+            }).then(function(uvq) {
+                // Do nothing
+            }, function (err) {
+                console.log("Update Vehicle Query: " + err);
             });
         } else {
             executeQuery(insertFormQ).then(function(a,b,c) {
@@ -50,9 +62,13 @@ function submitVin(data) {
             }, function(err) {
                 console.log("Insert Form Query: " + err);
             }).then(function(iiq) {
-
+                return executeQuery(insertVehicleQ);
             }, function(err) {
                 console.log("Insert Info Query: " + err);
+            }).then(function(ivq) {
+                // Do Nothing
+            }, function(err) {
+                console.log("Insert Vehicle Query: " + err);
             });
         }
     });

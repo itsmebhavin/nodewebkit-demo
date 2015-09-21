@@ -28,6 +28,72 @@ exports.UPDATE_VIN_FORM_DATA = function(form, id) {
                 .set('Is25FeeCollected', (form.feeCollected ? form.feeCollected.toString() : 'false'))
                 .toString();
 }
+exports.INSERT_VEHICLE_DATA = function(form, id) {
+    return squel.insert()
+                .into('Vehicles')
+                .set('ID', uuid.v4())
+                .set('DocumentID', id)
+                // .set('Body')
+                // .set('MakeCode')
+                .set('Make', form.vehicleMake)
+                .set('Model', form.vehicleModel)
+                .set('Color', form.vehicleColor)
+                // .set('Owner')
+                // .set('Address')
+                .set('Year', form.vehicleYear)
+                // .set('TagNumber')
+                // .set('TagState')
+                // .set('TagYear')
+                .set('Vin', form.vin)
+                .set('IsDaycare', 'false')
+                .set('IsSchoolBus', 'false')
+                .set('IsPrivate', 'false')
+                .set('IsCommercial', 'false')
+                .set('CdlRequired', 'false')
+                .set('HazMat', 'false')
+                // .set('ModelCode')
+                // .set('TypeName')
+                // .set('TypeCode')
+                .set('IsDamageToVehicle', 'false')
+                // .set('VehicleDamage')
+                .set('IsAbandonedVehicle', 'false')
+                .set('IsMakeUnknown', 'false')
+                .set('IsModelUnknown', 'false')
+                .toString();
+}
+exports.UPDATE_VEHICLE_DATA = function(form, id) {
+    return squel.update()
+                .table('Vehicles')
+                .set('ID', uuid.v4())
+                .set('DocumentID', id)
+                // .set('Body')
+                // .set('MakeCode')
+                .set('Make', form.vehicleMake)
+                .set('Model', form.vehicleModel)
+                .set('Color', form.vehicleColor)
+                // .set('Owner')
+                // .set('Address')
+                .set('Year', form.vehicleYear)
+                // .set('TagNumber')
+                // .set('TagState')
+                // .set('TagYear')
+                .set('Vin', form.vin)
+                .set('IsDaycare', 'false')
+                .set('IsSchoolBus', 'false')
+                .set('IsPrivate', 'false')
+                .set('IsCommercial', 'false')
+                .set('CdlRequired', 'false')
+                .set('HazMat', 'false')
+                // .set('ModelCode')
+                // .set('TypeName')
+                // .set('TypeCode')
+                .set('IsDamageToVehicle', 'false')
+                // .set('VehicleDamage')
+                .set('IsAbandonedVehicle', 'false')
+                .set('IsMakeUnknown', 'false')
+                .set('IsModelUnknown', 'false')
+                .toString();
+}
 exports.INSERT_VIN_FORM_INFO = function(info) {
     return squel.insert()
                 .into("Documents")
@@ -87,5 +153,11 @@ exports.SELECT_DOCUMENTS_BY_USER = function(username) {
                 .from('Documents')
                 .where('Username = ?', username)
                 .toString();
+}
+exports.SELECT_DOCUMENT_BY_ID = function(docId) {
+    return squel.select()
+        .from('Documents')
+        .where('DocumentID = ?', docId)
+        .toString();
 }
 /* VIN (end) */

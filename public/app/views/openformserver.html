@@ -21,7 +21,7 @@
         <div class="panel panel-default" winresize ng-style="resizeWithOffset(130)" style="overflow-y: auto;">
             <div class="well well-sm pointer" ng-repeat="doc in documents" ng-click="showFormDetails(doc)" style="margin-bottom:0px;">
                 {{doc.TicketNum}}
-                <button class="btn btn-xs btn-primary pull-right">Load</button>
+                <button class="btn btn-xs btn-primary pull-right" ng-click="openForm(doc.DocumentID)">Load</button>
                 <br />
                 {{doc.CreateDate | date:'short'}}
             </div>
@@ -32,7 +32,7 @@
         <div class="panel panel-primary">
             <div class="panel-heading">Details</div>
             <div class="panel-body" winresize ng-style="resizeWithOffset(170)" style="overflow-y: auto;">
-                <button class="btn btn-sm btn-primary col-sm-12">Load</button>
+                <button class="btn btn-sm btn-primary col-sm-12" ng-click="openForm(selectedForm.DocumentID)">Load</button>
                 <br /><br />
                 <div ng-repeat="(key,value) in selectedForm">
                     <div class="col-sm-4">
