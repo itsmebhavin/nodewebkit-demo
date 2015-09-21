@@ -144,3 +144,8 @@ gulp.task('default',
         'asrForm'
     ]
 );
+
+gulp.task('watch', function() {
+    gulp.watch('./public/**/*', ['default']);
+    gulp.watch('./server/**/*', ['default']);
+});

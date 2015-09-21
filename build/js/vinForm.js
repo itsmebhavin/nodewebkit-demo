@@ -52,6 +52,7 @@ angular.module('application.vin').controller('vinCtrl', ['$scope', '$http','vinF
         alert('test');
     }
     $scope.$watchCollection('vinForm', function(nVal, oVal) {
+        console.log('watch');
         server.vindb.saveLocalForm($scope.tab.form.formInfo, nVal);
     });
     $scope.panelClass = function() {
