@@ -24,6 +24,7 @@ exports.UPDATE_VIN_FORM_DATA = function(form, id) {
                 .set('InspectionDateTime', (form.inpsectionDateTime ? form.inspectionDateTime : null))
                 .set('WorkPhone', (form.WorkPhone ? form.WorkPhone : null))
                 .set('Is25FeeCollected', (form.feeCollected ? form.feeCollected.toString() : 'false'))
+                .where('DocumentID = ?', id)
                 .toString();
 }
 exports.INSERT_VEHICLE_DATA = function(form, id) {
@@ -88,6 +89,7 @@ exports.UPDATE_VEHICLE_DATA = function(form, id) {
                 .set('IsAbandonedVehicle', 'false')
                 .set('IsMakeUnknown', 'false')
                 .set('IsModelUnknown', 'false')
+                .where('DocumentID = ?', id)
                 .toString();
 }
 exports.INSERT_VIN_FORM_INFO = function(info) {
@@ -135,6 +137,7 @@ exports.UPDATE_VIN_FORM_INFO = function(info) {
                 .set('LastModifiedDate', (new Date()).toISOString())
                 .set('Username', 'asdf')            // JUNK DATA - CHANGE LATER
                 .set('VersionNumber', 'asdf')       // JUNK DATA - CHANGE LATER
+                .where('DocumentID = ?', id)
                 .toString();
 }
 exports.DOES_DOCUMENT_EXIST = function(id) {

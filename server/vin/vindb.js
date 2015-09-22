@@ -20,7 +20,7 @@ function init() {
     });
 }
 
-exports.saveLocalActive = function(id) {
+var saveLocalActive = function(id) {
     var entry = localActive.findOne({activeTab: {$contains: ''}});
     if(entry === null) {
         localActive.insert({activeTab: id})
@@ -30,7 +30,7 @@ exports.saveLocalActive = function(id) {
     }
 }
 
-exports.saveLocalForm = function(info, form) {//id, form, type, title) {
+var saveLocalForm = function(info, form) {//id, form, type, title) {
     var entry = localForms.findOne({'formInfo.id': info.id});
     if(entry === null) {
         localForms.insert({form:form, formInfo:info})
@@ -40,14 +40,14 @@ exports.saveLocalForm = function(info, form) {//id, form, type, title) {
     }
 }
 
-exports.deleteLocalForm = function(id) {
+var deleteLocalForm = function(id) {
     var x = localForms.findOne({'formInfo.id':id});
     if(x !== null) {
         localForms.remove(x);
     }
 }
 
-exports.saveForm = function() {
+var saveForm = function() {
     var id = localActive.findOne({activeTab: {$contains: ''}}).activeTab;
     var localForm = localForms.findOne({'formInfo.id': id});
     // var savedForm = savedForms.findOne({$and:[{'formInfo':{$contains:'id'}},{'formInfo.id':id}]});
@@ -72,7 +72,7 @@ exports.saveForm = function() {
     db.saveDatabase();
 }
 
-exports.finalizeForm = function(finalize) {
+var finalizeForm = function(finalize) {
     var id = localActive.findOne({activeTab: {$contains: ''}}).activeTab;
     var localForm = localForms.findOne({'formInfo.id':id});
     var savedForm = savedForms.findOne({'formInfo.id':id});
@@ -85,18 +85,19 @@ exports.finalizeForm = function(finalize) {
     localForm.formInfo.finalizedDate = finalize ? new Date() : null;
 
     if(savedForm === null) {
-        savedForms.insert({
-            formInfo: {
-                id:localForm.id,
-                title:localForm.title,
-                type:localForm.type,
-                dateIssued:new Date(),
-                lastModifiedDate:new Date(),
-                finalized:true,
-                finalizedDate:new Date()
-            },
-            form:localForm.form
-        });
+        saveForm();
+        // savedForms.insert({
+        //     formInfo: {
+        //         id:localForm.id,
+        //         title:localForm.title,
+        //         type:localForm.type,
+        //         dateIssued:new Date(),
+        //         lastModifiedDate:new Date(),
+        //         finalized:true,
+        //         finalizedDate:new Date()
+        //     },
+        //     form:localForm.form
+        // });
     } else {
         savedForm.formInfo.finalized = finalize;
         savedForm.formInfo.finalizedDate = finalize ? localForm.formInfo.finalizedDate : null;
@@ -104,47 +105,60 @@ exports.finalizeForm = function(finalize) {
     db.saveDatabase();
 }
 
-exports.markTransferred = function(id) {
+var markTransferred = function(id) {
     var savedForm = savedForms.findOne({'formInfo.id':id});
     savedForm.formInfo.transferred = true;
     savedForm.formInfo.transferredDate = new Date();
     db.saveDatabase();
 }
 
-exports.loadFormList = function() {
+var loadFormList = function() {
     var forms = savedForms.find({});
     var result = forms.map(function(form) {return {title:form.formInfo.title,type:form.formInfo.type}});
     return result;
 }
 
-exports.loadForm = function(t) {
+var loadForm = function(t) {
     var form = savedForms.findOne({'formInfo.title': t});
+    if(form.form.inspectionDateTime) form.form.inspectionDateTime = new Date(form.form.inspectionDateTime);
     return form;
 }
 
-exports.loadRecents = function() {
+var loadRecents = function() {
     var forms = savedForms.chain().find().simplesort('formInfo.lastModifiedDate').limit(5).data();
     var result = forms.map(function(form) {return {title:form.formInfo.title, type:form.formInfo.type}});
     return result;
 }
 
-exports.loadLocalForms = function() {
+var loadLocalForms = function() {
     return localForms.find({});
 }
 
-exports.loadFinalizedForms = function() {
+var loadFinalizedForms = function() {
     return savedForms.find({
         'formInfo.finalized': true
     });
 }
 
-// DEBUGGING/TESTING FUNCTIONS
-exports.dumpDatabase = function() {
-    localdb.saveDatabase();
-    db.saveDatabase();
+var printReport = function () {
+    report.printVINReport();
 }
 
+exports.saveLocalActive = saveLocalActive;
+exports.saveLocalForm = saveLocalForm;
+exports.deleteLocalForm = deleteLocalForm;
+exports.saveForm = saveForm;
+exports.finalizeForm = finalizeForm;
+exports.markTransferred = markTransferred;
+exports.loadFormList = loadFormList;
+exports.loadForm = loadForm;
+exports.loadRecents = loadRecents;
+exports.loadLocalForms = loadLocalForms;
+exports.loadFinalizedForms = loadFinalizedForms;
+exports.printReport = printReport;
 
-exports.printReport = function () {
-    report.printVINReport();
+// DEBUGGING/TESTING FUNCTIONS
+var dumpDatabase = function() {
+    localdb.saveDatabase();
+    db.saveDatabase();
 }

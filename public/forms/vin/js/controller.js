@@ -31,7 +31,8 @@ angular.module('application.vin').controller('vinCtrl', ['$scope', '$http','vinF
 
     // If exists, load existing form
     if($scope.$parent.tab.form.form !== null) {
-        $scope.vinForm = angular.fromJson($scope.tab.form.form);
+        // $scope.vinForm = angular.fromJson($scope.tab.form.form);
+        $scope.vinForm = $scope.tab.form.form;
     }
 
     // Retrieve local validation rules for VIN
