@@ -51,8 +51,11 @@ angular.module('application.vin').controller('vinCtrl', ['$scope', '$http','vinF
     $scope.submitForm = function() {
         alert('test');
     }
-    $scope.$watchCollection('vinForm', function(nVal, oVal) {
-        server.vindb.saveLocalForm($scope.tab.form.formInfo, nVal);
+    $scope.$watchCollection('vinForm', function(val) { // Data bindings for elements in form
+        server.vindb.saveLocalForm($scope.tab.form.formInfo, val);
+    });
+    $scope.$watch('vinFrm.$valid', function(val) { // DOM form
+        $scope.tab.form.formInfo.valid = val;
     });
     $scope.panelClass = function() {
         if($scope.vinFrm.$valid) {

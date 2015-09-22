@@ -1,0 +1,48 @@
+<div class="row">
+    <hr class="hr-primary" />
+    <div class="col-xs-3">
+        <ol class="breadcrumb bread-primary">
+            <button ui-sref="main" class="btn btn-primary btn-xs"><i class="fa fa-home"></i>&nbsp;Home</button>
+            &nbsp;
+            <span style="padding-top:130px; font-size:2em" class="mdc-text-grey-400">Open </span>
+        </ol>
+        <!--<i class="fa fa-folder-open-o mdc-text-grey-500" style="padding-top:70%;font-size:200px;margin-left:-120px;"></i>-->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Filters
+            </div>
+            <div class="panel-body">
+
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-4">
+        <br />
+        <div class="panel panel-default" winresize ng-style="resizeWithOffset(130)" style="overflow-y: auto;">
+            <div class="well well-sm pointer" ng-repeat="doc in documents" ng-click="showFormDetails(doc)" style="margin-bottom:0px;">
+                {{doc.TicketNum}}
+                <button class="btn btn-xs btn-primary pull-right" ng-click="openForm(doc.DocumentID)">Load</button>
+                <br />
+                {{doc.CreateDate | date:'short'}}
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-5">
+        <br />
+        <div class="panel panel-primary">
+            <div class="panel-heading">Details</div>
+            <div class="panel-body" winresize ng-style="resizeWithOffset(170)" style="overflow-y: auto;">
+                <button class="btn btn-sm btn-primary col-sm-12" ng-click="openForm(selectedForm.DocumentID)">Load</button>
+                <br /><br />
+                <div ng-repeat="(key,value) in selectedForm">
+                    <div class="col-sm-4">
+                        <div class="pull-right">{{key}}</div>
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="pull-left">{{value}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

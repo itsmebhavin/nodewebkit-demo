@@ -11,10 +11,15 @@ angular.module('application.routing', [])
         url: '/home',
         templateUrl: './app/views/test.html'
     })
-    .state('openform', {
-        url: '/openform',
-        templateUrl: './app/views/openform.html',
-        controller: 'openFormCtrl'
+    .state('openformlocal', {
+        url: '/openformlocal',
+        templateUrl: './app/views/openformlocal.html',
+        controller: 'openFormLocalCtrl'
+    })
+    .state('openformserver', {
+        url: '/openformserver',
+        templateUrl: './app/views/openformserver.html',
+        controller: 'openFormServerCtrl'
     })
     .state('applicationsettings', {
         url: '/appsetting',

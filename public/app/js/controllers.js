@@ -152,7 +152,7 @@ angular.module('demoapp').controller('defaultCtrl', ['$scope', '$stateParams', '
     }
 }]);
 
-angular.module('demoapp').controller('openFormCtrl', ['$scope', '$state', function ($scope, $state) {
+angular.module('demoapp').controller('openFormLocalCtrl', ['$scope', '$state', function ($scope, $state) {
     $scope.recent = server.vindb.loadFormList();
     $scope.selectedForm;
     $scope.selectedFormTitle;
@@ -171,6 +171,24 @@ angular.module('demoapp').controller('openFormCtrl', ['$scope', '$state', functi
     }
 
 }]);
+angular.module('demoapp').controller('openFormServerCtrl', ['$scope', function($scope) {
+    $scope.documents;
+    $scope.selectedForm;
+
+    server.remotedb.loadFormsForUser('zm0307').then(function(data) {
+        $scope.documents = data;
+    });
+
+    $scope.openForm = function(docId) {
+        var form = server.remotedb.loadForm(docId);
+        console.log(form);
+    }
+
+
+    $scope.showFormDetails = function(doc) {
+        $scope.selectedForm = doc;
+    }
+}]);
 angular.module('demoapp').controller('applicationSettingsCtrl', ['$scope', 'hotkeys', function ($scope, hotkeys) {
     //TODO: application settings related code.
 }]);
@@ -180,7 +198,10 @@ angular.module('demoapp').controller('userSettingsCtrl', ['$scope', function ($s
 }]);
 angular.module('demoapp').controller('toolbarCtrl', ['$scope', '$rootScope', function ($scope, $rootScope) {
     $scope.saveForm = server.vindb.saveForm;
-    $scope.finalizeForm = server.vindb.finalizeForm;
+    $scope.finalizeForm = function(finalize) {
+        var ret = server.vindb.finalizeForm(finalize);
+        if(ret === 'Invalid') console.log("Invalid Form, not finalized");
+    }
     $scope.openTransferPanel = function() {
         $rootScope.$broadcast('openTransferPanel', {});
     }

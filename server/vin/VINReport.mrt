@@ -1,0 +1,800 @@
+{
+  "ReportVersion": "2015.1.20",
+  "ReportGuid": "7a01ad192ab44381971281deb0474e63",
+  "ReportName": "Report",
+  "ReportAlias": "Report",
+  "ReportCreated": "/Date(1408391349000+0300)/",
+  "ReportChanged": "/Date(1442615212504+0300)/",
+  "EngineVersion": "EngineV2",
+  "ReportUnit": "Inches",
+  "Script": "using System;\r\nusing System.Drawing;\r\nusing System.Windows.Forms;\r\nusing System.Data;\r\nusing Stimulsoft.Controls;\r\nusing Stimulsoft.Base.Drawing;\r\nusing Stimulsoft.Report;\r\nusing Stimulsoft.Report.Dialogs;\r\nusing Stimulsoft.Report.Components;\r\n\r\nnamespace Reports\r\n{\r\n    public class Report : Stimulsoft.Report.StiReport\r\n    {\r\n        public Report()        {\r\n            this.InitializeComponent();\r\n        }\r\n\r\n        #region StiReport Designer generated code - do not modify\r\n\t\t#endregion StiReport Designer generated code - do not modify\r\n    }\r\n}\r\n",
+  "ReferencedAssemblies": {
+    "0": "System.Dll",
+    "1": "System.Drawing.Dll",
+    "2": "System.Windows.Forms.Dll",
+    "3": "System.Data.Dll",
+    "4": "System.Xml.Dll",
+    "5": "Stimulsoft.Controls.Dll",
+    "6": "Stimulsoft.Base.Dll",
+    "7": "Stimulsoft.Report.Dll"
+  },
+  "ReportResources": {
+    "0": {
+      "Resource": "Image1.png",
+      "Component": "Image1",
+      "Property": "Image"
+    }
+  },
+  "Dictionary": {
+    "DataSources": {
+      "0": {
+        "Ident": "StiDataTableSource",
+        "Name": "VINObject",
+        "Alias": "VINObject",
+        "Columns": {
+          "0": {
+            "Name": "VIN",
+            "Index": -1,
+            "NameInSource": "VIN",
+            "Alias": "VIN",
+            "Type": "System.String"
+          },
+          "1": {
+            "Name": "ControlNumber",
+            "Index": -1,
+            "NameInSource": "ControlNumber",
+            "Alias": "ControlNumber",
+            "Type": "System.String"
+          },
+          "2": {
+            "Name": "VehicleState",
+            "Index": -1,
+            "NameInSource": "VehicleState",
+            "Alias": "VehicleState",
+            "Type": "System.String"
+          },
+          "3": {
+            "Name": "VehicleYear",
+            "Index": -1,
+            "NameInSource": "VehicleYear",
+            "Alias": "VehicleYear",
+            "Type": "System.String"
+          },
+          "4": {
+            "Name": "TitleOrCourtOrderNum",
+            "Index": -1,
+            "NameInSource": "TitleOrCourtOrderNum",
+            "Alias": "TitleOrCourtOrderNum",
+            "Type": "System.String"
+          },
+          "5": {
+            "Name": "VehicleColor",
+            "Index": -1,
+            "NameInSource": "VehicleColor",
+            "Alias": "VehicleColor",
+            "Type": "System.String"
+          },
+          "6": {
+            "Name": "VehicleMake",
+            "Index": -1,
+            "NameInSource": "VehicleMake",
+            "Alias": "VehicleMake",
+            "Type": "System.String"
+          },
+          "7": {
+            "Name": "VehicleModel",
+            "Index": -1,
+            "NameInSource": "VehicleModel",
+            "Alias": "VehicleModel",
+            "Type": "System.String"
+          },
+          "8": {
+            "Name": "IsFeeCollectedYes",
+            "Index": -1,
+            "NameInSource": "IsFeeCollectedYes",
+            "Alias": "IsFeeCollectedYes",
+            "Type": "System.Boolean"
+          },
+          "9": {
+            "Name": "CreatedDate",
+            "Index": -1,
+            "NameInSource": "CreatedDate",
+            "Alias": "CreatedDate",
+            "Type": "System.DateTime"
+          },
+          "10": {
+            "Name": "OfficerName",
+            "Index": -1,
+            "NameInSource": "OfficerName",
+            "Alias": "OfficerName",
+            "Type": "System.String"
+          },
+          "11": {
+            "Name": "WorkPhone",
+            "Index": -1,
+            "NameInSource": "WorkPhone",
+            "Alias": "WorkPhone",
+            "Type": "System.String"
+          },
+          "12": {
+            "Name": "AgencyORI",
+            "Index": -1,
+            "NameInSource": "AgencyORI",
+            "Alias": "AgencyORI",
+            "Type": "System.String"
+          },
+          "13": {
+            "Name": "OfficerSign",
+            "Index": -1,
+            "NameInSource": "OfficerSign",
+            "Alias": "OfficerSign",
+            "Type": "System.String"
+          },
+          "14": {
+            "Name": "IsFeeCollectedNo",
+            "Index": -1,
+            "NameInSource": "IsFeeCollectedNo",
+            "Alias": "IsFeeCollectedNo",
+            "Type": "System.Boolean"
+          },
+          "15": {
+            "Name": "BadgeNum",
+            "Index": -1,
+            "NameInSource": "BadgeNum",
+            "Alias": "BadgeNum",
+            "Type": "System.String"
+          }
+        },
+        "NameInSource": "VINObject"
+      }
+    }
+  },
+  "Pages": {
+    "0": {
+      "Ident": "StiPage",
+      "Name": "Page1",
+      "Guid": "cf6200b6bdb343709eb9e6196950ce04",
+      "Interaction": {
+        "Ident": "StiInteraction"
+      },
+      "Border": ";;2;;;;;solid:Black",
+      "Brush": "solid:",
+      "Components": {
+        "0": {
+          "Ident": "StiDataBand",
+          "Name": "DataBand1",
+          "ClientRectangle": "0,0.2,10.22,7.5",
+          "Interaction": {
+            "Ident": "StiBandInteraction"
+          },
+          "Border": ";;;;;;;solid:Black",
+          "Brush": "solid:",
+          "Components": {
+            "0": {
+              "Ident": "StiText",
+              "Name": "Text6",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "3.4,2.4,3.3,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Vehicle Identification Number (VIN)"
+              },
+              "HorAlignment": "Center",
+              "Font": "Roboto Bk;14;;",
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black"
+            },
+            "1": {
+              "Ident": "StiText",
+              "Name": "Text8",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "0.2,3.1,4.9,0.3",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": " State Of Current Title:    {VINObject.VehicleState}"
+              },
+              "VertAlignment": "Bottom",
+              "Font": "Roboto Bk;15;;",
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black"
+            },
+            "2": {
+              "Ident": "StiText",
+              "Name": "Text9",
+              "Guid": "7b1b1eec035542f8b13df6d957e3b55a",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "5.2,3.1,4.8,0.3",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Title/Court Order #:  {VINObject.TitleOrCourtOrderNum}"
+              },
+              "VertAlignment": "Bottom",
+              "Font": "Roboto Bk;15;;",
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black"
+            },
+            "3": {
+              "Ident": "StiText",
+              "Name": "Text10",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "0.2,3.6,2.6,0.3",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": " Model Year:  {VINObject.VehicleYear}"
+              },
+              "VertAlignment": "Bottom",
+              "Font": "Roboto Bk;15;;",
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black"
+            },
+            "4": {
+              "Ident": "StiText",
+              "Name": "Text11",
+              "Guid": "9302ad7129454ff2b1b43ec60f488129",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "3,3.6,4.4,0.3",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Make/Model:  {VINObject.VehicleMake}/{VINObject.VehicleModel}"
+              },
+              "VertAlignment": "Bottom",
+              "Font": "Roboto Bk;15;;",
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black"
+            },
+            "5": {
+              "Ident": "StiText",
+              "Name": "Text12",
+              "Guid": "319ee472f427499a92f5534bcab7a098",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "7.5,3.6,2.5,0.3",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Color:  {VINObject.VehicleColor}"
+              },
+              "VertAlignment": "Bottom",
+              "Font": "Roboto Bk;15;;",
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black"
+            },
+            "6": {
+              "Ident": "StiText",
+              "Name": "Text13",
+              "Guid": "93f4338b251e4b9c85a260ee463333da",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "3.2,4.1,3.9,0.3",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "THERE WILL BE A $25 FEE COLLECTED."
+              },
+              "VertAlignment": "Bottom",
+              "Font": "Roboto Bk;14;Bold;",
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black"
+            },
+            "7": {
+              "Ident": "StiText",
+              "Name": "Text16",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "0.3,4.5,9.7,0.5",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "I certify that I have made a physical examination of the above vehicle and its documents AND the VIN\r\ndoes not appear to be tampered with or altered AND the VIN agrees with supporting documents."
+              },
+              "Font": "Roboto Bk;16;;",
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black"
+            },
+            "8": {
+              "Ident": "StiText",
+              "Name": "Text17",
+              "Guid": "752740f23ed848c6bb3a6c60def7b214",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "0.2,5.1,2.6,0.3",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": " Date:  {VINObject.CreatedDate}"
+              },
+              "VertAlignment": "Bottom",
+              "Font": "Roboto Bk;15;;",
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black"
+            },
+            "9": {
+              "Ident": "StiText",
+              "Name": "Text18",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "0.8,5.4,2,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "(Month/Day/Year)"
+              },
+              "HorAlignment": "Center",
+              "Font": "Roboto Bk;12;;",
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black"
+            },
+            "10": {
+              "Ident": "StiText",
+              "Name": "Text19",
+              "Guid": "42a92f71f3eb42e1ad768eef1880d393",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "3.2,5.1,0.6,0.3",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Name:"
+              },
+              "VertAlignment": "Bottom",
+              "Font": "Roboto Bk;15;;",
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black"
+            },
+            "11": {
+              "Ident": "StiText",
+              "Name": "Text20",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "3.8,5.1,1,0.3",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "(Please Print)"
+              },
+              "VertAlignment": "Center",
+              "Font": "Roboto Bk;12;;",
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black"
+            },
+            "12": {
+              "Ident": "StiText",
+              "Name": "Text21",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "4.9,5.1,5.1,0.3",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{VINObject.OfficerName}#{VINObject.BadgeNum}"
+              },
+              "VertAlignment": "Center",
+              "Font": "Roboto Bk;15;;",
+              "Border": "Bottom;;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black"
+            },
+            "13": {
+              "Ident": "StiText",
+              "Name": "Text22",
+              "Guid": "2b6014567df24d139b2dd04ba369cbed",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "4.8,5.4,5.2,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "(Rank/First/MI/Last Name/Badge #)"
+              },
+              "HorAlignment": "Center",
+              "Font": "Roboto Bk;12;;",
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black"
+            },
+            "14": {
+              "Ident": "StiText",
+              "Name": "Text23",
+              "Guid": "33de05d1e3c446b6a9bd9a941df4c7b4",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "0.2,5.7,4.3,0.3",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Work Phone:  {VINObject.WorkPhone}"
+              },
+              "VertAlignment": "Bottom",
+              "Font": "Roboto Bk;15;;",
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black"
+            },
+            "15": {
+              "Ident": "StiText",
+              "Name": "Text24",
+              "Guid": "6bf2a6cfba3345349b567d129508834a",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "4.6,5.7,5.4,0.3",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Verifying Agency:  {VINObject.AgencyORI}"
+              },
+              "VertAlignment": "Bottom",
+              "Font": "Roboto Bk;15;;",
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black"
+            },
+            "16": {
+              "Ident": "StiText",
+              "Name": "Text7",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "0.2,2.6,9.8,0.4",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{VINObject.VIN}"
+              },
+              "HorAlignment": "Center",
+              "Font": "Roboto Bk;26;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black"
+            },
+            "17": {
+              "Ident": "StiText",
+              "Name": "Text25",
+              "Guid": "b8b70f0e54c34f78a42b102a1a4c5cf0",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "0.2,6.1,9.8,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "UNDER PENALTY OF PERJURY, I DECLARE THAT I HAVE READ THE DOCUMENT AND THAT THE FACTS STATED IN IT ARE TRUE"
+              },
+              "VertAlignment": "Bottom",
+              "Font": "Roboto Bk;10;Bold;",
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black"
+            },
+            "18": {
+              "Ident": "StiText",
+              "Name": "Text26",
+              "Guid": "4d28d2828b8447f8b7a960b8d7c8a481",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "0.2,6.4,6.5,0.3",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Signature Of Officer:  {VINObject.OfficerSign}"
+              },
+              "VertAlignment": "Bottom",
+              "Font": "Roboto Bk;15;;",
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black"
+            },
+            "19": {
+              "Ident": "StiText",
+              "Name": "Text27",
+              "Guid": "7c5a318670984d468601c793fec01b23",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "2.1,6.7,4.5,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "(First/MI/Last Name)"
+              },
+              "HorAlignment": "Center",
+              "Font": "Roboto Bk;12;;",
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black"
+            },
+            "20": {
+              "Ident": "StiText",
+              "Name": "Text5",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "0.2,1.6,7.2,0.3",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "TO BE COMPLETED BY ARKANSAS LAW ENFORCEMENT OFFICER ONLY"
+              },
+              "VertAlignment": "Bottom",
+              "Font": "Roboto Bk;14;Bold;",
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black"
+            },
+            "21": {
+              "Ident": "StiText",
+              "Name": "Text28",
+              "Guid": "56fbfe537fe241438821ef52b240f08d",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "5.2,1.1,2,0.3",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "CONTROL NUMBER:"
+              },
+              "HorAlignment": "Right",
+              "VertAlignment": "Bottom",
+              "Font": "Roboto Bk;14;Bold;",
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black"
+            },
+            "22": {
+              "Ident": "StiText",
+              "Name": "Text4",
+              "Guid": "5b1a6d3dbb6b4b2fb2eb1aa20fe2dbe2",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "7.2,1.1,2.8,0.3",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{VINObject.ControlNumber}"
+              },
+              "VertAlignment": "Bottom",
+              "Font": "Roboto Bk;14;Bold;",
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:192,0,0"
+            },
+            "23": {
+              "Ident": "StiText",
+              "Name": "Text1",
+              "Guid": "0c342e5e36704fed95063d905dfbe1c2",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "2.7,0.1,4.8,0.4",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "ARKANSAS   STATE   POLICE"
+              },
+              "HorAlignment": "Center",
+              "VertAlignment": "Bottom",
+              "Font": "Roboto Bk;24.5;Bold;",
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black"
+            },
+            "24": {
+              "Ident": "StiText",
+              "Name": "Text3",
+              "Guid": "a5321cb22e314b458ab0845bb3f6e0aa",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "3.1,0.6,4,0.3",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Certification Of VIN Inspection"
+              },
+              "HorAlignment": "Center",
+              "Font": "Roboto Bk;20;Bold;",
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black"
+            },
+            "25": {
+              "Ident": "StiText",
+              "Name": "Text2",
+              "Guid": "77dd93fea5454808b5bcf74ccec9e40b",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "9.1,0.1,0.9,0.4",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "ASP-74A\r\n(Rev. 06/03)"
+              },
+              "Font": "Roboto Bk;11;Bold;",
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black"
+            },
+            "26": {
+              "Ident": "StiHorizontalLinePrimitive",
+              "Name": "HorizontalLinePrimitive2",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "2.2,3.4,2.9,0.01",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "StartCap": ";;;",
+              "EndCap": ";;;"
+            },
+            "27": {
+              "Ident": "StiHorizontalLinePrimitive",
+              "Name": "HorizontalLinePrimitive3",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "6.9,3.4,3.1,0.01",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "StartCap": ";;;",
+              "EndCap": ";;;"
+            },
+            "28": {
+              "Ident": "StiHorizontalLinePrimitive",
+              "Name": "HorizontalLinePrimitive4",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "1.3,3.9,1.5,0.01",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "StartCap": ";;;",
+              "EndCap": ";;;"
+            },
+            "29": {
+              "Ident": "StiHorizontalLinePrimitive",
+              "Name": "HorizontalLinePrimitive5",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "4.2,3.9,3.2,0.01",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "StartCap": ";;;",
+              "EndCap": ";;;"
+            },
+            "30": {
+              "Ident": "StiHorizontalLinePrimitive",
+              "Name": "HorizontalLinePrimitive6",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "8.1,3.9,1.9,0.01",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "StartCap": ";;;",
+              "EndCap": ";;;"
+            },
+            "31": {
+              "Ident": "StiHorizontalLinePrimitive",
+              "Name": "HorizontalLinePrimitive7",
+              "Guid": "4492b9fade18443b967def777937be64",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "0.8,5.4,2,0.01",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "StartCap": ";;;",
+              "EndCap": ";;;"
+            },
+            "32": {
+              "Ident": "StiHorizontalLinePrimitive",
+              "Name": "HorizontalLinePrimitive8",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "1.4,6,3.1,0.01",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "StartCap": ";;;",
+              "EndCap": ";;;"
+            },
+            "33": {
+              "Ident": "StiHorizontalLinePrimitive",
+              "Name": "HorizontalLinePrimitive9",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "6.2,6,3.8,0.01",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "StartCap": ";;;",
+              "EndCap": ";;;"
+            },
+            "34": {
+              "Ident": "StiHorizontalLinePrimitive",
+              "Name": "HorizontalLinePrimitive10",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "2,6.7,4.7,0.01",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "StartCap": ";;;",
+              "EndCap": ";;;"
+            },
+            "35": {
+              "Ident": "StiHorizontalLinePrimitive",
+              "Name": "HorizontalLinePrimitive1",
+              "Guid": "827001154ac9440d8651a2b8cb30e964",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "1,0.5,9,0.01",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Size": 3.5,
+              "StartCap": ";;;",
+              "EndCap": ";;;"
+            }
+          },
+          "DataSourceName": "VINObject"
+        }
+      },
+      "PaperSize": "Letter",
+      "Orientation": "Landscape",
+      "PageWidth": 11.0,
+      "PageHeight": 8.5,
+      "Watermark": {
+        "TextBrush": "solid:50,0,0,0"
+      },
+      "Margins": {
+        "Left": 0.39,
+        "Right": 0.39,
+        "Top": 0.39,
+        "Bottom": 0.39
+      }
+    }
+  }
+}
