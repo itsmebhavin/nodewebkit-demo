@@ -57,10 +57,12 @@ angular.module('components.window',[])
             function start() {
                 stop();
                 promise = $interval(function () {
-                    if ((index * 10) >= 100)
+                    console.log('index:' + index);
+                    if ((index * 10) > 100)
                         stop();
                     else {
                         index += 1;
+                        console.log('index:' + index + '  ' + 10 * index);
                         win.setBadgeLabel(10 * index);
                     }
                 }, 20000);
