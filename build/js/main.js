@@ -116,7 +116,7 @@ angular.module('demoapp').controller('mainCtrl', ['$scope', '$state', 'hotkeys',
     $scope.today = new Date();
     $scope.format = 'M/d/yy h:mm:ss a';
 
-    server.vindb.printReport();
+    
 }]);
 
 angular.module('demoapp').controller('defaultCtrl', ['$scope', '$stateParams', '$state', function ($scope, $stateParams, $state) {
@@ -236,6 +236,9 @@ angular.module('demoapp').controller('toolbarCtrl', ['$scope', '$rootScope', fun
     }
     $scope.openTransferPanel = function() {
         $rootScope.$broadcast('openTransferPanel', {});
+    }
+    $scope.printForm = function () {
+        server.vindb.printReport();
     }
 }]);
 angular.module('demoapp').controller('releaseNotesCtrl', ['$scope', function ($scope) {
