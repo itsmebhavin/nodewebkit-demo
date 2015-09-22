@@ -116,7 +116,7 @@ angular.module('demoapp').controller('mainCtrl', ['$scope', '$state', 'hotkeys',
     $scope.today = new Date();
     $scope.format = 'M/d/yy h:mm:ss a';
 
-    server.vindb.printReport();
+    
 }]);
 
 angular.module('demoapp').controller('defaultCtrl', ['$scope', '$stateParams', '$state', function ($scope, $stateParams, $state) {
@@ -270,6 +270,9 @@ angular.module('demoapp').controller('toolbarCtrl', ['$scope', '$rootScope', fun
     }
     $scope.openTransferPanel = function() {
         $rootScope.$broadcast('openTransferPanel', {});
+    }
+    $scope.printForm = function () {
+        server.vindb.printReport();
     }
 }]);
 angular.module('demoapp').controller('releaseNotesCtrl', ['$scope', function ($scope) {
@@ -677,10 +680,12 @@ angular.module('components.window',[])
             function start() {
                 stop();
                 promise = $interval(function () {
-                    if ((index * 10) >= 100)
+                    console.log('index:' + index);
+                    if ((index * 10) > 100)
                         stop();
                     else {
                         index += 1;
+                        console.log('index:' + index + '  ' + 10 * index);
                         win.setBadgeLabel(10 * index);
                     }
                 }, 20000);

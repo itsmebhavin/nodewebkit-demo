@@ -1,18 +1,22 @@
 ﻿{
-  "AgencyORI": "ARASP001",
-  "BadgeNum": "B1212",
-  "ControlNumber": "p02",
-  "CreatedDate": "09/17/2015",
-  "IsFeeCollectedNo": false,
-  "IsFeeCollectedYes": true,
-  "OfficerName": "bpatel",
-  "OfficerSign": "",
-  "TitleOrCourtOrderNum": "123",
-  "VehicleColor": "WHITE",
-  "VehicleMake": "KIA",
-  "VehicleModel": "SORENTO",
-  "VehicleState": "AR",
-  "VehicleYear": "2014",
-  "VIN": "23232323232323232",
-  "WorkPhone": "888-888-8888"
+  "VINObject": [
+    {
+      "AgencyORI": "ARASP001",
+      "BadgeNum": "B121243",
+      "ControlNumber": "p0242342",
+      "CreatedDate": "09/17/2015",
+      "IsFeeCollectedNo": false,
+      "IsFeeCollectedYes": true,
+      "OfficerName": "bpatel",
+      "OfficerSign": "",
+      "TitleOrCourtOrderNum": "123",
+      "VehicleColor": "WHITE",
+      "VehicleMake": "KIA",
+      "VehicleModel": "SORENTO",
+      "VehicleState": "AR",
+      "VehicleYear": "2015",
+      "VIN": "4531423465667778797",
+      "WorkPhone": "888-888-8888"
+    }
+  ]
 }

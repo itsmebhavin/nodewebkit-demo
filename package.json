@@ -11,7 +11,9 @@
     "gulp-concat": "^2.6.0",
     "gulp-htmlmin": "^1.1.4",
     "gulp-util": "^3.0.6",
-    "nw-builder": "^2.0.2"
+    "nw-builder": "^2.0.2",
+    "opentype.js": "^0.4.10",
+    "strip-bom": "^2.0.0"
   },
   "author": "bhavin patel",
   "window": {

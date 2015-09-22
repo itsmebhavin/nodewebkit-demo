@@ -146,5 +146,5 @@ exports.dumpDatabase = function() {
 
 
 exports.printReport = function () {
-    report.printReport();
+    report.printVINReport();
 }

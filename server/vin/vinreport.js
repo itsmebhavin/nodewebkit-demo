@@ -1,27 +1,31 @@
-﻿var fs = require('fs');
-var stripBom = require('strip-bom');
-var sr = require('./../general/stimulsoft.reports.js');
-console.log("Stimulsoft Reports Loaded");
+﻿exports.printVINReport = function () {
+    var fs = require('fs');
+    var stripBom = require('strip-bom');
+    var sr = require('../StimulsoftReportJS/stimulsoft.reports.js');
+    var opentype = require('opentype.js');
+    console.log("-----------------START------------------.");
+    console.log("Stimulsoft Reports Loaded");
 
-exports.printReport = function () {
+    var font = opentype.loadSync('../nodewebkit-demo/server/StimulsoftReportJS/Roboto-Black.ttf');
+    sr.Stimulsoft.Base.StiFontCollection.addOpentypeFont(font);
+    //sr.Stimulsoft.Base.StiFontCollection.addOpentypeFont(font, "My Font Name");
+
     var report = new sr.Stimulsoft.Report.StiReport();
     console.log("New Report Created");
 
-    var reportTemplate = fs.readFileSync('./../nodewebkit-demo/server/vin/VINReport.mrt', "utf8");
+    var reportTemplate = stripBom(fs.readFileSync('./server/vin/VINReport.mrt', "utf8"));
     report.load(reportTemplate);
     console.log("Report Template Loaded");
 
-    var demoData = stripBom(fs.readFileSync('./../nodewebkit-demo/server/vin/VINPrintObject.json', "utf8"));
+    var demoData = stripBom(fs.readFileSync('./server/vin/VINPrintObject.json', "utf8"));
     report.dictionary.databases.clear();
-    report.regData("Demo", "Demo", demoData);
-    console.log("Demo data loaded into the report. Tables County: ", report.dataStore.count);
-
+    report.regData("VINObject", "", demoData);
+    console.log("Demo data loaded into the report. Tables Count: ", report.dataStore.count);
     report.render();
-    console.log("Report rendered. Pages Count: ", report.renderedPages.count);
 
+    console.log("Report rendered. Pages Count: ", report.renderedPages.count);
     // Creating export settings
     var settings = new sr.Stimulsoft.Report.Export.StiPdfExportSettings();
-
     // Creating export service
     var service = new sr.Stimulsoft.Report.Export.StiPdfExportService();
 
@@ -38,7 +42,7 @@ exports.printReport = function () {
     var buffer = new Buffer(data, "utf-8")
 
     // Saving rendered report in PDF into a file
-    fs.writeFileSync('./SimpleList.pdf', buffer);
+    fs.writeFileSync('./VinReport.pdf', buffer);
     console.log("Rendered report saved into PDF-file.");
-    
+    console.log("-----------------------------------.");
 }
