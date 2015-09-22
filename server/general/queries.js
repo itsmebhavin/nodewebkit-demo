@@ -10,7 +10,7 @@ exports.INSERT_VIN_FORM_DATA = function(form, id) {
                 .set('TitleState', (form.stateTitle ? form.stateTitle : ''))
                 .set('IsTitleorCourtNum', (form.titleCourt ? 'T' : 'C'))
                 .set('TitleOrCourtNum', (form.titleCourtOrderNum ? form.titleCourtOrderNum : ''))
-                .set('InspectionDateTime', (form.inpsectionDateTime ? form.InspectionDateTime : null))
+                .set('InspectionDateTime', (form.inpsectionDateTime ? form.inspectionDateTime : null))
                 .set('WorkPhone', (form.WorkPhone ? form.WorkPhone : null))
                 .set('Is25FeeCollected', (form.feeCollected ? form.feeCollected.toString() : 'false'))
                 .toString();
@@ -23,7 +23,7 @@ exports.UPDATE_VIN_FORM_DATA = function(form, id) {
                 .set('TitleState', (form.stateTitle ? form.stateTitle : ''))
                 .set('IsTitleorCourtNum', (form.titleCourt ? 'T' : 'C'))
                 .set('TitleOrCourtNum', (form.titleCourtOrderNum ? form.titleCourtOrderNum : ''))
-                .set('InspectionDateTime', (form.inpsectionDateTime ? form.InspectionDateTime : null))
+                .set('InspectionDateTime', (form.inpsectionDateTime ? form.inspectionDateTime : null))
                 .set('WorkPhone', (form.WorkPhone ? form.WorkPhone : null))
                 .set('Is25FeeCollected', (form.feeCollected ? form.feeCollected.toString() : 'false'))
                 .toString();
@@ -95,6 +95,7 @@ exports.UPDATE_VEHICLE_DATA = function(form, id) {
                 .toString();
 }
 exports.INSERT_VIN_FORM_INFO = function(info) {
+    console.log(info.finalizedDate);
     return squel.insert()
                 .into("Documents")
                 .set('DocumentID', info.id)
@@ -119,15 +120,16 @@ exports.INSERT_VIN_FORM_INFO = function(info) {
                 .toString();
 }
 exports.UPDATE_VIN_FORM_INFO = function(info) {
+    console.log(info.finalizedDate);
     return squel.update()
                 .table("Documents")
                 .set('DocumentID', info.id)
                 .set('TicketNum', info.title)
                 .set('CreateDate', (info.createDate ? info.createDate : (new Date()).toISOString()))
                 .set('Finalized', info.finalized.toString())
-                .set('FinalizedDate', info.finalizedDate)
+                .set('FinalizedDate', (info.finalizedDate ? info.finalizedDate : (new Date()).toISOString()))
                 .set('Transferred', 'true')
-                .set('TransferDate', (info.transferredDate ? info.transferredDate : (new Date()).toISOString()))
+                .set('TransferDate', (new Date()).toISOString())
                 .set('StatusID', 4)
                 .set('StatusText', 'Transferred')
                 .set('TypeID', 8)
@@ -152,12 +154,27 @@ exports.SELECT_DOCUMENTS_BY_USER = function(username) {
     return squel.select()
                 .from('Documents')
                 .where('Username = ?', username)
+                .where('TypeID = ?', 8)
                 .toString();
 }
-exports.SELECT_DOCUMENT_BY_ID = function(docId) {
-    return squel.select()
+/* VIN (end) */
+/* LOAD FROM SERVER (begin) */
+exports.SELECT_VIN_DATA_BY_ID = function(docId) {
+    return squel.select('top 1 *')
+                .from('VINInspections')
+                .where('DocumentID = ?', docId)
+                .toString();
+}
+exports.SELECT_VIN_FORM_INFO_BY_ID = function(docId) {
+    return squel.select('top 1 *')
         .from('Documents')
         .where('DocumentID = ?', docId)
         .toString();
 }
-/* VIN (end) */
+exports.SELECT_VIN_VEHICLES_BY_ID = function(docId) {
+    return squel.select('top 1 *')
+                .from('Vehicles')
+                .where('DocumentID = ?', docId)
+                .toString();
+}
+/* LOAD FROM SERVER (end) */

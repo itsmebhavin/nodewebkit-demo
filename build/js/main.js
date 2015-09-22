@@ -203,7 +203,7 @@ angular.module('demoapp').controller('openFormLocalCtrl', ['$scope', '$state', f
     }
 
 }]);
-angular.module('demoapp').controller('openFormServerCtrl', ['$scope', function($scope) {
+angular.module('demoapp').controller('openFormServerCtrl', ['$scope', '$state', function($scope, $state) {
     $scope.documents;
     $scope.selectedForm;
 
@@ -212,8 +212,42 @@ angular.module('demoapp').controller('openFormServerCtrl', ['$scope', function($
     });
 
     $scope.openForm = function(docId) {
-        var form = server.remotedb.loadForm(docId);
-        console.log(form);
+        server.remotedb.loadForm(docId).then(function (data) {
+            var form = {
+                form: {
+                    vin: data.vehicle.Vin,
+                    stateTitle: data.form.TitleState,
+                    titleCourt: data.form.IsTitleorCourtNum == 'T',
+                    titleCourtOrderNum: data.form.TitleOrCourtNum,
+                    inspectionDateTime: data.form.InspectionDateTime,
+                    verifyingAgency: null,
+                    workPhone: data.form.WorkPhone,
+                    vehicleYear: data.vehicle.Year,
+                    vehicleMake: data.vehicle.Make,
+                    vehicleModel: data.vehicle.Model,
+                    vehicleColor: data.vehicle.Color,
+                    officerName: data.info.OffcerName,
+                    badgeID: null,
+                    feeCollected: data.form.Is25FeeCollected
+                },
+                formInfo: {
+                    id: data.info.DocumentID,
+                    title: data.info.TicketNum,
+                    createDate: data.info.CreateDate,
+                    finalized: data.info.Finalized,
+                    finalizedDate: data.info.FinalizedDate,
+                    transferred: data.info.Transferred,
+                    transferredDate: data.info.TransferredDate,
+                    type: 'VIN',
+                    lastModifiedDate: data.info.LastModifiedDate
+                },
+            }
+            console.log(form);
+            server.vindb.saveLocalForm(form.formInfo, form.form);
+            $state.go('default', { type: 'VIN', newform: false });
+        }, function(err) {
+            console.log("openForm: " + err);
+        });
     }
 
 
@@ -348,7 +382,8 @@ angular.module('application.directives', [])
             required: '@',
             ngModel: '=',
             ngMinlengthErrType: '@',
-            static: '@'
+            static: '@',
+            type: '@'
         },
         //templateUrl: 'app/directive_tmpl/form_controls/textboxwithlabel.tmpl.html',
         template: $templateCache.get('textboxwithlabel.tmpl.html'),

@@ -77,7 +77,7 @@ exports.finalizeForm = function(finalize) {
     var localForm = localForms.findOne({'formInfo.id':id});
     var savedForm = savedForms.findOne({'formInfo.id':id});
 
-    if(localForm.formInfo.valid !== true) {
+    if(finalize && localForm.formInfo.valid !== true) {
         return "Invalid";
     }
 

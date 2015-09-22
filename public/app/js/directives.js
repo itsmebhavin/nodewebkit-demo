@@ -82,7 +82,8 @@ angular.module('application.directives', [])
             required: '@',
             ngModel: '=',
             ngMinlengthErrType: '@',
-            static: '@'
+            static: '@',
+            type: '@'
         },
         //templateUrl: 'app/directive_tmpl/form_controls/textboxwithlabel.tmpl.html',
         template: $templateCache.get('textboxwithlabel.tmpl.html'),

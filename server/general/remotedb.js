@@ -24,7 +24,27 @@ exports.loadFormsForUser = function(username) {
 }
 exports.loadForm = function(docId) {
     var q = queue.defer();
-    q.resolve(true);
+    var ret = {
+        form: {},
+        info: {},
+        vehicle: {}
+    };
+    executeQuery(query.SELECT_VIN_DATA_BY_ID(docId)).then(function(data) {
+        if(data) ret.form = data[0];
+        return executeQuery(query.SELECT_VIN_FORM_INFO_BY_ID(docId));
+    }, function(err) {
+        q.reject(err);
+    }).then(function(data) {
+        if(data) ret.info = data[0];
+        return executeQuery(query.SELECT_VIN_VEHICLES_BY_ID(docId));
+    }, function(err) {
+        q.reject(err);
+    }).then(function(data) {
+        if(data) ret.vehicle = data[0];
+        q.resolve(ret);
+    }).then(function(err) {
+        q.reject(err);
+    });
     return q.promise;
 }
 
@@ -36,42 +56,44 @@ function submitVin(data) {
     var existsQ = query.DOES_DOCUMENT_EXIST(info.id);
     var insertFormQ = query.INSERT_VIN_FORM_DATA(form, info.id);
     var updateFormQ = query.UPDATE_VIN_FORM_DATA(form, info.id);
+    console.log("Form Info")
     var insertInfoQ = query.INSERT_VIN_FORM_INFO(info);
     var updateInfoQ = query.UPDATE_VIN_FORM_INFO(info);
+    console.log("Vehilce Data")
     var insertVehicleQ = query.INSERT_VEHICLE_DATA(form, info.id);
     var updateVehicleQ = query.UPDATE_VEHICLE_DATA(form, info.id);
 
-    executeQuery(existsQ).then(function(data) {
-        if(data.length > 0) {
-            executeQuery(updateFormQ).then(function(ufq) {
-                return executeQuery(updateInfoQ);
-            }, function(err) {
-                console.log("Update Form Query: " + err);
-            }).then(function(uiq) {
-                return executeQuery(updateVehicleQ);
-            }, function (err) {
-                console.log("Update Info Query: " + err);
-            }).then(function(uvq) {
-                // Do nothing
-            }, function (err) {
-                console.log("Update Vehicle Query: " + err);
-            });
-        } else {
-            executeQuery(insertFormQ).then(function(a,b,c) {
-                return executeQuery(insertInfoQ);
-            }, function(err) {
-                console.log("Insert Form Query: " + err);
-            }).then(function(iiq) {
-                return executeQuery(insertVehicleQ);
-            }, function(err) {
-                console.log("Insert Info Query: " + err);
-            }).then(function(ivq) {
-                // Do Nothing
-            }, function(err) {
-                console.log("Insert Vehicle Query: " + err);
-            });
-        }
-    });
+    // executeQuery(existsQ).then(function(data) {
+    //     if(data.length > 0) {
+    //         executeQuery(updateFormQ).then(function(ufq) {
+    //             return executeQuery(updateInfoQ);
+    //         }, function(err) {
+    //             console.log("Update Form Query: " + err);
+    //         }).then(function(uiq) {
+    //             return executeQuery(updateVehicleQ);
+    //         }, function (err) {
+    //             console.log("Update Info Query: " + err);
+    //         }).then(function(uvq) {
+    //             // Do nothing
+    //         }, function (err) {
+    //             console.log("Update Vehicle Query: " + err);
+    //         });
+    //     } else {
+    //         executeQuery(insertFormQ).then(function(a,b,c) {
+    //             return executeQuery(insertInfoQ);
+    //         }, function(err) {
+    //             console.log("Insert Form Query: " + err);
+    //         }).then(function(iiq) {
+    //             return executeQuery(insertVehicleQ);
+    //         }, function(err) {
+    //             console.log("Insert Info Query: " + err);
+    //         }).then(function(ivq) {
+    //             // Do Nothing
+    //         }, function(err) {
+    //             console.log("Insert Vehicle Query: " + err);
+    //         });
+    //     }
+    // });
 }
 
 function executeQuery(query) {
