@@ -59,14 +59,14 @@ exports.saveForm = function() {
                 title:localForm.formInfo.title,
                 type:localForm.formInfo.type,
                 dateIssued:new Date(),
-                lastChanged:new Date(),
+                lastModifiedDate:new Date(),
                 valid:localForm.formInfo.valid
             },
             form:localForm.form
         });
     } else {
         savedForm = localForm;
-        savedForm.formInfo.lastchanged = new Date();
+        savedForm.formInfo.lastModifiedDate = new Date();
         savedForms.update(savedForm);
     }
     db.saveDatabase();
@@ -77,7 +77,7 @@ exports.finalizeForm = function(finalize) {
     var localForm = localForms.findOne({'formInfo.id':id});
     var savedForm = savedForms.findOne({'formInfo.id':id});
 
-    if(finalize && localForm.formInfo.valid !== true) {
+    if(finalize && localForm.formInfo.validity == "invalid") {
         return "Invalid";
     }
 
@@ -91,7 +91,7 @@ exports.finalizeForm = function(finalize) {
                 title:localForm.title,
                 type:localForm.type,
                 dateIssued:new Date(),
-                lastChanged:new Date(),
+                lastModifiedDate:new Date(),
                 finalized:true,
                 finalizedDate:new Date()
             },
@@ -123,7 +123,7 @@ exports.loadForm = function(t) {
 }
 
 exports.loadRecents = function() {
-    var forms = savedForms.chain().find().simplesort('formInfo.lastchanged').limit(5).data();
+    var forms = savedForms.chain().find().simplesort('formInfo.lastModifiedDate').limit(5).data();
     var result = forms.map(function(form) {return {title:form.formInfo.title, type:form.formInfo.type}});
     return result;
 }

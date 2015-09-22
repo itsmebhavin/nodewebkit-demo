@@ -18,8 +18,6 @@ exports.INSERT_VIN_FORM_DATA = function(form, id) {
 exports.UPDATE_VIN_FORM_DATA = function(form, id) {
     return squel.update()
                 .table('VINInspections')
-                .set('VinInspectionID', uuid.v4())
-                .set('DocumentID', id)
                 .set('TitleState', (form.stateTitle ? form.stateTitle : ''))
                 .set('IsTitleorCourtNum', (form.titleCourt ? 'T' : 'C'))
                 .set('TitleOrCourtNum', (form.titleCourtOrderNum ? form.titleCourtOrderNum : ''))
@@ -64,8 +62,6 @@ exports.INSERT_VEHICLE_DATA = function(form, id) {
 exports.UPDATE_VEHICLE_DATA = function(form, id) {
     return squel.update()
                 .table('Vehicles')
-                .set('ID', uuid.v4())
-                .set('DocumentID', id)
                 // .set('Body')
                 // .set('MakeCode')
                 .set('Make', form.vehicleMake)
@@ -95,16 +91,15 @@ exports.UPDATE_VEHICLE_DATA = function(form, id) {
                 .toString();
 }
 exports.INSERT_VIN_FORM_INFO = function(info) {
-    console.log(info.finalizedDate);
     return squel.insert()
                 .into("Documents")
                 .set('DocumentID', info.id)
                 .set('TicketNum', info.title)
-                .set('CreateDate', (info.createDate ? info.createDate : (new Date()).toISOString()))
+                .set('CreateDate', (info.createDate ? info.createDate.toISOString() : (new Date()).toISOString()))
                 .set('Finalized', info.finalized.toString())
-                .set('FinalizedDate', (info.finalizedDate ? info.finalizedDate : (new Date()).toISOString()))
+                .set('FinalizedDate', (info.finalizedDate ? info.finalizedDate.toISOString() : (new Date()).toISOString()))
                 .set('Transferred', 'true')
-                .set('TransferDate', (info.transferredDate ? info.transferredDate : (new Date()).toISOString()))
+                .set('TransferDate', (info.transferredDate ? info.transferredDate.toISOString() : (new Date()).toISOString()))
                 .set('StatusID', 4)
                 .set('StatusText', 'Transferred')
                 .set('TypeID', 8)
@@ -120,16 +115,14 @@ exports.INSERT_VIN_FORM_INFO = function(info) {
                 .toString();
 }
 exports.UPDATE_VIN_FORM_INFO = function(info) {
-    console.log(info.finalizedDate);
     return squel.update()
                 .table("Documents")
-                .set('DocumentID', info.id)
                 .set('TicketNum', info.title)
-                .set('CreateDate', (info.createDate ? info.createDate : (new Date()).toISOString()))
+                .set('CreateDate', (info.createDate ? info.createDate.toISOString() : (new Date()).toISOString()))
                 .set('Finalized', info.finalized.toString())
-                .set('FinalizedDate', (info.finalizedDate ? info.finalizedDate : (new Date()).toISOString()))
+                .set('FinalizedDate', (info.finalizedDate ? info.finalizedDate.toISOString() : (new Date()).toISOString()))
                 .set('Transferred', 'true')
-                .set('TransferDate', (new Date()).toISOString())
+                .set('TransferDate', (info.transferredDate ? info.transferredDate.toISOString() : (new Date()).toISOString()))
                 .set('StatusID', 4)
                 .set('StatusText', 'Transferred')
                 .set('TypeID', 8)

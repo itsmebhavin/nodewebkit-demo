@@ -116,7 +116,7 @@ angular.module('demoapp').controller('mainCtrl', ['$scope', '$state', 'hotkeys',
     $scope.today = new Date();
     $scope.format = 'M/d/yy h:mm:ss a';
 
-    
+
 }]);
 
 angular.module('demoapp').controller('defaultCtrl', ['$scope', '$stateParams', '$state', function ($scope, $stateParams, $state) {
@@ -197,7 +197,6 @@ angular.module('demoapp').controller('openFormLocalCtrl', ['$scope', '$state', f
 
     $scope.openForm = function (title) {
         var form = server.vindb.loadForm(title);
-        // server.vindb.saveLocalForm(form.formInfo.id, form.form, form.formInfo.type, form.title);
         server.vindb.saveLocalForm(form.formInfo, form.form);
         $state.go('default', { type: 'VIN', newform: false });
     }
