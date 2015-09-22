@@ -141,7 +141,34 @@ var loadFinalizedForms = function() {
 }
 
 var printReport = function () {
-    report.printVINReport();
+    var id = localActive.findOne({activeTab: {$contains: ''}}).activeTab;
+    var localForm = localForms.findOne({'formInfo.id': id});
+    form = localForm.form;
+    info = localForm.formInfo;
+    console.log(info);
+    var data = {
+        "VINObject": [
+            {
+                "AgencyORI": form.verifyingAgency,
+                "BadgeNum": form.badgeID,
+                "ControlNumber": "p0242342",
+                "CreatedDate": (info.createDate ? info.createDate : new Date()),
+                "IsFeeCollectedNo": !form.feeCollected,
+                "IsFeeCollectedYes": form.feeCollected,
+                "OfficerName": form.officerName,
+                "OfficerSign": "",
+                "TitleOrCourtOrderNum": form.titleCourtOrderNum,
+                "VehicleColor": form.vehicleColor,
+                "VehicleMake": form.vehicleMake,
+                "VehicleModel": form.vehicleModel,
+                "VehicleState": form.stateTitle,
+                "VehicleYear": form.vehicleYear,
+                "VIN": form.vin,
+                "WorkPhone": form.workPhone
+            }
+        ]
+    }
+    report.printVINReport(data);
 }
 
 exports.saveLocalActive = saveLocalActive;
