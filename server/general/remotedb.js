@@ -77,7 +77,7 @@ function submitVin(data) {
                 console.log("Update Vehicle Query: " + err);
             });
         } else {
-            executeQuery(insertFormQ).then(function(a,b,c) {
+            executeQuery(insertFormQ).then(function(ifq) {
                 return executeQuery(insertInfoQ);
             }, function(err) {
                 console.log("Insert Form Query: " + err);

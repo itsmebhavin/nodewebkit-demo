@@ -50,7 +50,6 @@ var deleteLocalForm = function(id) {
 var saveForm = function() {
     var id = localActive.findOne({activeTab: {$contains: ''}}).activeTab;
     var localForm = localForms.findOne({'formInfo.id': id});
-    // var savedForm = savedForms.findOne({$and:[{'formInfo':{$contains:'id'}},{'formInfo.id':id}]});
     var savedForm = savedForms.findOne({'formInfo.id': id});
     if(savedForm === null) {
         savedForms.insert({
@@ -60,7 +59,7 @@ var saveForm = function() {
                 type:localForm.formInfo.type,
                 dateIssued:new Date(),
                 lastModifiedDate:new Date(),
-                valid:localForm.formInfo.valid
+                validity:localForm.formInfo.validity
             },
             form:localForm.form
         });
@@ -86,18 +85,6 @@ var finalizeForm = function(finalize) {
 
     if(savedForm === null) {
         saveForm();
-        // savedForms.insert({
-        //     formInfo: {
-        //         id:localForm.id,
-        //         title:localForm.title,
-        //         type:localForm.type,
-        //         dateIssued:new Date(),
-        //         lastModifiedDate:new Date(),
-        //         finalized:true,
-        //         finalizedDate:new Date()
-        //     },
-        //     form:localForm.form
-        // });
     } else {
         savedForm.formInfo.finalized = finalize;
         savedForm.formInfo.finalizedDate = finalize ? localForm.formInfo.finalizedDate : null;
@@ -145,10 +132,20 @@ var printReport = function () {
     var localForm = localForms.findOne({'formInfo.id': id});
     form = localForm.form;
     info = localForm.formInfo;
-    console.log(info);
+    if(!info.finalized) {
+        console.log("Form not finalized");
+        return;
+    } else if(!form.vin || !form.vehicleColor || !form.vehicleMake || !form.vehicleModel) {
+        console.log("Missing required data");
+        return;
+    }
     var data = {
         "VINObject": [
             {
+                "VIN": form.vin,
+                "VehicleColor": form.vehicleColor,
+                "VehicleMake": form.vehicleMake,
+                "VehicleModel": form.vehicleModel,
                 "AgencyORI": form.verifyingAgency ? form.verifyingAgency : "",
                 "BadgeNum": form.badgeID ? form.badgeID : "",
                 "ControlNumber": "p0242342",
@@ -158,12 +155,8 @@ var printReport = function () {
                 "OfficerName": form.officerName ? form.officerName : "",
                 "OfficerSign": "",
                 "TitleOrCourtOrderNum": form.titleCourtOrderNum ? form.titleCourtOrderNum : "",
-                "VehicleColor": form.vehicleColor,
-                "VehicleMake": form.vehicleMake,
-                "VehicleModel": form.vehicleModel,
                 "VehicleState": form.stateTitle ? form.stateTitle : "",
                 "VehicleYear": form.vehicleYear ? form.vehicleYear : "",
-                "VIN": form.vin,
                 "WorkPhone": form.workPhone ? form.workPhone : ""
             }
         ]
