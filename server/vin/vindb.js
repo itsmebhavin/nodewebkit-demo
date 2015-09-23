@@ -149,22 +149,22 @@ var printReport = function () {
     var data = {
         "VINObject": [
             {
-                "AgencyORI": form.verifyingAgency,
-                "BadgeNum": form.badgeID,
+                "AgencyORI": form.verifyingAgency ? form.verifyingAgency : "",
+                "BadgeNum": form.badgeID ? form.badgeID : "",
                 "ControlNumber": "p0242342",
                 "CreatedDate": (info.createDate ? info.createDate : new Date()),
-                "IsFeeCollectedNo": !form.feeCollected,
-                "IsFeeCollectedYes": form.feeCollected,
-                "OfficerName": form.officerName,
+                "IsFeeCollectedNo": form.feeCollected ? !form.feeCollected: false,
+                "IsFeeCollectedYes": form.feeCollected ? form.feeCollected: true,
+                "OfficerName": form.officerName ? form.officerName : "",
                 "OfficerSign": "",
-                "TitleOrCourtOrderNum": form.titleCourtOrderNum,
+                "TitleOrCourtOrderNum": form.titleCourtOrderNum ? form.titleCourtOrderNum : "",
                 "VehicleColor": form.vehicleColor,
                 "VehicleMake": form.vehicleMake,
                 "VehicleModel": form.vehicleModel,
-                "VehicleState": form.stateTitle,
-                "VehicleYear": form.vehicleYear,
+                "VehicleState": form.stateTitle ? form.stateTitle : "",
+                "VehicleYear": form.vehicleYear ? form.vehicleYear : "",
                 "VIN": form.vin,
-                "WorkPhone": form.workPhone
+                "WorkPhone": form.workPhone ? form.workPhone : ""
             }
         ]
     }

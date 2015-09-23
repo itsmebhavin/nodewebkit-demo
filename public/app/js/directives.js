@@ -81,6 +81,7 @@ angular.module('application.directives', [])
             ngMaxlength: '=',
             required: '@',
             ngModel: '=',
+            ngModelOptions: '=',
             ngMinlengthErrType: '@',
             static: '@',
             type: '@'
