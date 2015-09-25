@@ -16,7 +16,7 @@
     var reportTemplate = stripBom(fs.readFileSync('./server/vin/VINReport.mrt', "utf8"));
     report.load(reportTemplate);
     console.log("Report Template Loaded");
-
+     
     var demoData = stripBom(fs.readFileSync('./server/vin/VINPrintObject.json', "utf8"));
     report.dictionary.databases.clear();
     report.regData("VINObject", "", demoData);
