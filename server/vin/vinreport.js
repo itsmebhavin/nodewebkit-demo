@@ -1,4 +1,4 @@
-﻿exports.printVINReport = function () {
+﻿exports.printVINReport = function (data) {
     var fs = require('fs');
     var stripBom = require('strip-bom');
     var sr = require('../StimulsoftReportJS/stimulsoft.reports.js');
@@ -16,8 +16,9 @@
     var reportTemplate = stripBom(fs.readFileSync('./server/vin/VINReport.mrt', "utf8"));
     report.load(reportTemplate);
     console.log("Report Template Loaded");
-     
-    var demoData = stripBom(fs.readFileSync('./server/vin/VINPrintObject.json', "utf8"));
+
+    // var demoData1 = stripBom(fs.readFileSync('./server/vin/VINPrintObject.json', "utf8"));
+    var demoData = JSON.stringify(data);
     report.dictionary.databases.clear();
     report.regData("VINObject", "", demoData);
     console.log("Demo data loaded into the report. Tables Count: ", report.dataStore.count);

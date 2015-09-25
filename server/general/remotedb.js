@@ -24,7 +24,27 @@ exports.loadFormsForUser = function(username) {
 }
 exports.loadForm = function(docId) {
     var q = queue.defer();
-    q.resolve(true);
+    var ret = {
+        form: {},
+        info: {},
+        vehicle: {}
+    };
+    executeQuery(query.SELECT_VIN_DATA_BY_ID(docId)).then(function(data) {
+        if(data) ret.form = data[0];
+        return executeQuery(query.SELECT_VIN_FORM_INFO_BY_ID(docId));
+    }, function(err) {
+        q.reject(err);
+    }).then(function(data) {
+        if(data) ret.info = data[0];
+        return executeQuery(query.SELECT_VIN_VEHICLES_BY_ID(docId));
+    }, function(err) {
+        q.reject(err);
+    }).then(function(data) {
+        if(data) ret.vehicle = data[0];
+        q.resolve(ret);
+    }).then(function(err) {
+        q.reject(err);
+    });
     return q.promise;
 }
 
@@ -57,7 +77,7 @@ function submitVin(data) {
                 console.log("Update Vehicle Query: " + err);
             });
         } else {
-            executeQuery(insertFormQ).then(function(a,b,c) {
+            executeQuery(insertFormQ).then(function(ifq) {
                 return executeQuery(insertInfoQ);
             }, function(err) {
                 console.log("Insert Form Query: " + err);

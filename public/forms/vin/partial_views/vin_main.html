@@ -3,11 +3,11 @@
         <!-- Temporary button to open validation panel -->
         <fieldset ng-disabled="tab.form.formInfo.finalized">
             <div class="column col-xs-6">
-                <textbox-with-label id="inputVIN" placeholder="Enter VIN#" label="VIN" ng-model="vinForm.vin" ng-minlength="13" required ng-minlength-err-type="minLengthWarning"></textbox-with-label>
+                <textbox-with-label id="inputVIN" placeholder="Enter VIN#" label="VIN" ng-model="vinForm.vin" ng-minlength="13" required ng-minlength-err-type="minLengthWarning" ng-model-options="{allowInvalid: true}"></textbox-with-label>
                 <dropdown-with-label id="inputStateOfTitle" label="State Of Current Title" items="stateList" ng-model="vinForm.stateTitle"></dropdown-with-label>
                 <switch-with-label id="inputTitleCourt" label="Title or Court" on="Title" off="Court" ng-model="vinForm.titleCourt"></switch-with-label>
                 <textbox-with-label id="inputTitleCourtOrderNum" placeholder="Enter {{vinForm.titleCourt ? 'Title' : 'Court'}} Order #" label="{{vinForm.titleCourt ? 'Title' : 'Court'}} Order #" ng-model="vinForm.titleCourtOrderNum"></textbox-with-label>
-                <textbox-with-label id="inputInspectionDateTime" placeholder="Select Inspection Datetime" label="Inspection Date &amp; Time" ng-model="vinForm.inspectionDateTime"></textbox-with-label>
+                <textbox-with-label id="inputInspectionDateTime" type="date" placeholder="Select Inspection Datetime" label="Inspection Date &amp; Time" ng-model="vinForm.inspectionDateTime"></textbox-with-label>
                 <textbox-with-label id="inputVerifyingAgency" placeholder="Enter Agency" label="Verifying Agency" ng-model="vinForm.verifyingAgency"></textbox-with-label>
                 <textbox-with-label id="inputWorkPhone" placeholder="Enter Phone#" label="Work Phone" ng-model="vinForm.workPhone"></textbox-with-label>
             </div>

@@ -84,7 +84,7 @@ angular.module('demoapp').controller('mainCtrl', ['$scope', '$state', 'hotkeys',
     $scope.today = new Date();
     $scope.format = 'M/d/yy h:mm:ss a';
 
-    
+
 }]);
 
 angular.module('demoapp').controller('defaultCtrl', ['$scope', '$stateParams', '$state', function ($scope, $stateParams, $state) {
@@ -165,13 +165,12 @@ angular.module('demoapp').controller('openFormLocalCtrl', ['$scope', '$state', f
 
     $scope.openForm = function (title) {
         var form = server.vindb.loadForm(title);
-        // server.vindb.saveLocalForm(form.formInfo.id, form.form, form.formInfo.type, form.title);
         server.vindb.saveLocalForm(form.formInfo, form.form);
         $state.go('default', { type: 'VIN', newform: false });
     }
 
 }]);
-angular.module('demoapp').controller('openFormServerCtrl', ['$scope', function($scope) {
+angular.module('demoapp').controller('openFormServerCtrl', ['$scope', '$state', function($scope, $state) {
     $scope.documents;
     $scope.selectedForm;
 
@@ -180,8 +179,42 @@ angular.module('demoapp').controller('openFormServerCtrl', ['$scope', function($
     });
 
     $scope.openForm = function(docId) {
-        var form = server.remotedb.loadForm(docId);
-        console.log(form);
+        server.remotedb.loadForm(docId).then(function (data) {
+            var form = {
+                form: {
+                    vin: data.vehicle.Vin,
+                    stateTitle: data.form.TitleState,
+                    titleCourt: data.form.IsTitleorCourtNum == 'T',
+                    titleCourtOrderNum: data.form.TitleOrCourtNum,
+                    inspectionDateTime: data.form.InspectionDateTime,
+                    verifyingAgency: null,
+                    workPhone: data.form.WorkPhone,
+                    vehicleYear: data.vehicle.Year,
+                    vehicleMake: data.vehicle.Make,
+                    vehicleModel: data.vehicle.Model,
+                    vehicleColor: data.vehicle.Color,
+                    officerName: data.info.OffcerName,
+                    badgeID: null,
+                    feeCollected: data.form.Is25FeeCollected
+                },
+                formInfo: {
+                    id: data.info.DocumentID,
+                    title: data.info.TicketNum,
+                    createDate: data.info.CreateDate,
+                    finalized: data.info.Finalized,
+                    finalizedDate: data.info.FinalizedDate,
+                    transferred: data.info.Transferred,
+                    transferredDate: data.info.TransferredDate,
+                    type: 'VIN',
+                    lastModifiedDate: data.info.LastModifiedDate
+                },
+            }
+            console.log(form);
+            server.vindb.saveLocalForm(form.formInfo, form.form);
+            $state.go('default', { type: 'VIN', newform: false });
+        }, function(err) {
+            console.log("openForm: " + err);
+        });
     }
 
 

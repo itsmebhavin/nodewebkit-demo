@@ -31,7 +31,8 @@ angular.module('application.vin').controller('vinCtrl', ['$scope', '$http','vinF
 
     // If exists, load existing form
     if($scope.$parent.tab.form.form !== null) {
-        $scope.vinForm = angular.fromJson($scope.tab.form.form);
+        // $scope.vinForm = angular.fromJson($scope.tab.form.form);
+        $scope.vinForm = $scope.tab.form.form;
     }
 
     // Retrieve local validation rules for VIN
@@ -54,15 +55,15 @@ angular.module('application.vin').controller('vinCtrl', ['$scope', '$http','vinF
     $scope.$watchCollection('vinForm', function(val) { // Data bindings for elements in form
         server.vindb.saveLocalForm($scope.tab.form.formInfo, val);
     });
-    $scope.$watch('vinFrm.$valid', function(val) { // DOM form
-        $scope.tab.form.formInfo.valid = val;
-    });
     $scope.panelClass = function() {
         if($scope.vinFrm.$valid) {
+            $scope.tab.form.formInfo.validity = "valid";
             return 'panel-success';
         } else if (checkForErrors()) {
+            $scope.tab.form.formInfo.validity = "invalid";
             return 'panel-danger';
         } else {
+            $scope.tab.form.formInfo.validity = "warning";
             return 'panel-warning';
         }
     }

@@ -20,7 +20,7 @@ function init() {
     });
 }
 
-exports.saveLocalActive = function(id) {
+var saveLocalActive = function(id) {
     var entry = localActive.findOne({activeTab: {$contains: ''}});
     if(entry === null) {
         localActive.insert({activeTab: id})
@@ -30,7 +30,7 @@ exports.saveLocalActive = function(id) {
     }
 }
 
-exports.saveLocalForm = function(info, form) {//id, form, type, title) {
+var saveLocalForm = function(info, form) {//id, form, type, title) {
     var entry = localForms.findOne({'formInfo.id': info.id});
     if(entry === null) {
         localForms.insert({form:form, formInfo:info})
@@ -40,17 +40,16 @@ exports.saveLocalForm = function(info, form) {//id, form, type, title) {
     }
 }
 
-exports.deleteLocalForm = function(id) {
+var deleteLocalForm = function(id) {
     var x = localForms.findOne({'formInfo.id':id});
     if(x !== null) {
         localForms.remove(x);
     }
 }
 
-exports.saveForm = function() {
+var saveForm = function() {
     var id = localActive.findOne({activeTab: {$contains: ''}}).activeTab;
     var localForm = localForms.findOne({'formInfo.id': id});
-    // var savedForm = savedForms.findOne({$and:[{'formInfo':{$contains:'id'}},{'formInfo.id':id}]});
     var savedForm = savedForms.findOne({'formInfo.id': id});
     if(savedForm === null) {
         savedForms.insert({
@@ -59,25 +58,25 @@ exports.saveForm = function() {
                 title:localForm.formInfo.title,
                 type:localForm.formInfo.type,
                 dateIssued:new Date(),
-                lastChanged:new Date(),
-                valid:localForm.formInfo.valid
+                lastModifiedDate:new Date(),
+                validity:localForm.formInfo.validity
             },
             form:localForm.form
         });
     } else {
         savedForm = localForm;
-        savedForm.formInfo.lastchanged = new Date();
+        savedForm.formInfo.lastModifiedDate = new Date();
         savedForms.update(savedForm);
     }
     db.saveDatabase();
 }
 
-exports.finalizeForm = function(finalize) {
+var finalizeForm = function(finalize) {
     var id = localActive.findOne({activeTab: {$contains: ''}}).activeTab;
     var localForm = localForms.findOne({'formInfo.id':id});
     var savedForm = savedForms.findOne({'formInfo.id':id});
 
-    if(localForm.formInfo.valid !== true) {
+    if(finalize && localForm.formInfo.validity == "invalid") {
         return "Invalid";
     }
 
@@ -85,18 +84,7 @@ exports.finalizeForm = function(finalize) {
     localForm.formInfo.finalizedDate = finalize ? new Date() : null;
 
     if(savedForm === null) {
-        savedForms.insert({
-            formInfo: {
-                id:localForm.id,
-                title:localForm.title,
-                type:localForm.type,
-                dateIssued:new Date(),
-                lastChanged:new Date(),
-                finalized:true,
-                finalizedDate:new Date()
-            },
-            form:localForm.form
-        });
+        saveForm();
     } else {
         savedForm.formInfo.finalized = finalize;
         savedForm.formInfo.finalizedDate = finalize ? localForm.formInfo.finalizedDate : null;
@@ -104,47 +92,93 @@ exports.finalizeForm = function(finalize) {
     db.saveDatabase();
 }
 
-exports.markTransferred = function(id) {
+var markTransferred = function(id) {
     var savedForm = savedForms.findOne({'formInfo.id':id});
     savedForm.formInfo.transferred = true;
     savedForm.formInfo.transferredDate = new Date();
     db.saveDatabase();
 }
 
-exports.loadFormList = function() {
+var loadFormList = function() {
     var forms = savedForms.find({});
     var result = forms.map(function(form) {return {title:form.formInfo.title,type:form.formInfo.type}});
     return result;
 }
 
-exports.loadForm = function(t) {
+var loadForm = function(t) {
     var form = savedForms.findOne({'formInfo.title': t});
+    if(form.form.inspectionDateTime) form.form.inspectionDateTime = new Date(form.form.inspectionDateTime);
     return form;
 }
 
-exports.loadRecents = function() {
-    var forms = savedForms.chain().find().simplesort('formInfo.lastchanged').limit(5).data();
+var loadRecents = function() {
+    var forms = savedForms.chain().find().simplesort('formInfo.lastModifiedDate').limit(5).data();
     var result = forms.map(function(form) {return {title:form.formInfo.title, type:form.formInfo.type}});
     return result;
 }
 
-exports.loadLocalForms = function() {
+var loadLocalForms = function() {
     return localForms.find({});
 }
 
-exports.loadFinalizedForms = function() {
+var loadFinalizedForms = function() {
     return savedForms.find({
         'formInfo.finalized': true
     });
 }
 
-// DEBUGGING/TESTING FUNCTIONS
-exports.dumpDatabase = function() {
-    localdb.saveDatabase();
-    db.saveDatabase();
+var printReport = function () {
+    var id = localActive.findOne({activeTab: {$contains: ''}}).activeTab;
+    var localForm = localForms.findOne({'formInfo.id': id});
+    form = localForm.form;
+    info = localForm.formInfo;
+    if(!info.finalized) {
+        console.log("Form not finalized");
+        return;
+    } else if(!form.vin || !form.vehicleColor || !form.vehicleMake || !form.vehicleModel) {
+        console.log("Missing required data");
+        return;
+    }
+    var data = {
+        "VINObject": [
+            {
+                "VIN": form.vin,
+                "VehicleColor": form.vehicleColor,
+                "VehicleMake": form.vehicleMake,
+                "VehicleModel": form.vehicleModel,
+                "AgencyORI": form.verifyingAgency ? form.verifyingAgency : "",
+                "BadgeNum": form.badgeID ? form.badgeID : "",
+                "ControlNumber": "p0242342",
+                "CreatedDate": (info.createDate ? info.createDate : new Date()),
+                "IsFeeCollectedNo": form.feeCollected ? !form.feeCollected: false,
+                "IsFeeCollectedYes": form.feeCollected ? form.feeCollected: true,
+                "OfficerName": form.officerName ? form.officerName : "",
+                "OfficerSign": "",
+                "TitleOrCourtOrderNum": form.titleCourtOrderNum ? form.titleCourtOrderNum : "",
+                "VehicleState": form.stateTitle ? form.stateTitle : "",
+                "VehicleYear": form.vehicleYear ? form.vehicleYear : "",
+                "WorkPhone": form.workPhone ? form.workPhone : ""
+            }
+        ]
+    }
+    report.printVINReport(data);
 }
 
+exports.saveLocalActive = saveLocalActive;
+exports.saveLocalForm = saveLocalForm;
+exports.deleteLocalForm = deleteLocalForm;
+exports.saveForm = saveForm;
+exports.finalizeForm = finalizeForm;
+exports.markTransferred = markTransferred;
+exports.loadFormList = loadFormList;
+exports.loadForm = loadForm;
+exports.loadRecents = loadRecents;
+exports.loadLocalForms = loadLocalForms;
+exports.loadFinalizedForms = loadFinalizedForms;
+exports.printReport = printReport;
 
-exports.printReport = function () {
-    report.printVINReport();
+// DEBUGGING/TESTING FUNCTIONS
+var dumpDatabase = function() {
+    localdb.saveDatabase();
+    db.saveDatabase();
 }
