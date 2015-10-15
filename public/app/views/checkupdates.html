@@ -1,0 +1,17 @@
+﻿<div class="row">
+    <hr class="hr-success" />
+    <div class="col-xs-4">
+        <ol class="breadcrumb bread-success">
+            <button ui-sref="main" class="btn btn-success btn-xs"><i class="fa fa-home"></i>&nbsp;Home</button>
+            <h3 class="mdc-text-grey-400">Check for Updates</h3>
+        </ol>
+        <i class="fa fa-cloud-download mdc-text-grey-500" style="padding-top:70%;font-size:200px;margin-left:-100px;"></i>
+    </div>
+    <div class="col-xs-8">
+        <br />
+        <div class="well well-sm">
+            {{version}}
+            <button type='button' ng-click="checkForUpdates()" class='btn btn-sm btn-success'>CHECK</button>
+        </div>
+    </div>
+</div>

@@ -4,6 +4,16 @@ var uuid = require('node-uuid');
 angular.isUndefinedOrNull = function (val) {
     return angular.isUndefined(val) || val === null
 }
+angular.module('demoapp').controller('checkUpdatesCtrl', ['$rootScope', '$scope', function ($rootScope, $scope) {
+    // Check for updates controller.
+    $scope.version = $rootScope.currentVersion;
+    $scope.checkForUpdates = function () {
+        server.appsettingsdb.checkUpdates($scope.version, false)
+            .then(function (result) {
+                console.log(result);
+            });
+    }
+}]);
 angular.module('demoapp').controller('cssBundleCtrl', ['$scope', '$css', function ($scope, $css) {
     // set the default bootswatch name
     var dbtheme = server.appsettingsdb.loadTheme().then(function (theme) {
@@ -100,7 +110,7 @@ angular.module('demoapp').controller('defaultCtrl', ['$scope', '$stateParams', '
         })[0];
         try {
             server.vindb.saveLocalActive(active.form.formInfo.id);
-        } catch(e) {
+        } catch (e) {
             server.vindb.saveLocalActive(0);
         }
     }, true);
@@ -114,16 +124,16 @@ angular.module('demoapp').controller('defaultCtrl', ['$scope', '$stateParams', '
         });
         if (newform == 'true') {
             // $scope.addTab($scope.doctype, uuid.v4());
-            $scope.addTab({formInfo:{type:$scope.doctype}, form:{}})
+            $scope.addTab({ formInfo: { type: $scope.doctype }, form: {} })
         }
     }
 
     // $scope.addTab = function (type, id, title, form) {
-    $scope.addTab = function(form) {
-        if(form.constructor === String) {
+    $scope.addTab = function (form) {
+        if (form.constructor === String) {
             var formType = form;
             form = {
-                formInfo:{type: formType},
+                formInfo: { type: formType },
                 form: {}
             }
         }
@@ -136,7 +146,7 @@ angular.module('demoapp').controller('defaultCtrl', ['$scope', '$stateParams', '
             form.formInfo.title = title;
         }
         // $scope.tabs.push({ title: title, active: true, type: type, id: id, form: form });
-        $scope.tabs.push({active:true, form:form});
+        $scope.tabs.push({ active: true, form: form });
     }
     $scope.removeTab = function (index) {
         var formId = $scope.tabs[index].form.formInfo.id;
@@ -157,7 +167,7 @@ angular.module('demoapp').controller('openFormLocalCtrl', ['$scope', '$state', f
     $scope.selectedForm;
     $scope.selectedFormTitle;
 
-    $scope.showFormDetails = function(title) {
+    $scope.showFormDetails = function (title) {
         var formEntry = server.vindb.loadForm(title);
         $scope.selectedFormTitle = formEntry.formInfo.title;
         $scope.selectedForm = angular.fromJson(formEntry.form);
@@ -170,15 +180,15 @@ angular.module('demoapp').controller('openFormLocalCtrl', ['$scope', '$state', f
     }
 
 }]);
-angular.module('demoapp').controller('openFormServerCtrl', ['$scope', '$state', function($scope, $state) {
+angular.module('demoapp').controller('openFormServerCtrl', ['$scope', '$state', function ($scope, $state) {
     $scope.documents;
     $scope.selectedForm;
 
-    server.remotedb.loadFormsForUser('zm0307').then(function(data) {
+    server.remotedb.loadFormsForUser('zm0307').then(function (data) {
         $scope.documents = data;
     });
 
-    $scope.openForm = function(docId) {
+    $scope.openForm = function (docId) {
         server.remotedb.loadForm(docId).then(function (data) {
             var form = {
                 form: {
@@ -212,13 +222,13 @@ angular.module('demoapp').controller('openFormServerCtrl', ['$scope', '$state', 
             console.log(form);
             server.vindb.saveLocalForm(form.formInfo, form.form);
             $state.go('default', { type: 'VIN', newform: false });
-        }, function(err) {
+        }, function (err) {
             console.log("openForm: " + err);
         });
     }
 
 
-    $scope.showFormDetails = function(doc) {
+    $scope.showFormDetails = function (doc) {
         $scope.selectedForm = doc;
     }
 }]);
@@ -231,11 +241,11 @@ angular.module('demoapp').controller('userSettingsCtrl', ['$scope', function ($s
 }]);
 angular.module('demoapp').controller('toolbarCtrl', ['$scope', '$rootScope', function ($scope, $rootScope) {
     $scope.saveForm = server.vindb.saveForm;
-    $scope.finalizeForm = function(finalize) {
+    $scope.finalizeForm = function (finalize) {
         var ret = server.vindb.finalizeForm(finalize);
-        if(ret === 'Invalid') console.log("Invalid Form, not finalized");
+        if (ret === 'Invalid') console.log("Invalid Form, not finalized");
     }
-    $scope.openTransferPanel = function() {
+    $scope.openTransferPanel = function () {
         $rootScope.$broadcast('openTransferPanel', {});
     }
     $scope.printForm = function () {
@@ -245,25 +255,25 @@ angular.module('demoapp').controller('toolbarCtrl', ['$scope', '$rootScope', fun
 angular.module('demoapp').controller('releaseNotesCtrl', ['$scope', function ($scope) {
     //TODO: user settings related code.
 }]);
-angular.module('demoapp').controller('transferCtrl', ['$scope', '$rootScope', function($scope, $rootScope) {
+angular.module('demoapp').controller('transferCtrl', ['$scope', '$rootScope', function ($scope, $rootScope) {
     $scope.checked = false;
     $scope.transferList = [];
 
-    $scope.open = function() {
+    $scope.open = function () {
         $scope.finalizedForms = server.vindb.loadFinalizedForms();
         $scope.checked = !$scope.checked
     }
 
-    $scope.transfer = function() {
-        for(var i=0;i<$scope.transferList.length; i++) {
-            if($scope.transferList[i]) {
+    $scope.transfer = function () {
+        for (var i = 0; i < $scope.transferList.length; i++) {
+            if ($scope.transferList[i]) {
                 server.remotedb.submitForm($scope.finalizedForms[i]);
                 server.vindb.markTransferred($scope.finalizedForms[i].formInfo.id);
             }
         }
     }
 
-    $rootScope.$on('openTransferPanel', function(event,data) {
+    $rootScope.$on('openTransferPanel', function (event, data) {
         $scope.open();
     });
 }]);

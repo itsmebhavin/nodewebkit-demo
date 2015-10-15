@@ -3,8 +3,11 @@
 var gui = require('nw.gui');
 var win = gui.Window.get(); // to get current window context.
 var commands = gui.App.argv;
+
 console.log('Commands - ');
 console.log(commands);
+var currentVersion = gui.App.manifest.version;
+console.log('Version- ' + currentVersion);
 
 angular.module('components.window',[])
 .run(function($interval){
@@ -90,7 +93,9 @@ angular.module('components.window',[])
     tray.menu = developr;
     // console.log('our tray is now completed and ready..!!')
 })
-.controller('windowCtrl',['$scope','windowFactory',function($scope,windowFactory){
+.controller('windowCtrl', ['$rootScope', '$scope', 'windowFactory', function ($rootScope, $scope, windowFactory) {
+
+    $rootScope.currentVersion = currentVersion;
 
     $scope.minWindow = function(){
         console.log('minimizing window');

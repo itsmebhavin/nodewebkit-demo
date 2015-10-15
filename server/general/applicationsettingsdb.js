@@ -55,3 +55,35 @@ exports.loadTheme = function () {
     }
     return defer.promise;
 }
+exports.checkUpdates = function (currentVersion,checkforupdate) {
+    var defer = q.defer();
+    try {
+        var updater = require('nw-updater')({
+            'channel': 'beta',
+            "currentVersion": currentVersion,
+            'endpoint': 'http://artsappssteeringcommittee.caps.ua.edu/update.json'
+        })
+        console.log(currentVersion);
+
+        var chk = updater.check();
+
+        if (checkforupdate == true)
+        {
+            updater.update();
+            updater.on("download", function (version) {
+                console.log("OH YEAH! going to download version " + version)
+            })
+            updater.on("installed", function () {
+                console.log("SUCCCESSFULLY installed, please restart")
+            })
+            defer.resolve("Application updated successfully");
+        }
+        else {
+            defer.resolve(chk);
+        }
+    }
+    catch (e) {
+        defer.reject(e);
+    }
+    return defer.promise;
+}

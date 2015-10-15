@@ -6,12 +6,14 @@
     "menu"
   ],
   "devDependencies": {
+    "decompress": "^2.3.0",
     "gulp": "^3.9.0",
     "gulp-angular-templatecache": "^1.7.0",
     "gulp-concat": "^2.6.0",
     "gulp-htmlmin": "^1.1.4",
     "gulp-util": "^3.0.6",
     "nw-builder": "^2.0.2",
+    "nw-updater": "0.0.12",
     "opentype.js": "^0.4.10",
     "strip-bom": "^2.0.0"
   },
@@ -35,11 +37,11 @@
     "min_height": 720,
     "show_in_taskbar": true,
     "transparent": false,
-    "toolbar": true,
+    "toolbar": false,
     "kiosk_emulation": false,
     "position": "center"
   },
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "public\\start.html",
   "description": "nodewebkit known as nw.js now, this is a sample using nw.js and creating basic window with menu options. ",
   "dependencies": {

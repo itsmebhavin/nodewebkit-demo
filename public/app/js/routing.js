@@ -31,6 +31,11 @@ angular.module('application.routing', [])
         templateUrl: './app/views/usersettings.html',
         controller: 'userSettingsCtrl'
     })
+    .state('checkupdate', {
+        url: '/checkupdate',
+        templateUrl: './app/views/checkupdates.html',
+        controller: 'checkUpdatesCtrl'
+    })
     .state('default', {
         url: '/default/:type/:newform',
         views: {
